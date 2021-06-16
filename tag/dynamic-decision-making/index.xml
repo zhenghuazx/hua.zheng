@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>&#34;dynamic decision-making&#34; | Zheng.H</title>
+    <link>https://zhenghuazx.github.io/hua.zheng/tag/dynamic-decision-making/</link>
+      <atom:link href="https://zhenghuazx.github.io/hua.zheng/tag/dynamic-decision-making/index.xml" rel="self" type="application/rss+xml" />
+    <description>&#34;dynamic decision-making&#34;</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>Hua Zheng ©2021</copyright><lastBuildDate>Wed, 01 Dec 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://zhenghuazx.github.io/hua.zheng/media/icon_hu658dc7ef748f26cdf7d87fd659137d7d_44050_512x512_fill_lanczos_center_2.png</url>
+      <title>&#34;dynamic decision-making&#34;</title>
+      <link>https://zhenghuazx.github.io/hua.zheng/tag/dynamic-decision-making/</link>
+    </image>
+    
+    <item>
+      <title>Global-Local Metamodel-Assisted Stochastic Programming via Simulation</title>
+      <link>https://zhenghuazx.github.io/hua.zheng/publication/10-1145-3411080/</link>
+      <pubDate>Wed, 01 Dec 2021 00:00:00 +0000</pubDate>
+      <guid>https://zhenghuazx.github.io/hua.zheng/publication/10-1145-3411080/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

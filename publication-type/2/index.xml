@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>2 | Zheng.H</title>
+    <link>https://zhenghuazx.github.io/hua.zheng/publication-type/2/</link>
+      <atom:link href="https://zhenghuazx.github.io/hua.zheng/publication-type/2/index.xml" rel="self" type="application/rss+xml" />
+    <description>2</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>Hua Zheng ©2021</copyright><lastBuildDate>Wed, 01 Dec 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://zhenghuazx.github.io/hua.zheng/media/icon_hu658dc7ef748f26cdf7d87fd659137d7d_44050_512x512_fill_lanczos_center_2.png</url>
+      <title>2</title>
+      <link>https://zhenghuazx.github.io/hua.zheng/publication-type/2/</link>
+    </image>
+    
+    <item>
+      <title>Global-Local Metamodel-Assisted Stochastic Programming via Simulation</title>
+      <link>https://zhenghuazx.github.io/hua.zheng/publication/10-1145-3411080/</link>
+      <pubDate>Wed, 01 Dec 2021 00:00:00 +0000</pubDate>
+      <guid>https://zhenghuazx.github.io/hua.zheng/publication/10-1145-3411080/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Reinforcement Learning Assisted Oxygen Therapy for COVID-19 Patients Under Intensive Care</title>
+      <link>https://zhenghuazx.github.io/hua.zheng/publication/zheng-2021-reinforcement/</link>
+      <pubDate>Sat, 01 May 2021 00:00:00 +0000</pubDate>
+      <guid>https://zhenghuazx.github.io/hua.zheng/publication/zheng-2021-reinforcement/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Personalized Multimorbidity Management for Patients with Type 2 Diabetes Using Reinforcement Learning of Electronic Health Records</title>
+      <link>https://zhenghuazx.github.io/hua.zheng/publication/zheng-2021/</link>
+      <pubDate>Mon, 01 Mar 2021 00:00:00 +0000</pubDate>
+      <guid>https://zhenghuazx.github.io/hua.zheng/publication/zheng-2021/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Policy Optimization in Bayesian Network Hybrid Models of Biomanufacturing Processes</title>
+      <link>https://zhenghuazx.github.io/hua.zheng/publication/zheng-2021-policy/</link>
+      <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
+      <guid>https://zhenghuazx.github.io/hua.zheng/publication/zheng-2021-policy/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

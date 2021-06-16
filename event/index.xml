@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Recent &amp; Upcoming Talks | Zheng.H</title>
+    <link>https://zhenghuazx.github.io/hua.zheng/event/</link>
+      <atom:link href="https://zhenghuazx.github.io/hua.zheng/event/index.xml" rel="self" type="application/rss+xml" />
+    <description>Recent &amp; Upcoming Talks</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>Hua Zheng ©2021</copyright><lastBuildDate>Tue, 15 Dec 2020 10:30:00 +0000</lastBuildDate>
+    <image>
+      <url>https://zhenghuazx.github.io/hua.zheng/media/icon_hu658dc7ef748f26cdf7d87fd659137d7d_44050_512x512_fill_lanczos_center_2.png</url>
+      <title>Recent &amp; Upcoming Talks</title>
+      <link>https://zhenghuazx.github.io/hua.zheng/event/</link>
+    </image>
+    
+    <item>
+      <title>Green Simulation Assisted Reinforcement Learning Presentation in WSC 2020</title>
+      <link>https://zhenghuazx.github.io/hua.zheng/talk/green-simulation-assisted-reinforcement-learning-presentation-in-wsc-2020/</link>
+      <pubDate>Tue, 15 Dec 2020 10:30:00 +0000</pubDate>
+      <guid>https://zhenghuazx.github.io/hua.zheng/talk/green-simulation-assisted-reinforcement-learning-presentation-in-wsc-2020/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
