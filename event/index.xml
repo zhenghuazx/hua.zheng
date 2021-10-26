@@ -5,12 +5,20 @@
     <link>https://zhenghuazx.github.io/hua.zheng/event/</link>
       <atom:link href="https://zhenghuazx.github.io/hua.zheng/event/index.xml" rel="self" type="application/rss+xml" />
     <description>Recent &amp; Upcoming Talks</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>Hua Zheng ©2021</copyright><lastBuildDate>Tue, 15 Dec 2020 10:30:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>Hua Zheng ©2021</copyright><lastBuildDate>Tue, 26 Oct 2021 09:00:00 +0000</lastBuildDate>
     <image>
       <url>https://zhenghuazx.github.io/hua.zheng/media/icon_hu658dc7ef748f26cdf7d87fd659137d7d_44050_512x512_fill_lanczos_center_2.png</url>
       <title>Recent &amp; Upcoming Talks</title>
       <link>https://zhenghuazx.github.io/hua.zheng/event/</link>
     </image>
+    
+    <item>
+      <title>INFORMS Annual 2021</title>
+      <link>https://zhenghuazx.github.io/hua.zheng/talk/informs-annual-2021/</link>
+      <pubDate>Tue, 26 Oct 2021 09:00:00 +0000</pubDate>
+      <guid>https://zhenghuazx.github.io/hua.zheng/talk/informs-annual-2021/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Green Simulation Assisted Reinforcement Learning Presentation in WSC 2020</title>
