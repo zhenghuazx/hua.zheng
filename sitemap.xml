@@ -32,8 +32,6 @@
   <url>
     <loc>https://zhenghuazx.github.io/hua.zheng/tag/digital-twin/</loc><lastmod>2022-04-25T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
   <url>
-    <loc>https://zhenghuazx.github.io/hua.zheng/project/ehr-rl/</loc><lastmod>2022-04-25T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
-  <url>
     <loc>https://zhenghuazx.github.io/hua.zheng/tag/ongoing/</loc><lastmod>2022-04-25T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
   <url>
     <loc>https://zhenghuazx.github.io/hua.zheng/project/</loc><lastmod>2022-04-25T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
@@ -128,6 +126,8 @@
   <url>
     <loc>https://zhenghuazx.github.io/hua.zheng/publication/zheng-2021/</loc><lastmod>2021-06-13T20:46:45-04:00</lastmod><changefreq>weekly</changefreq></url>
   <url>
+    <loc>https://zhenghuazx.github.io/hua.zheng/project/ehr-rl/</loc><lastmod>2021-02-11T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
+  <url>
     <loc></loc><lastmod>2021-06-13T20:48:17-04:00</lastmod><changefreq>weekly</changefreq></url>
   <url>
     <loc>https://zhenghuazx.github.io/hua.zheng/tag/hyrbid-model/</loc><lastmod>2021-06-13T20:48:17-04:00</lastmod><changefreq>weekly</changefreq></url>
@@ -161,5 +161,11 @@
     <loc>https://zhenghuazx.github.io/hua.zheng/tag/green-simulation/</loc><lastmod>2021-06-13T20:49:52-04:00</lastmod><changefreq>weekly</changefreq></url>
   <url>
     <loc>https://zhenghuazx.github.io/hua.zheng/publication/10-5555-3466184-3466221/</loc><lastmod>2021-06-13T20:49:52-04:00</lastmod><changefreq>weekly</changefreq></url>
+  <url>
+    <loc>https://zhenghuazx.github.io/hua.zheng/tag/deep-learning/</loc><lastmod>2018-03-25T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
+  <url>
+    <loc>https://zhenghuazx.github.io/hua.zheng/tag/kaggle/</loc><lastmod>2018-03-25T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
+  <url>
+    <loc>https://zhenghuazx.github.io/hua.zheng/project/toxiccomment/</loc><lastmod>2018-03-25T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
   <url>
     <loc>https://zhenghuazx.github.io/hua.zheng/admin/</loc><changefreq>weekly</changefreq></url></urlset>

@@ -13,14 +13,6 @@
     </image>
     
     <item>
-      <title>EHR-RL</title>
-      <link>https://zhenghuazx.github.io/hua.zheng/project/ehr-rl/</link>
-      <pubDate>Mon, 25 Apr 2022 00:00:00 +0000</pubDate>
-      <guid>https://zhenghuazx.github.io/hua.zheng/project/ehr-rl/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Virtual Laboratory</title>
       <link>https://zhenghuazx.github.io/hua.zheng/project/vlab/</link>
       <pubDate>Mon, 25 Apr 2022 00:00:00 +0000</pubDate>
@@ -64,6 +56,22 @@ including:&lt;/p&gt;
 &lt;/p&gt;
 &lt;p&gt;The end goal of this project is to build a modularized platform, composed of an interactive interface and a digital twin based “vLab”. The digital twin is designed to simulate end-to-end bioprocess by using state-of-the-art mechanistic models for prediction, control and risk management.&lt;/p&gt;
 </description>
+    </item>
+    
+    <item>
+      <title>EHR-RL</title>
+      <link>https://zhenghuazx.github.io/hua.zheng/project/ehr-rl/</link>
+      <pubDate>Thu, 11 Feb 2021 00:00:00 +0000</pubDate>
+      <guid>https://zhenghuazx.github.io/hua.zheng/project/ehr-rl/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Toxic Comment Classification</title>
+      <link>https://zhenghuazx.github.io/hua.zheng/project/toxiccomment/</link>
+      <pubDate>Sun, 25 Mar 2018 00:00:00 +0000</pubDate>
+      <guid>https://zhenghuazx.github.io/hua.zheng/project/toxiccomment/</guid>
+      <description></description>
     </item>
     
   </channel>
