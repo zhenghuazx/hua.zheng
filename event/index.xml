@@ -1,46 +1,46 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Recent &amp; Upcoming Talks | Academic</title>
-    <link>https://example.com/event/</link>
-      <atom:link href="https://example.com/event/index.xml" rel="self" type="application/rss+xml" />
+    <title>Recent &amp; Upcoming Talks | Zheng.H</title>
+    <link>https://zhenghuazx.github.io/hua.zheng/event/</link>
+      <atom:link href="https://zhenghuazx.github.io/hua.zheng/event/index.xml" rel="self" type="application/rss+xml" />
     <description>Recent &amp; Upcoming Talks</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 25 Apr 2022 14:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>Hua Zheng ©2021</copyright><lastBuildDate>Mon, 25 Apr 2022 14:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://example.com/media/icon_hu658dc7ef748f26cdf7d87fd659137d7d_44050_512x512_fill_lanczos_center_3.png</url>
+      <url>https://zhenghuazx.github.io/hua.zheng/media/icon_hu658dc7ef748f26cdf7d87fd659137d7d_44050_512x512_fill_lanczos_center_3.png</url>
       <title>Recent &amp; Upcoming Talks</title>
-      <link>https://example.com/event/</link>
+      <link>https://zhenghuazx.github.io/hua.zheng/event/</link>
     </image>
     
     <item>
       <title>32nd Annual POMS-Conference</title>
-      <link>https://example.com/talk/32nd-annual-poms-conference/</link>
+      <link>https://zhenghuazx.github.io/hua.zheng/talk/32nd-annual-poms-conference/</link>
       <pubDate>Mon, 25 Apr 2022 14:00:00 +0000</pubDate>
-      <guid>https://example.com/talk/32nd-annual-poms-conference/</guid>
+      <guid>https://zhenghuazx.github.io/hua.zheng/talk/32nd-annual-poms-conference/</guid>
       <description></description>
     </item>
     
     <item>
       <title>32nd Annual POMS-Conference</title>
-      <link>https://example.com/talk/32nd-annual-poms-conference/</link>
+      <link>https://zhenghuazx.github.io/hua.zheng/talk/32nd-annual-poms-conference/</link>
       <pubDate>Sat, 23 Apr 2022 16:30:00 +0000</pubDate>
-      <guid>https://example.com/talk/32nd-annual-poms-conference/</guid>
+      <guid>https://zhenghuazx.github.io/hua.zheng/talk/32nd-annual-poms-conference/</guid>
       <description></description>
     </item>
     
     <item>
       <title>INFORMS Annual 2021</title>
-      <link>https://example.com/talk/informs-annual-2021/</link>
+      <link>https://zhenghuazx.github.io/hua.zheng/talk/informs-annual-2021/</link>
       <pubDate>Tue, 26 Oct 2021 09:00:00 +0000</pubDate>
-      <guid>https://example.com/talk/informs-annual-2021/</guid>
+      <guid>https://zhenghuazx.github.io/hua.zheng/talk/informs-annual-2021/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Winter Simulation Conference 2020</title>
-      <link>https://example.com/talk/winter-simulation-conference-2020/</link>
+      <link>https://zhenghuazx.github.io/hua.zheng/talk/winter-simulation-conference-2020/</link>
       <pubDate>Tue, 15 Dec 2020 10:30:00 +0000</pubDate>
-      <guid>https://example.com/talk/winter-simulation-conference-2020/</guid>
+      <guid>https://zhenghuazx.github.io/hua.zheng/talk/winter-simulation-conference-2020/</guid>
       <description></description>
     </item>
     

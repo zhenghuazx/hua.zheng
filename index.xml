@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Academic</title>
-    <link>https://example.com/</link>
-      <atom:link href="https://example.com/index.xml" rel="self" type="application/rss+xml" />
-    <description>Academic</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 25 Apr 2022 14:00:00 +0000</lastBuildDate>
+    <title>Zheng.H</title>
+    <link>https://zhenghuazx.github.io/hua.zheng/</link>
+      <atom:link href="https://zhenghuazx.github.io/hua.zheng/index.xml" rel="self" type="application/rss+xml" />
+    <description>Zheng.H</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>Hua Zheng ©2021</copyright><lastBuildDate>Mon, 25 Apr 2022 14:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://example.com/media/icon_hu658dc7ef748f26cdf7d87fd659137d7d_44050_512x512_fill_lanczos_center_3.png</url>
-      <title>Academic</title>
-      <link>https://example.com/</link>
+      <url>https://zhenghuazx.github.io/hua.zheng/media/icon_hu658dc7ef748f26cdf7d87fd659137d7d_44050_512x512_fill_lanczos_center_3.png</url>
+      <title>Zheng.H</title>
+      <link>https://zhenghuazx.github.io/hua.zheng/</link>
     </image>
     
     <item>
       <title>32nd Annual POMS-Conference</title>
-      <link>https://example.com/talk/32nd-annual-poms-conference/</link>
+      <link>https://zhenghuazx.github.io/hua.zheng/talk/32nd-annual-poms-conference/</link>
       <pubDate>Mon, 25 Apr 2022 14:00:00 +0000</pubDate>
-      <guid>https://example.com/talk/32nd-annual-poms-conference/</guid>
+      <guid>https://zhenghuazx.github.io/hua.zheng/talk/32nd-annual-poms-conference/</guid>
       <description></description>
     </item>
     
     <item>
       <title>EHR-RL</title>
-      <link>https://example.com/project/ehr-rl/</link>
+      <link>https://zhenghuazx.github.io/hua.zheng/project/ehr-rl/</link>
       <pubDate>Mon, 25 Apr 2022 00:00:00 +0000</pubDate>
-      <guid>https://example.com/project/ehr-rl/</guid>
+      <guid>https://zhenghuazx.github.io/hua.zheng/project/ehr-rl/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Virtual Laboratory</title>
-      <link>https://example.com/project/vlab/</link>
+      <link>https://zhenghuazx.github.io/hua.zheng/project/vlab/</link>
       <pubDate>Mon, 25 Apr 2022 00:00:00 +0000</pubDate>
-      <guid>https://example.com/project/vlab/</guid>
+      <guid>https://zhenghuazx.github.io/hua.zheng/project/vlab/</guid>
       <description>&lt;p&gt;vLab is a package for biopharmaceutical manufacturing simulation in Python. It utilizes the &lt;code&gt;diffeqpy&lt;/code&gt;,
 a python wrapper of &lt;a href=&#34;http://diffeq.sciml.ai/dev/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;DifferentialEquations.jl&lt;/a&gt; and scipy built-in ode solver
 for its core routines to give high performance solving of large stiff differential equations, currently
@@ -61,10 +61,10 @@ including:&lt;/p&gt;
 &lt;figure  &gt;
   &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
     &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;&#34; srcset=&#34;
-               /project/vlab/simulation_hua58c4e7b2b6fe9cda0c02501bb32db1c_885464_a0f66eab6cc7499f24c236af3a3e2b70.webp 400w,
-               /project/vlab/simulation_hua58c4e7b2b6fe9cda0c02501bb32db1c_885464_3bd80d72ab635699bceb8bea3ef685fc.webp 760w,
-               /project/vlab/simulation_hua58c4e7b2b6fe9cda0c02501bb32db1c_885464_1200x1200_fit_q100_h2_lanczos_3.webp 1200w&#34;
-               src=&#34;https://example.com/project/vlab/simulation_hua58c4e7b2b6fe9cda0c02501bb32db1c_885464_a0f66eab6cc7499f24c236af3a3e2b70.webp&#34;
+               /hua.zheng/project/vlab/simulation_hua58c4e7b2b6fe9cda0c02501bb32db1c_885464_a0f66eab6cc7499f24c236af3a3e2b70.webp 400w,
+               /hua.zheng/project/vlab/simulation_hua58c4e7b2b6fe9cda0c02501bb32db1c_885464_3bd80d72ab635699bceb8bea3ef685fc.webp 760w,
+               /hua.zheng/project/vlab/simulation_hua58c4e7b2b6fe9cda0c02501bb32db1c_885464_1200x1200_fit_q100_h2_lanczos_3.webp 1200w&#34;
+               src=&#34;https://zhenghuazx.github.io/hua.zheng/hua.zheng/project/vlab/simulation_hua58c4e7b2b6fe9cda0c02501bb32db1c_885464_a0f66eab6cc7499f24c236af3a3e2b70.webp&#34;
                width=&#34;760&#34;
                height=&#34;448&#34;
                loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
@@ -76,97 +76,97 @@ including:&lt;/p&gt;
     
     <item>
       <title>32nd Annual POMS-Conference</title>
-      <link>https://example.com/talk/32nd-annual-poms-conference/</link>
+      <link>https://zhenghuazx.github.io/hua.zheng/talk/32nd-annual-poms-conference/</link>
       <pubDate>Sat, 23 Apr 2022 16:30:00 +0000</pubDate>
-      <guid>https://example.com/talk/32nd-annual-poms-conference/</guid>
+      <guid>https://zhenghuazx.github.io/hua.zheng/talk/32nd-annual-poms-conference/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Opportunities of Hybrid Model-based Reinforcement Learning for Cell Therapy Manufacturing Process Development and Control</title>
-      <link>https://example.com/publication/zheng-2022-opportunities/</link>
+      <link>https://zhenghuazx.github.io/hua.zheng/publication/zheng-2022-opportunities/</link>
       <pubDate>Sat, 01 Jan 2022 00:00:00 +0000</pubDate>
-      <guid>https://example.com/publication/zheng-2022-opportunities/</guid>
+      <guid>https://zhenghuazx.github.io/hua.zheng/publication/zheng-2022-opportunities/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Global-Local Metamodel-Assisted Stochastic Programming via Simulation</title>
-      <link>https://example.com/publication/10-1145-3411080/</link>
+      <link>https://zhenghuazx.github.io/hua.zheng/publication/10-1145-3411080/</link>
       <pubDate>Wed, 01 Dec 2021 00:00:00 +0000</pubDate>
-      <guid>https://example.com/publication/10-1145-3411080/</guid>
+      <guid>https://zhenghuazx.github.io/hua.zheng/publication/10-1145-3411080/</guid>
       <description></description>
     </item>
     
     <item>
       <title>INFORMS Annual 2021</title>
-      <link>https://example.com/talk/informs-annual-2021/</link>
+      <link>https://zhenghuazx.github.io/hua.zheng/talk/informs-annual-2021/</link>
       <pubDate>Tue, 26 Oct 2021 09:00:00 +0000</pubDate>
-      <guid>https://example.com/talk/informs-annual-2021/</guid>
+      <guid>https://zhenghuazx.github.io/hua.zheng/talk/informs-annual-2021/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Green Simulation Assisted Policy Gradient to Accelerate Stochastic Process Control</title>
-      <link>https://example.com/publication/zheng-2021-green/</link>
+      <link>https://zhenghuazx.github.io/hua.zheng/publication/zheng-2021-green/</link>
       <pubDate>Tue, 26 Oct 2021 00:00:00 +0000</pubDate>
-      <guid>https://example.com/publication/zheng-2021-green/</guid>
+      <guid>https://zhenghuazx.github.io/hua.zheng/publication/zheng-2021-green/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Policy Optimization in Bayesian Network Hybrid Models of Biomanufacturing Processes</title>
-      <link>https://example.com/publication/example/</link>
+      <link>https://zhenghuazx.github.io/hua.zheng/publication/example/</link>
       <pubDate>Thu, 13 May 2021 00:00:00 +0000</pubDate>
-      <guid>https://example.com/publication/example/</guid>
+      <guid>https://zhenghuazx.github.io/hua.zheng/publication/example/</guid>
       <description></description>
     </item>
     
     <item>
       <title>STEM Education and Industry Workforce Life-Long Training Platform Development to Faciliate Smart Biopharmaceutical Manufacturing 4.0-4</title>
-      <link>https://example.com/publication/xie-2020-stem/</link>
+      <link>https://zhenghuazx.github.io/hua.zheng/publication/xie-2020-stem/</link>
       <pubDate>Sat, 01 May 2021 00:00:00 +0000</pubDate>
-      <guid>https://example.com/publication/xie-2020-stem/</guid>
+      <guid>https://zhenghuazx.github.io/hua.zheng/publication/xie-2020-stem/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Personalized Multimorbidity Management for Patients with Type 2 Diabetes Using Reinforcement Learning of Electronic Health Records</title>
-      <link>https://example.com/publication/zheng-2021/</link>
+      <link>https://zhenghuazx.github.io/hua.zheng/publication/zheng-2021/</link>
       <pubDate>Mon, 01 Mar 2021 00:00:00 +0000</pubDate>
-      <guid>https://example.com/publication/zheng-2021/</guid>
+      <guid>https://zhenghuazx.github.io/hua.zheng/publication/zheng-2021/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Policy Optimization in Bayesian Network Hybrid Models of Biomanufacturing Processes</title>
-      <link>https://example.com/publication/zheng-2021-policy/</link>
+      <link>https://zhenghuazx.github.io/hua.zheng/publication/zheng-2021-policy/</link>
       <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
-      <guid>https://example.com/publication/zheng-2021-policy/</guid>
+      <guid>https://zhenghuazx.github.io/hua.zheng/publication/zheng-2021-policy/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Reinforcement Learning Assisted Oxygen Therapy for COVID-19 Patients Under Intensive Care</title>
-      <link>https://example.com/publication/zheng-2021-reinforcement/</link>
+      <link>https://zhenghuazx.github.io/hua.zheng/publication/zheng-2021-reinforcement/</link>
       <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
-      <guid>https://example.com/publication/zheng-2021-reinforcement/</guid>
+      <guid>https://zhenghuazx.github.io/hua.zheng/publication/zheng-2021-reinforcement/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Winter Simulation Conference 2020</title>
-      <link>https://example.com/talk/winter-simulation-conference-2020/</link>
+      <link>https://zhenghuazx.github.io/hua.zheng/talk/winter-simulation-conference-2020/</link>
       <pubDate>Tue, 15 Dec 2020 10:30:00 +0000</pubDate>
-      <guid>https://example.com/talk/winter-simulation-conference-2020/</guid>
+      <guid>https://zhenghuazx.github.io/hua.zheng/talk/winter-simulation-conference-2020/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Welcome to Wowchemy, the website builder for Hugo</title>
-      <link>https://example.com/post/getting-started/</link>
+      <link>https://zhenghuazx.github.io/hua.zheng/post/getting-started/</link>
       <pubDate>Sun, 13 Dec 2020 00:00:00 +0000</pubDate>
-      <guid>https://example.com/post/getting-started/</guid>
+      <guid>https://zhenghuazx.github.io/hua.zheng/post/getting-started/</guid>
       <description>&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;The Wowchemy website builder for Hugo, along with its starter templates, is designed for professional creators, educators, and teams/organizations - although it can be used to create any kind of site&lt;/li&gt;
@@ -243,17 +243,17 @@ including:&lt;/p&gt;
     
     <item>
       <title>Green Simulation Assisted Reinforcement Learning with Model Risk for Biomanufacturing Learning and Control</title>
-      <link>https://example.com/publication/10-5555-3466184-3466221/</link>
+      <link>https://zhenghuazx.github.io/hua.zheng/publication/10-5555-3466184-3466221/</link>
       <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>https://example.com/publication/10-5555-3466184-3466221/</guid>
+      <guid>https://zhenghuazx.github.io/hua.zheng/publication/10-5555-3466184-3466221/</guid>
       <description></description>
     </item>
     
     <item>
       <title></title>
-      <link>https://example.com/admin/config.yml</link>
+      <link>https://zhenghuazx.github.io/hua.zheng/admin/config.yml</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://example.com/admin/config.yml</guid>
+      <guid>https://zhenghuazx.github.io/hua.zheng/admin/config.yml</guid>
       <description></description>
     </item>
     

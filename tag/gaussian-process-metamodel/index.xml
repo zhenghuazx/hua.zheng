@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>&#34;Gaussian process metamodel&#34; | Academic</title>
-    <link>https://example.com/tag/gaussian-process-metamodel/</link>
-      <atom:link href="https://example.com/tag/gaussian-process-metamodel/index.xml" rel="self" type="application/rss+xml" />
+    <title>&#34;Gaussian process metamodel&#34; | Zheng.H</title>
+    <link>https://zhenghuazx.github.io/hua.zheng/tag/gaussian-process-metamodel/</link>
+      <atom:link href="https://zhenghuazx.github.io/hua.zheng/tag/gaussian-process-metamodel/index.xml" rel="self" type="application/rss+xml" />
     <description>&#34;Gaussian process metamodel&#34;</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Wed, 01 Dec 2021 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>Hua Zheng ©2021</copyright><lastBuildDate>Wed, 01 Dec 2021 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://example.com/media/icon_hu658dc7ef748f26cdf7d87fd659137d7d_44050_512x512_fill_lanczos_center_3.png</url>
+      <url>https://zhenghuazx.github.io/hua.zheng/media/icon_hu658dc7ef748f26cdf7d87fd659137d7d_44050_512x512_fill_lanczos_center_3.png</url>
       <title>&#34;Gaussian process metamodel&#34;</title>
-      <link>https://example.com/tag/gaussian-process-metamodel/</link>
+      <link>https://zhenghuazx.github.io/hua.zheng/tag/gaussian-process-metamodel/</link>
     </image>
     
     <item>
       <title>Global-Local Metamodel-Assisted Stochastic Programming via Simulation</title>
-      <link>https://example.com/publication/10-1145-3411080/</link>
+      <link>https://zhenghuazx.github.io/hua.zheng/publication/10-1145-3411080/</link>
       <pubDate>Wed, 01 Dec 2021 00:00:00 +0000</pubDate>
-      <guid>https://example.com/publication/10-1145-3411080/</guid>
+      <guid>https://zhenghuazx.github.io/hua.zheng/publication/10-1145-3411080/</guid>
       <description></description>
     </item>
     

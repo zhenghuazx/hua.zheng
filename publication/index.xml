@@ -1,86 +1,86 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Publications | Academic</title>
-    <link>https://example.com/publication/</link>
-      <atom:link href="https://example.com/publication/index.xml" rel="self" type="application/rss+xml" />
+    <title>Publications | Zheng.H</title>
+    <link>https://zhenghuazx.github.io/hua.zheng/publication/</link>
+      <atom:link href="https://zhenghuazx.github.io/hua.zheng/publication/index.xml" rel="self" type="application/rss+xml" />
     <description>Publications</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sat, 01 Jan 2022 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>Hua Zheng ©2021</copyright><lastBuildDate>Sat, 01 Jan 2022 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://example.com/media/icon_hu658dc7ef748f26cdf7d87fd659137d7d_44050_512x512_fill_lanczos_center_3.png</url>
+      <url>https://zhenghuazx.github.io/hua.zheng/media/icon_hu658dc7ef748f26cdf7d87fd659137d7d_44050_512x512_fill_lanczos_center_3.png</url>
       <title>Publications</title>
-      <link>https://example.com/publication/</link>
+      <link>https://zhenghuazx.github.io/hua.zheng/publication/</link>
     </image>
     
     <item>
       <title>Opportunities of Hybrid Model-based Reinforcement Learning for Cell Therapy Manufacturing Process Development and Control</title>
-      <link>https://example.com/publication/zheng-2022-opportunities/</link>
+      <link>https://zhenghuazx.github.io/hua.zheng/publication/zheng-2022-opportunities/</link>
       <pubDate>Sat, 01 Jan 2022 00:00:00 +0000</pubDate>
-      <guid>https://example.com/publication/zheng-2022-opportunities/</guid>
+      <guid>https://zhenghuazx.github.io/hua.zheng/publication/zheng-2022-opportunities/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Global-Local Metamodel-Assisted Stochastic Programming via Simulation</title>
-      <link>https://example.com/publication/10-1145-3411080/</link>
+      <link>https://zhenghuazx.github.io/hua.zheng/publication/10-1145-3411080/</link>
       <pubDate>Wed, 01 Dec 2021 00:00:00 +0000</pubDate>
-      <guid>https://example.com/publication/10-1145-3411080/</guid>
+      <guid>https://zhenghuazx.github.io/hua.zheng/publication/10-1145-3411080/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Green Simulation Assisted Policy Gradient to Accelerate Stochastic Process Control</title>
-      <link>https://example.com/publication/zheng-2021-green/</link>
+      <link>https://zhenghuazx.github.io/hua.zheng/publication/zheng-2021-green/</link>
       <pubDate>Tue, 26 Oct 2021 00:00:00 +0000</pubDate>
-      <guid>https://example.com/publication/zheng-2021-green/</guid>
+      <guid>https://zhenghuazx.github.io/hua.zheng/publication/zheng-2021-green/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Policy Optimization in Bayesian Network Hybrid Models of Biomanufacturing Processes</title>
-      <link>https://example.com/publication/example/</link>
+      <link>https://zhenghuazx.github.io/hua.zheng/publication/example/</link>
       <pubDate>Thu, 13 May 2021 00:00:00 +0000</pubDate>
-      <guid>https://example.com/publication/example/</guid>
+      <guid>https://zhenghuazx.github.io/hua.zheng/publication/example/</guid>
       <description></description>
     </item>
     
     <item>
       <title>STEM Education and Industry Workforce Life-Long Training Platform Development to Faciliate Smart Biopharmaceutical Manufacturing 4.0-4</title>
-      <link>https://example.com/publication/xie-2020-stem/</link>
+      <link>https://zhenghuazx.github.io/hua.zheng/publication/xie-2020-stem/</link>
       <pubDate>Sat, 01 May 2021 00:00:00 +0000</pubDate>
-      <guid>https://example.com/publication/xie-2020-stem/</guid>
+      <guid>https://zhenghuazx.github.io/hua.zheng/publication/xie-2020-stem/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Personalized Multimorbidity Management for Patients with Type 2 Diabetes Using Reinforcement Learning of Electronic Health Records</title>
-      <link>https://example.com/publication/zheng-2021/</link>
+      <link>https://zhenghuazx.github.io/hua.zheng/publication/zheng-2021/</link>
       <pubDate>Mon, 01 Mar 2021 00:00:00 +0000</pubDate>
-      <guid>https://example.com/publication/zheng-2021/</guid>
+      <guid>https://zhenghuazx.github.io/hua.zheng/publication/zheng-2021/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Policy Optimization in Bayesian Network Hybrid Models of Biomanufacturing Processes</title>
-      <link>https://example.com/publication/zheng-2021-policy/</link>
+      <link>https://zhenghuazx.github.io/hua.zheng/publication/zheng-2021-policy/</link>
       <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
-      <guid>https://example.com/publication/zheng-2021-policy/</guid>
+      <guid>https://zhenghuazx.github.io/hua.zheng/publication/zheng-2021-policy/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Reinforcement Learning Assisted Oxygen Therapy for COVID-19 Patients Under Intensive Care</title>
-      <link>https://example.com/publication/zheng-2021-reinforcement/</link>
+      <link>https://zhenghuazx.github.io/hua.zheng/publication/zheng-2021-reinforcement/</link>
       <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
-      <guid>https://example.com/publication/zheng-2021-reinforcement/</guid>
+      <guid>https://zhenghuazx.github.io/hua.zheng/publication/zheng-2021-reinforcement/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Green Simulation Assisted Reinforcement Learning with Model Risk for Biomanufacturing Learning and Control</title>
-      <link>https://example.com/publication/10-5555-3466184-3466221/</link>
+      <link>https://zhenghuazx.github.io/hua.zheng/publication/10-5555-3466184-3466221/</link>
       <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>https://example.com/publication/10-5555-3466184-3466221/</guid>
+      <guid>https://zhenghuazx.github.io/hua.zheng/publication/10-5555-3466184-3466221/</guid>
       <description></description>
     </item>
     

@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Education | Academic</title>
-    <link>https://example.com/tag/education/</link>
-      <atom:link href="https://example.com/tag/education/index.xml" rel="self" type="application/rss+xml" />
+    <title>Education | Zheng.H</title>
+    <link>https://zhenghuazx.github.io/hua.zheng/tag/education/</link>
+      <atom:link href="https://zhenghuazx.github.io/hua.zheng/tag/education/index.xml" rel="self" type="application/rss+xml" />
     <description>Education</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sat, 01 May 2021 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>Hua Zheng ©2021</copyright><lastBuildDate>Sat, 01 May 2021 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://example.com/media/icon_hu658dc7ef748f26cdf7d87fd659137d7d_44050_512x512_fill_lanczos_center_3.png</url>
+      <url>https://zhenghuazx.github.io/hua.zheng/media/icon_hu658dc7ef748f26cdf7d87fd659137d7d_44050_512x512_fill_lanczos_center_3.png</url>
       <title>Education</title>
-      <link>https://example.com/tag/education/</link>
+      <link>https://zhenghuazx.github.io/hua.zheng/tag/education/</link>
     </image>
     
     <item>
       <title>STEM Education and Industry Workforce Life-Long Training Platform Development to Faciliate Smart Biopharmaceutical Manufacturing 4.0-4</title>
-      <link>https://example.com/publication/xie-2020-stem/</link>
+      <link>https://zhenghuazx.github.io/hua.zheng/publication/xie-2020-stem/</link>
       <pubDate>Sat, 01 May 2021 00:00:00 +0000</pubDate>
-      <guid>https://example.com/publication/xie-2020-stem/</guid>
+      <guid>https://zhenghuazx.github.io/hua.zheng/publication/xie-2020-stem/</guid>
       <description></description>
     </item>
     

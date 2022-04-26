@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Digital Twin | Academic</title>
-    <link>https://example.com/tag/digital-twin/</link>
-      <atom:link href="https://example.com/tag/digital-twin/index.xml" rel="self" type="application/rss+xml" />
+    <title>Digital Twin | Zheng.H</title>
+    <link>https://zhenghuazx.github.io/hua.zheng/tag/digital-twin/</link>
+      <atom:link href="https://zhenghuazx.github.io/hua.zheng/tag/digital-twin/index.xml" rel="self" type="application/rss+xml" />
     <description>Digital Twin</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 25 Apr 2022 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>Hua Zheng ©2021</copyright><lastBuildDate>Mon, 25 Apr 2022 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://example.com/media/icon_hu658dc7ef748f26cdf7d87fd659137d7d_44050_512x512_fill_lanczos_center_3.png</url>
+      <url>https://zhenghuazx.github.io/hua.zheng/media/icon_hu658dc7ef748f26cdf7d87fd659137d7d_44050_512x512_fill_lanczos_center_3.png</url>
       <title>Digital Twin</title>
-      <link>https://example.com/tag/digital-twin/</link>
+      <link>https://zhenghuazx.github.io/hua.zheng/tag/digital-twin/</link>
     </image>
     
     <item>
       <title>Virtual Laboratory</title>
-      <link>https://example.com/project/vlab/</link>
+      <link>https://zhenghuazx.github.io/hua.zheng/project/vlab/</link>
       <pubDate>Mon, 25 Apr 2022 00:00:00 +0000</pubDate>
-      <guid>https://example.com/project/vlab/</guid>
+      <guid>https://zhenghuazx.github.io/hua.zheng/project/vlab/</guid>
       <description>&lt;p&gt;vLab is a package for biopharmaceutical manufacturing simulation in Python. It utilizes the &lt;code&gt;diffeqpy&lt;/code&gt;,
 a python wrapper of &lt;a href=&#34;http://diffeq.sciml.ai/dev/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;DifferentialEquations.jl&lt;/a&gt; and scipy built-in ode solver
 for its core routines to give high performance solving of large stiff differential equations, currently
@@ -45,10 +45,10 @@ including:&lt;/p&gt;
 &lt;figure  &gt;
   &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
     &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;&#34; srcset=&#34;
-               /project/vlab/simulation_hua58c4e7b2b6fe9cda0c02501bb32db1c_885464_a0f66eab6cc7499f24c236af3a3e2b70.webp 400w,
-               /project/vlab/simulation_hua58c4e7b2b6fe9cda0c02501bb32db1c_885464_3bd80d72ab635699bceb8bea3ef685fc.webp 760w,
-               /project/vlab/simulation_hua58c4e7b2b6fe9cda0c02501bb32db1c_885464_1200x1200_fit_q100_h2_lanczos_3.webp 1200w&#34;
-               src=&#34;https://example.com/project/vlab/simulation_hua58c4e7b2b6fe9cda0c02501bb32db1c_885464_a0f66eab6cc7499f24c236af3a3e2b70.webp&#34;
+               /hua.zheng/project/vlab/simulation_hua58c4e7b2b6fe9cda0c02501bb32db1c_885464_a0f66eab6cc7499f24c236af3a3e2b70.webp 400w,
+               /hua.zheng/project/vlab/simulation_hua58c4e7b2b6fe9cda0c02501bb32db1c_885464_3bd80d72ab635699bceb8bea3ef685fc.webp 760w,
+               /hua.zheng/project/vlab/simulation_hua58c4e7b2b6fe9cda0c02501bb32db1c_885464_1200x1200_fit_q100_h2_lanczos_3.webp 1200w&#34;
+               src=&#34;https://zhenghuazx.github.io/hua.zheng/hua.zheng/project/vlab/simulation_hua58c4e7b2b6fe9cda0c02501bb32db1c_885464_a0f66eab6cc7499f24c236af3a3e2b70.webp&#34;
                width=&#34;760&#34;
                height=&#34;448&#34;
                loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
