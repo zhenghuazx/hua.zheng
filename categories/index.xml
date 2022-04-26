@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Categories | Zheng.H</title>
-    <link>https://zhenghuazx.github.io/hua.zheng/categories/</link>
-      <atom:link href="https://zhenghuazx.github.io/hua.zheng/categories/index.xml" rel="self" type="application/rss+xml" />
+    <title>Categories | Academic</title>
+    <link>https://example.com/categories/</link>
+      <atom:link href="https://example.com/categories/index.xml" rel="self" type="application/rss+xml" />
     <description>Categories</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>Hua Zheng ©2021</copyright><lastBuildDate>Sun, 13 Dec 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sat, 01 Jan 2022 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://zhenghuazx.github.io/hua.zheng/media/icon_hu658dc7ef748f26cdf7d87fd659137d7d_44050_512x512_fill_lanczos_center_2.png</url>
+      <url>https://example.com/media/icon_hu658dc7ef748f26cdf7d87fd659137d7d_44050_512x512_fill_lanczos_center_3.png</url>
       <title>Categories</title>
-      <link>https://zhenghuazx.github.io/hua.zheng/categories/</link>
+      <link>https://example.com/categories/</link>
     </image>
     
   </channel>

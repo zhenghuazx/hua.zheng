@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Bayesian Network | Academic</title>
+    <link>https://example.com/category/bayesian-network/</link>
+      <atom:link href="https://example.com/category/bayesian-network/index.xml" rel="self" type="application/rss+xml" />
+    <description>Bayesian Network</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Thu, 13 May 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://example.com/media/icon_hu658dc7ef748f26cdf7d87fd659137d7d_44050_512x512_fill_lanczos_center_3.png</url>
+      <title>Bayesian Network</title>
+      <link>https://example.com/category/bayesian-network/</link>
+    </image>
+    
+    <item>
+      <title>Policy Optimization in Bayesian Network Hybrid Models of Biomanufacturing Processes</title>
+      <link>https://example.com/publication/example/</link>
+      <pubDate>Thu, 13 May 2021 00:00:00 +0000</pubDate>
+      <guid>https://example.com/publication/example/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

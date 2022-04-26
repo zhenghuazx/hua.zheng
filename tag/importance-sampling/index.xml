@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Importance Sampling | Academic</title>
+    <link>https://example.com/tag/importance-sampling/</link>
+      <atom:link href="https://example.com/tag/importance-sampling/index.xml" rel="self" type="application/rss+xml" />
+    <description>Importance Sampling</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Tue, 26 Oct 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://example.com/media/icon_hu658dc7ef748f26cdf7d87fd659137d7d_44050_512x512_fill_lanczos_center_3.png</url>
+      <title>Importance Sampling</title>
+      <link>https://example.com/tag/importance-sampling/</link>
+    </image>
+    
+    <item>
+      <title>Green Simulation Assisted Policy Gradient to Accelerate Stochastic Process Control</title>
+      <link>https://example.com/publication/zheng-2021-green/</link>
+      <pubDate>Tue, 26 Oct 2021 00:00:00 +0000</pubDate>
+      <guid>https://example.com/publication/zheng-2021-green/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>1 | Zheng.H</title>
-    <link>https://zhenghuazx.github.io/hua.zheng/publication-type/1/</link>
-      <atom:link href="https://zhenghuazx.github.io/hua.zheng/publication-type/1/index.xml" rel="self" type="application/rss+xml" />
+    <title>1 | Academic</title>
+    <link>https://example.com/publication-type/1/</link>
+      <atom:link href="https://example.com/publication-type/1/index.xml" rel="self" type="application/rss+xml" />
     <description>1</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>Hua Zheng ©2021</copyright><lastBuildDate>Sat, 01 May 2021 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sat, 01 May 2021 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://zhenghuazx.github.io/hua.zheng/media/icon_hu658dc7ef748f26cdf7d87fd659137d7d_44050_512x512_fill_lanczos_center_2.png</url>
+      <url>https://example.com/media/icon_hu658dc7ef748f26cdf7d87fd659137d7d_44050_512x512_fill_lanczos_center_3.png</url>
       <title>1</title>
-      <link>https://zhenghuazx.github.io/hua.zheng/publication-type/1/</link>
+      <link>https://example.com/publication-type/1/</link>
     </image>
     
     <item>
       <title>STEM Education and Industry Workforce Life-Long Training Platform Development to Faciliate Smart Biopharmaceutical Manufacturing 4.0-4</title>
-      <link>https://zhenghuazx.github.io/hua.zheng/publication/xie-2020-stem/</link>
+      <link>https://example.com/publication/xie-2020-stem/</link>
       <pubDate>Sat, 01 May 2021 00:00:00 +0000</pubDate>
-      <guid>https://zhenghuazx.github.io/hua.zheng/publication/xie-2020-stem/</guid>
+      <guid>https://example.com/publication/xie-2020-stem/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Green Simulation Assisted Reinforcement Learning with Model Risk for Biomanufacturing Learning and Control</title>
-      <link>https://zhenghuazx.github.io/hua.zheng/publication/10-5555-3466184-3466221/</link>
+      <link>https://example.com/publication/10-5555-3466184-3466221/</link>
       <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>https://zhenghuazx.github.io/hua.zheng/publication/10-5555-3466184-3466221/</guid>
+      <guid>https://example.com/publication/10-5555-3466184-3466221/</guid>
       <description></description>
     </item>
     
