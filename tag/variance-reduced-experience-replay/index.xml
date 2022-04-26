@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Policy Optimization | Zheng.H</title>
-    <link>https://zhenghuazx.github.io/hua.zheng/tag/policy-optimization/</link>
-      <atom:link href="https://zhenghuazx.github.io/hua.zheng/tag/policy-optimization/index.xml" rel="self" type="application/rss+xml" />
-    <description>Policy Optimization</description>
+    <title>Variance Reduced Experience Replay | Zheng.H</title>
+    <link>https://zhenghuazx.github.io/hua.zheng/tag/variance-reduced-experience-replay/</link>
+      <atom:link href="https://zhenghuazx.github.io/hua.zheng/tag/variance-reduced-experience-replay/index.xml" rel="self" type="application/rss+xml" />
+    <description>Variance Reduced Experience Replay</description>
     <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>Hua Zheng ©2021</copyright><lastBuildDate>Sat, 23 Apr 2022 16:30:00 +0000</lastBuildDate>
     <image>
       <url>https://zhenghuazx.github.io/hua.zheng/media/icon_hu658dc7ef748f26cdf7d87fd659137d7d_44050_512x512_fill_lanczos_center_3.png</url>
-      <title>Policy Optimization</title>
-      <link>https://zhenghuazx.github.io/hua.zheng/tag/policy-optimization/</link>
+      <title>Variance Reduced Experience Replay</title>
+      <link>https://zhenghuazx.github.io/hua.zheng/tag/variance-reduced-experience-replay/</link>
     </image>
     
     <item>
@@ -17,14 +17,6 @@
       <link>https://zhenghuazx.github.io/hua.zheng/talk/32nd-annual-poms-conference/</link>
       <pubDate>Sat, 23 Apr 2022 16:30:00 +0000</pubDate>
       <guid>https://zhenghuazx.github.io/hua.zheng/talk/32nd-annual-poms-conference/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Policy Optimization in Bayesian Network Hybrid Models of Biomanufacturing Processes</title>
-      <link>https://zhenghuazx.github.io/hua.zheng/publication/example/</link>
-      <pubDate>Thu, 13 May 2021 00:00:00 +0000</pubDate>
-      <guid>https://zhenghuazx.github.io/hua.zheng/publication/example/</guid>
       <description></description>
     </item>
     
