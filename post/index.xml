@@ -5,7 +5,7 @@
     <link>https://zhenghuazx.github.io/hua.zheng/post/</link>
       <atom:link href="https://zhenghuazx.github.io/hua.zheng/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>Hua Zheng ©2021</copyright><lastBuildDate>Sun, 13 Dec 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>Hua Zheng ©2022</copyright><lastBuildDate>Thu, 05 May 2022 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://zhenghuazx.github.io/hua.zheng/media/icon_hu658dc7ef748f26cdf7d87fd659137d7d_44050_512x512_fill_lanczos_center_3.png</url>
       <title>Posts</title>
@@ -13,16 +13,327 @@
     </image>
     
     <item>
-      <title>Welcome to Wowchemy, the website builder for Hugo</title>
-      <link>https://zhenghuazx.github.io/hua.zheng/post/getting-started/</link>
-      <pubDate>Sun, 13 Dec 2020 00:00:00 +0000</pubDate>
-      <guid>https://zhenghuazx.github.io/hua.zheng/post/getting-started/</guid>
-      <description>&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
+      <title>Dynamic Bayesian Network Based Hybrid Process Model</title>
+      <link>https://zhenghuazx.github.io/hua.zheng/post/dynamicbayesiannetworkbasedhybridprocessmodel/</link>
+      <pubDate>Thu, 05 May 2022 00:00:00 +0000</pubDate>
+      <guid>https://zhenghuazx.github.io/hua.zheng/post/dynamicbayesiannetworkbasedhybridprocessmodel/</guid>
+      <description>&lt;h1 id=&#34;table-of-contents&#34;&gt;Table of Contents&lt;/h1&gt;
 &lt;ol&gt;
-&lt;li&gt;The Wowchemy website builder for Hugo, along with its starter templates, is designed for professional creators, educators, and teams/organizations - although it can be used to create any kind of site&lt;/li&gt;
-&lt;li&gt;The template can be modified and customised to suit your needs. It&amp;rsquo;s a good platform for anyone looking to take control of their data and online identity whilst having the convenience to start off with a &lt;strong&gt;no-code solution (write in Markdown and customize with YAML parameters)&lt;/strong&gt; and having &lt;strong&gt;flexibility to later add even deeper personalization with HTML and CSS&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;You can work with all your favourite tools and apps with hundreds of plugins and integrations to speed up your workflows, interact with your readers, and much more&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#introduction&#34;&gt;Introduction&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#motivation&#34;&gt;Motivation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#process-modeling&#34;&gt;Process Modeling&lt;/a&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;#Linear-Gaussian-Dynamic-Bayesian-Network-Based-Hybrid-Model-4-httpsarxivorgpdf210506543pdf&#34;&gt;Linear Gaussian Dynamic Bayesian Network Based Hybrid Model&lt;/a&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;#process-trajectoryepisode-distribution&#34;&gt;Process Trajectory/Episode Distribution&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#model-formulation&#34;&gt;Model Formulation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#inference&#34;&gt;Inference&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#nonlinear-dynamic-bayesian-network-based-hybrid-modelh6ttpsarxivorgpdf220103116pdf&#34;&gt;Nonlinear Dynamic Bayesian Network Based Hybrid Model&lt;/a&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;#parametric-variation-modeling&#34;&gt;Parametric Variation Modeling&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#latent-state-modeling&#34;&gt;Latent State Modeling&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#inference-a-bayesian-approach&#34;&gt;Inference (A Bayesian Approach)&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#conclusion&#34;&gt;Conclusion&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#next&#34;&gt;Next?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#reference&#34;&gt;Reference&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
+&lt;p&gt;This is a tutorial about a series of advanced hybrid process models for people with some background in mathematical and statistical modeling and interested in the process modeling. The class of process models I will present in this tutorial is mainly based on Bayesian network and Bayesian inference.&lt;/p&gt;
+&lt;h1 id=&#34;motivation&#34;&gt;Motivation&lt;/h1&gt;
+&lt;p&gt;For many biochemical/physical/economic processes, the laws of physics and biochemistry often allow us to construct mechanistic models in forms of ordinary/partial/algebraic differential equations. While these models can well describe the the mean changes in a reaction/movement/economy profile over time, these models often ignore the impact from various sources of process inherent stochasticity. For example, in a cell culture process, although batch-to-batch variation and bioprocess noise are often dominant sources of process variation [1], biochemical kinetics literature rarely incorporates them into the ordinary/partial  differential equation (ODE/PDE) based mechanistic models. In a study on the microbial cell-to-cell phenotypic diversity, [2] identified the intracellular production fluctuations as one of the major sources of the bioprocessing noise. Raw material variability is another critical source of uncertainty impacting cell cultures [3]. In fact, process noises are widely seen in most complex systems such as economy, cell metabolism, production process of mRNA vaccines. Therefore, it is of great importance to understand  and incorporate major sources of stochastic uncertainty into a process model.&lt;/p&gt;
+&lt;h1 id=&#34;process-modeling&#34;&gt;Process Modeling&lt;/h1&gt;
+&lt;p&gt;Process-based modeling is a modeling framework for complex systems. In contrast to agent-based models and other mainstream languages in complex systems, in a process-based model the structural features of a system are encoded in the interactions between the entities, rather than in the entities themselves.&lt;/p&gt;
+&lt;h2 id=&#34;ordinary-differential-equations-based-mechanistic-model&#34;&gt;Ordinary Differential Equations Based Mechanistic Model&lt;/h2&gt;
+&lt;p&gt;A control system is a &lt;a href=&#34;http://www.scholarpedia.org/article/Dynamical_Systems&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;dynamical system&lt;/a&gt; on which one can act by using suitable controls. In this article, the dynamical model is modeled by ordinary differential equations of the following type&lt;/p&gt;
+&lt;p&gt;
+$$
+\dot{\pmb{s}}=\pmb f(\pmb s,\pmb a)\tag{1}\label{eq: 1}
+$$
+
+where $\pmb{f}(\cdot)$ encodes the causal interdependencies between actions and state. One typically assumes that the functional form of $\pmb{f}$ is known, though it may also depend on additional parameters calibrated from data. The variable $\pmb s$ is the state and belongs to some space $\mathcal{S}$. The variable $\pmb{a}$ is the control and belongs to some space $\mathcal{A}$. In this article, the space $\mathcal{S}$ is of infinite dimension.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Remark:&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;In control literature, people use the state and control variables $(x,u)$ instead of state and action $(\pmb{s},\pmb{a})$.&lt;/li&gt;
+&lt;li&gt;This is a first order differential equation;&lt;/li&gt;
+&lt;li&gt;$\pmb f(\cdot)=\left(f_1,\ldots, f_n\right)(\cdot)=\left(f_1(\cdot),\ldots, f_n(\cdot)\right)$ is a vector of functions.&lt;/li&gt;
+&lt;li&gt;Some characteristics of the dynamical system can be used to analyze the Eq.(1), such as
+&lt;ul&gt;
+&lt;li&gt;Stability: means that the trajectories do not change too much under small perturbations.&lt;/li&gt;
+&lt;li&gt;Asymptotically stability&lt;/li&gt;
+&lt;li&gt;controllability:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;: the kinetic/dynamic equations is linear, e.g. $\dot{s}=\mu s(t)$, where $\mu$ is a constant,  and in this case, $f(x)=ax$. The stability of linear systems is straightforward, i.e. stable if $\mu&amp;lt;0$, and unstable otherwise.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;linear-gaussian-dynamic-bayesian-network-based-hybrid-model-4httpsarxivorgpdf210506543pdf&#34;&gt;Linear Gaussian Dynamic Bayesian Network Based Hybrid Model [&lt;a href=&#34;https://arxiv.org/pdf/2105.06543.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;4&lt;/a&gt;]&lt;/h2&gt;
+&lt;p&gt;We model the  process dynamics as a finite-horizon Markov decision process (MDP) specified by $(\mathcal{S}, \mathcal{A}, H, r, p)$, where $\mathcal{S}$, $\mathcal{A}$, $H$, $r$ and $p$ represent state space, action space, planning horizon, reward function, and state transition probability model. The process state transition is modeled as,
+
+$$
+\begin{equation}
+\pmb{s}_{t+1} \sim p(\pmb{s}_{t+1}|\pmb{s}_t,\pmb{a}_t;\pmb\theta_t)
+\end{equation}
+$$
+&lt;/p&gt;
+&lt;p&gt;where $\pmb{s}_t\in \mathcal{S}\subset \mathbb{R}^n$ denotes the process state (e.g., glucose and lactate concentrations and cell density), $\pmb{a}_t \in \mathcal{A}\subset\mathbb{R}^m$  is the action (also known as control inputs) at time step $t\in\mathcal{H}$. Here $\mathcal{H}\equiv{1,2,\ldots,H}$ denotes the discrete time index (a.k.a. decision epochs).&lt;/p&gt;
+&lt;h3 id=&#34;process-trajectoryepisode-distribution&#34;&gt;Process Trajectory/Episode Distribution&lt;/h3&gt;
+&lt;p&gt;Then, the distribution of the entire trajectory $\pmb\tau=(\pmb{s}_1,\pmb{a}_1,\pmb{s}_2,\pmb{a}_2,\ldots,\pmb{s}_{H})$
+of the process can be written as a product&lt;/p&gt;
+&lt;p&gt;
+$$
+p(\pmb{\tau}) = p(\pmb{s}_1)\prod_{t=1}^{H-1} p(\pmb{s}_{t+1}|\pmb{s}_t,\pmb{a}_t) p(\pmb{a}_t)\tag{2}\label{eq:trajectory-distribution}
+$$
+
+of conditional distributions. Given a set of real-world process observations denoted by $\mathcal{D} =\left\{\pmb\tau^{(n)}\right\}^N_{n=1}$, we quantify the model parameter estimation uncertainty using the posterior distribution $p(\pmb{\theta}|\mathcal{D})$.&lt;/p&gt;
+&lt;h3 id=&#34;model-formulation&#34;&gt;Model Formulation&lt;/h3&gt;
+&lt;p&gt;Suppose that $\pmb s_t$ evolves according to the ordinary differential equation  \eqref{eq: 1}  and the dynamics is monitored on a small time scale using sensors, let us replace Eq. \eqref{eq: 1}  by the first-order Taylor approximation&lt;/p&gt;
+&lt;p&gt;
+$$
+\begin{equation}
+\frac{\Delta \pmb{s}_{t+1}}{\Delta t} =\pmb{f}(\pmb\mu_t^s,\pmb\mu_t^a)+J^s_f(\pmb\mu_t^s)(\pmb{s}_t-\pmb\mu_t^s)+J^a_f(\pmb\mu_t^a)(\pmb{a}_t-\pmb\mu_t^a), \tag{3}\label{eq:taylor1}
+\end{equation}
+$$
+
+where $\Delta \pmb{s}_{t+1}=\pmb{s}_{t+1}-\pmb{s}_{t}$, and  $J^s_f,J^a_f$ denote the Jacobian matrices of $\pmb{f}$  with respect to $\pmb{s}_t$ and $\pmb{a}_t$, respectively. The interval $\Delta t$ can change with time, but we keep it constant for simplicity. The approximation is taken at a point $\left(\pmb\mu_t^s,\pmb\mu_t^a\right)$. We can then rewrite Eq. \eqref{eq:taylor1}  as&lt;/p&gt;
+
+$$
+\begin{equation}
+\scriptsize
+\pmb{s}_{t+1} = \pmb{\mu}_{t}^s + \Delta t\cdot \pmb{f}(\pmb\mu_t^s,\pmb\mu_t^a)+(\Delta t \cdot J_f(\pmb\mu_t^s)+1)(\pmb{s}_t-\pmb\mu_t^s)+\Delta t \cdot J_f(\pmb\mu_t^a)(\pmb{a}_t-\pmb\mu_t^a)+R_{t+1}\tag{4}\label{eq:taylor}
+\end{equation}
+$$
+
+&lt;p&gt;where $R_{t+1}$ is a remainder term modeling the effect from other uncontrolled factors. In this way, the original process dynamics have been linearized, with $R_{t+1}$ serving as a residual. One can easily represent Eq. \eqref{eq:taylor}  using a network model. An edge exists from $s^k_t$ (respectively, $a^k_t$) to $s^l_{t+1}$ if the $\left(k,l\right)$-th entry of $J^s_f$ (respectively, $J^a_f$) is not identically zero.&lt;/p&gt;
+&lt;p&gt;As will be seen shortly, the linearized dynamics can be rewritten in a linear Gaussian dynamic Bayesian network. Specifically, let&lt;/p&gt;
+
+$$
+\begin{align*}\pmb\mu_{t+1}^s &amp;=\pmb{\mu}_{t}^s + \Delta t\cdot \pmb{f}(\pmb\mu_t^s,\pmb\mu_t^a),\\
+\pmb\beta_{t}^s &amp;= \Delta t \cdot J_f(\pmb\mu_t^s)+1,\\
+\pmb\beta_{t}^a &amp;=\Delta t \cdot J_f(\pmb\mu_t^a),\end{align*}
+$$
+
+&lt;p&gt;and treat $R_{t+1}$ as the residual $\pmb{e}_{t+1}=V_{t+1}^{1/2}\pmb{z}$,  with $\pmb{z}$ is an $n$-dimensional standard normal random vector, and $V_{t+1}\triangleq\text{diag}(v_{t+1}^{k})$ is a diagonal matrix of residual standard deviation.  we can turn  Eq. \eqref{eq:taylor}  into a Linear Gaussian (Dynamic) Bayesian Network [5]:&lt;/p&gt;
+&lt;p&gt; 
+$$
+\begin{equation}
+\pmb{s}_{t+1} = \pmb{\mu}_{t+1}^s + \left(\pmb{\beta}_{t}^s\right)^\top(\pmb{s}_t-\pmb\mu_t^s) + \left(\pmb\beta_{t}^a\right)^\top(\pmb{a}_t-\pmb\mu_t^a) +V_{t+1}^{1/2}\pmb{z}_{t+1}\tag{5}\label{eq: 5}
+\end{equation}
+$$
+
+where&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt; $s_t\in\mathcal{S}\subset \mathbb{R}^n, \pmb{a}_t\in\mathcal{A}\subset \mathbb{R}^{m}$&lt;/li&gt;
+&lt;li&gt; $\pmb\mu_{t}^s=(\mu_t^{1},\ldots, \mu_t^n)$ and  $\pmb\mu_{t}^a=(\lambda_t^{1},\ldots, \lambda_t^m)$ ,&lt;/li&gt;
+&lt;li&gt; $\pmb\beta_{t}^s$ is the $n\times n$ matrix whose $\left(j,k\right)$-th element is the linear coefficient $\beta^{jk}_t$  corresponding to the effect of state $s^j_t$ on the next state $s^k_{t+1}$&lt;/li&gt;
+&lt;li&gt;$\pmb\beta_t^a$ is the $m\times n$ matrix of analogous coefficients representing the effects of each component of $\pmb{a}_t$ on each component of $\pmb{s}_{t+1}$.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;State transition&lt;/strong&gt;: From Eq.\eqref{eq: 5}, the state transition becomes
+
+$$
+\begin{equation*}\small
+\pmb{s}_{t+1} \sim p(\pmb{s}_{t+1}|\pmb{s}_t,\pmb{a}_t;\pmb\theta_t)=\mathcal{N}\left( \pmb{\mu}_{t+1}^s + \left(\pmb{\beta}_{t}^s\right)^\top(\pmb{s}_t-\pmb\mu_t^s) + \left(\pmb\beta_{t}^a\right)^\top(\pmb{a}_t-\pmb\mu_t^a), V_{t+1}\right)
+\end{equation*}
+$$
+
+with $\pmb\theta_t=(\pmb{\mu}_{t+1}^s,\pmb\mu_t^s,\pmb\mu_t^a,\pmb{\beta}_{t}^s, \pmb\beta_{t}^a, V_{t+1})$.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Initial State:&lt;/strong&gt; $\pmb{s}_1\sim \mathcal{N}(\pmb\mu^s_1,V_1)$ or $s_{1}^k \sim \mathcal{N}(\mu^k_{1},(v^k_{1})^2)$ for $k=1,2,\ldots,m$.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Action:&lt;/strong&gt; $\pmb{a}_t\sim\mathcal{N}\left(\pmb\mu^a_t,\text{diag}(\sigma_t^k)\right)$ or $a_{t}^k \sim \mathcal{N}(\lambda^k_{t},(\sigma^k_{t})^2)$ for $k=1,2,\ldots,m$&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Parameters:&lt;/strong&gt; Letting $\pmb\sigma_t=(\sigma_t^1,\ldots,\sigma_t^m)$ and $\pmb{v}_t=(v_t^1,\ldots,v_t^n)$&lt;em&gt;,&lt;/em&gt; the list of parameters for full model is
+
+$$
+\pmb{\theta} = (\pmb{\mu}^s,\pmb\mu^a,\pmb{\beta},\pmb\sigma,\pmb{v})= \{(\pmb{\mu}_{t}^s,\pmb\mu_t^a,\pmb{\beta}_{t}^s,\pmb\beta_{t}^a,\pmb\sigma_t,\pmb{v}_t)| 0\leq t\leq H\}
+$$
+
+where $\pmb\beta = (\pmb\beta^a,\pmb\beta^s)$. Next, we will discuss how to estimate parameters $\pmb{\theta}$ from data.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Remark:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$\pmb{v}_t$ is the diagonal (vector)of the diagonal covariance matrix $V_t$, i.e. $\pmb{v}_t=\text{diag}(V_{t})$.&lt;/li&gt;
+&lt;li&gt;Action can be modeled by a policy distribution $\pmb{a}_t\sim \pi(\pmb{a}_t|\pmb{s}_t)$. This policy $\pi$ can be obtained from RL algorithms.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;inference&#34;&gt;Inference&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Bayesian Approach&lt;/strong&gt; (See details in &lt;strong&gt;Appendix Section 10 of [&lt;a href=&#34;https://arxiv.org/pdf/2105.06543.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;4&lt;/a&gt;]&lt;/strong&gt;):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Full likelihood and conjugate prior&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Given the data $\mathcal{D}$, the posterior distribution of $\pmb{\theta}$ is proportional to
+$\pmb{\theta}$$p(\pmb\theta|\mathcal{D})\propto p\left(\pmb{\theta}\right)\prod_{n=1}^Np\left(\pmb{\tau}^{(n)}|\pmb{\theta}\right)$$.&lt;/p&gt;
+&lt;p&gt;The Gibbs sampling technique can be used to sample from this distribution.&lt;/p&gt;
+&lt;p&gt;For each node $X$ in the network, let $\text{Ch}\left(X\right)$ be the set of child nodes (direct successors) of $X$. The &lt;strong&gt;full likelihood&lt;/strong&gt; $p\left(\mathcal{D}|\pmb{\theta}\right)$ becomes&lt;/p&gt;
+
+    $$
+    \begin{equation*}\scriptsize
+    p(\mathcal{D}|\pmb{\theta})=\prod^N_{i=1}p(\pmb{\tau}_i|\pmb{\theta})=\prod^N_{i=1}\prod_{t=1}^H\left[\prod_{k=1}^{m}\mathcal{N}\left(\lambda^k_{t},(\sigma^k_{t})^2\right)\prod_{k=1}^{n}\mathcal{N}\left(\mu^k_{t+1} + \sum_{X^j_t\in Pa(s^k_{t+1})}\beta^{jk}_{t}(X^j_t - \mu^j_t),(v^k_{t+1})^2\right)\right],
+    \end{equation*}
+    $$
+    
+&lt;p&gt;For the parameters $\pmb\mu^a, \pmb \mu^s,\pmb\sigma^2 \pmb v^2, \pmb \beta$, we have the &lt;strong&gt;conjugate prior&lt;/strong&gt;
+
+    $$
+    \begin{equation*}\small
+    p(\pmb \mu^a, \pmb \mu^s,\pmb\sigma^2 \pmb v^2, \pmb \beta) =
+    \prod_{t=1}^H\left(\prod_{k=1}^{m} p(\lambda^k_t)p\left((\sigma_k^{t})^2\right)\prod_{k=1}^{n} p(\mu^k_t)p\left((v^k_{t})^2\right) \prod_{i\neq j} p(\beta^{ij}_t)\right),
+    \end{equation*}
+    $$
+    
+where
+
+    $$
+    \begin{equation}
+    \small
+    \begin{split}
+    &amp;p(\lambda^k_t) =\mathcal{N}\left({\lambda}^{k(0)}_t, \left({\delta}_{t,k}^{(\lambda)}\right)^2\right), \quad p(\mu^k_t) = \mathcal{N}\left({\mu}^{k(0)}_t, \left({\delta}_{t,k}^{(\mu)}\right)^2\right), \\
+    &amp; p(\beta_{t}^{ij}) = \mathcal{N}\left({\beta}_{t}^{ij(0)}, \left({\delta}_{t,ij}^{(\beta)}\right)^2\right)\quad
+     p\left((\sigma_t^k)^2\right) = \text{Inv-}\Gamma\left(\dfrac{\kappa_{t,k}^{(\sigma)}}{2}, \dfrac{\rho_{t,k}^{(\sigma)}}{2}\right), \\ 
+    &amp;p((v_t^k)^2) = \text{Inv-}\Gamma\left(\dfrac{\kappa_{t,k}^{(v)}}{2}, \dfrac{\rho_{t,k}^{(v)}}{2}\right),
+    \end{split}
+    \end{equation}
+    $$
+    
+where $\text{Inv-}\Gamma$ denotes the inverse-gamma distribution. We omit the tedious derivation for the posterior conditional distribution for each model parameters but you can find them in &lt;strong&gt;Appendix Section 10 of [&lt;a href=&#34;https://arxiv.org/pdf/2105.06543.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;4&lt;/a&gt;].&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Frequentists’ Approach&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Following [5] (p.318, Chapter 10), we can write the LG-DBN Eq.\eqref{eq: 5} as&lt;/p&gt;
+&lt;p&gt;
+$$
+\begin{equation}\pmb\tau-\pmb\mu=B(\pmb\tau-\pmb\mu) - \Sigma^{1/2} \pmb u \tag{6}\label{eq: 6}\end{equation}
+$$
+
+where $\pmb{\mu} = [\pmb{\mu}^s_1,\pmb{\mu}^a_1,\ldots,\pmb{\mu}^s_{H},\pmb{\mu}^a_{H},\pmb{\mu}^s_{H+1}]^\top$, $\pmb u$ is an $\left((H+1)n+Hm\right)$-dimensional standard normal random vector, $\Sigma^{\frac{1}{2}}=\text{diag}\left(\pmb{v}^s_1,\pmb\sigma_1,\ldots,\pmb{v}^s_H,\pmb\sigma_H,\pmb{v}^s_{H+1}\right)$ is the diagonal matrix of the conditional standard deviations of state and actions, and the coefficient matrix of observed trajectory is written as
+
+$$
+B = \begin{bmatrix} 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; \cdots &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; \cdots &amp; 0 &amp; 0 &amp; 0 &amp; 0\\\pmb{\beta}^s_1 &amp; \pmb{\beta}^a_1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; \cdots &amp; 0 &amp; 0 &amp; 0 &amp; 0\\0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; \cdots &amp; 0 &amp; 0 &amp; 0 &amp; 0\\0 &amp; 0&amp; \pmb{\beta}^s_2 &amp; \pmb{\beta}^a_2 &amp;  0 &amp; 0 &amp;\cdots &amp; 0 &amp; 0 &amp; 0 &amp; 0\\0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; \cdots &amp; 0 &amp; 0 &amp; 0 &amp; 0\\\vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots\\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; \cdots &amp; \pmb{\beta}^s_H &amp; \pmb{\beta}^a_H &amp; 0 &amp; 0\\\end{bmatrix}
+$$
+&lt;/p&gt;
+&lt;p&gt;Thus, by rearranging Eq.\eqref{eq: 6} and letting $\pmb{\tau}-\pmb\mu=(I-B)^{-1}\Sigma^{\frac{1}{2}} \pmb{u}$,  we have
+
+$$
+\pmb{\tau}\sim \mathcal{N}\left(\pmb\mu, (I-B)^{-1}\Sigma (I-B)^{-\top}\right)
+$$
+
+with mean $\mathbb{E}[\pmb\tau]=\pmb{\mu}$ and covariance matrix $\text{Cov}\left(\pmb{\tau}-\pmb\mu\right)=(I-B)^{-1}\Sigma(I-B)^{-\top}$.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Estimating $\pmb\mu$:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Let $\tilde{\pmb\tau}
+\equiv (\tilde{\pmb{s}}_1,\tilde{\pmb{a}}_1,\ldots,\tilde{\pmb{s}}_H,\tilde{\pmb{a}}_H,
+\tilde{\pmb{s}}_{H+1})
+=\pmb{\tau} - \pmb\mu$, where $\tilde{\pmb{s}}_t$ and $\tilde{\pmb{a}}_t$ denote centered observable state and decision. The unbiased estimator $\hat{\pmb\mu}=\frac{1}{N}\sum^N_{i=1}\pmb\tau^{(i)}$ can be easily obtained by using the fact $\mathbb{E}[\pmb\tau]=\pmb\mu$.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Estimating $\pmb\beta_t^s,\pmb\beta_t^a,\Sigma$&lt;/strong&gt;:&lt;/p&gt;
+&lt;p&gt;The log-likelihood of the centered trajectory observations $\{\tilde{\pmb{\tau}}^{(i)}\}_{i=1}^N$ is,
+
+$$
+\begin{equation*}\scriptsize
+\begin{split}
+\max_{\pmb{{\beta}}^s, \pmb{{\beta}}^a,V} &amp; \ell\left(\tilde{\pmb\tau}^{(1)},\ldots, \tilde{\pmb\tau}^{(N)}; \pmb{{\beta}}^s, \pmb{{\beta}}^a,V \right) = \max_{\pmb{{\beta}}^s, \pmb{{\beta}}^a,V}\log\prod_{i=1}^N p\left(\tilde{\pmb\tau}^{(i)}\right) \\ &amp;=\max_{V_1} \sum_{i=1}^N\log p(\tilde{\pmb{s}}_1^{(i)}) \left[\sum_{t=1}^H\max_{\sigma_t}\sum_{i=1}^N \log p(\tilde{\pmb{a}}_t^{(i)}) \right] \left[\sum_{t=1}^H\max_{\pmb{{\beta}}_t^s,\pmb{{\beta}}_t^a,\pmb{v}_{t+1}} \sum_{i=1}^N\log p(\tilde{\pmb{s}}_{t+1}^{(i)}|\tilde{\pmb{s}}_t^{(i)},\tilde{\pmb{a}}_t^{(i)})\right]
+\end{split}
+\end{equation*}
+
+$$
+
+Since both initial state $\tilde{\pmb{s}}_1$ and actions $\tilde{\pmb{a}}_t$ are normally distributed with mean zero, the MLEs of their variance are just sample covariances:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$\hat{v}^{k}_1=\frac{1}{N}\sum^N_{i=1}\left(\tilde{{s}}_1^{k{(i)}}\right)^2$ with $k=1,2,\ldots,n$&lt;/li&gt;
+&lt;li&gt;$\hat{\sigma}_t^k=\frac{1}{N}\sum^N_{i=1}\left(\tilde{{a}}_t^{k{(i)}}\right)^2$ with $k=1,2,\ldots,m$.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In addition, at any time $t$,  we have the log likelihood of a sample $\tilde{\pmb\tau}^{(i)}$
+
+$$
+\begin{equation*}\scriptsize
+\log p(\tilde{\pmb{s}}_{t+1}^{(i)}|\tilde{\pmb{s}}_t^{(i)},\tilde{\pmb{a}}_t^{(i)}) \propto \frac{N}{2} \log|V_{t+1}|-\frac{1}{2} \left(\tilde{\pmb{s}}^{(i)}_{t+1}-\pmb{{\beta}}_t^s\tilde{\pmb{s}}^{(i)}_{t} -\pmb{{\beta}}_t^a\tilde{\pmb{a}}^{(i)}_{t}\right)^\top V_{t+1}\left(\tilde{\pmb{s}}^{(i)}_{t+1}-\pmb{{\beta}}_t^s\tilde{\pmb{s}}^{(i)}_{t} -\pmb{{\beta}}_t^a\tilde{\pmb{a}}^{(i)}_{t}\right)
+\end{equation*}
+$$
+
+Let $\tilde{\pmb{s}}_{t+1}^{(i)}$ and $(\tilde{\pmb{s}}_{t}^{(i)}, \tilde{\pmb{a}}_{t}^{(i)})$ denote the $i$-th rows of output matrix $Y$ and the input matrix $X$, respectively.&lt;/p&gt;
+&lt;p&gt;Let $B_{t}= \left(\pmb{{\beta}}^s_t,\pmb{{\beta}}^a_t\right)^\top$ denote the coefficient vector at time $t$.&lt;/p&gt;
+&lt;p&gt;As a result, the maximum likelihood estimators (MLEs) of $\pmb{{\beta}}_t^s$ and $\pmb{{\beta}}_t^a$ are
+
+$$
+\begin{equation}\scriptsize
+\left(\hat{\pmb\beta}_t^s,\hat{\pmb\beta}_t^a\right)^\top= \hat{B}_{t} = \arg\max_{B_{t}}-\frac{1}{2} \left(Y-XB_{t}\right)^\top (V_{t+1})^{-1}\left(Y-X B_{t}\right) = (X^\top (V_{t+1})^{-1}X)^{-1}X^\top (V_{t+1})^{-1} Y.  \tag{7}\label{eq: 7} \end{equation}
+$$
+&lt;/p&gt;
+&lt;p&gt;The MLE of each standard deviation can be computed by $\hat{v}^{k}_t=\sqrt{\frac{1}{N}\sum^N{i=1}\left(\tilde{s}_t^{k{(i)}}\right)^2}$. In summary, from observations $\mathcal{D}$, the auxiliary MLE can then be obtained as $\hat{\pmb{\beta}} = (\hat{\pmb{\mu}}^s,\hat{\pmb\mu}^a,\hat{\pmb{\beta}}^s,\hat{\pmb{\beta}}^a,\hat{\pmb\sigma},\hat{\pmb{v}})$.&lt;/p&gt;
+&lt;div class=&#34;alert alert-note&#34;&gt;
+  &lt;div&gt;
+    &lt;p&gt;&lt;strong&gt;Remark:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A simple explanation of the Frequentists’ approach is that the estimation of network can be viewed as solving initial node (initial state and action) separately and then local linear regression \eqref{eq: 7} for each time step.&lt;/li&gt;
+&lt;li&gt;Thus, in practice, parameter estimation of LG-DBN is extremely simple: center the data and then apply a set of  linear regressions to solve Eq.\eqref{eq: 5}.&lt;/li&gt;
+&lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;h2 id=&#34;nonlinear-dynamic-bayesian-network-based-hybrid-model-6httpsarxivorgpdf220103116pdf&#34;&gt;Nonlinear Dynamic Bayesian Network Based Hybrid Model [&lt;a href=&#34;https://arxiv.org/pdf/2201.03116.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;6&lt;/a&gt;]&lt;/h2&gt;
+&lt;p&gt;Given the existing nonlinear ODE-based mechanistic model with the parameter $\pmb\beta$, represented by
+
+$$
+\begin{equation}
+\text{d}\pmb{s}/\text{d}t = \pmb{f}\left(\pmb{s},\pmb{a}; \pmb\beta\right)
+\end{equation}
+$$
+&lt;/p&gt;
+&lt;p&gt;by using the finite difference approximations for derivatives, i.e., $\text{d} \pmb{s}\approx \Delta \pmb{s}_t=\pmb{s}_{t+1}-\pmb{s}_t$,
+and $\text{d}t\approx \Delta t$, we construct the hybrid model for state transition,&lt;/p&gt;
+
+$$
+\begin{equation}
+\pmb{s}_{t+1} = \pmb{s}_t + \Delta t \cdot \pmb{f}(\pmb{s}_t,\pmb{a}_t; \pmb{\beta}_t) + \pmb{e}^s_{t+1}\tag{8}\label{eq: 8}
+\end{equation}
+$$
+
+&lt;p&gt;with unknown kinetic coefficients $\pmb{\beta}_t\in \mathbb{R}^{d_\beta}$.  The residual terms are modeled by  multivariate Gaussian distributions $\pmb{e}_{t+1}^{s} \sim \mathcal{N}(0,V_{t+1})$ with zero means and diagonal covariance matrices $V_{t+1}$.&lt;/p&gt;
+&lt;p&gt;Let $g(\pmb{s}_t,\pmb{a}_t;\pmb{\beta}_t) \equiv \pmb{s}_t + \Delta t \cdot \pmb{f}(\pmb{s}_t,\pmb{a}_t; \pmb{\beta}_t)$. Then, at any time step $t$, we have the full state transition from $(\pmb s_t,\pmb a_t)$ to next state $\pmb s_{t+1}$&lt;/p&gt;
+&lt;p&gt;
+$$
+\begin{equation}
+\pmb{s}_{t+1}|\pmb{s}_{t},\pmb{a}_t=g(\pmb{s}_t,\pmb{a}_t;\pmb{\beta}_t) + \pmb{e}_{t+1} \sim \mathcal{N}\Big(g(\pmb{s}_t,\pmb{a}_t;\pmb{\beta}_t),  V_{t+1} \Big)\tag{9}\label{eq: 9}
+\end{equation}
+$$
+
+where $V_{t+1}$is diagonal covariance matrix.&lt;/p&gt;
+&lt;p&gt;In addition, if we define the initial conditions $\pmb{s}_1\sim \mathcal{N}(\pmb\mu_1,V_1)$ and assume the actions $\pmb a_t\sim \mathcal{N}(\lambda_t,\Sigma_t)$, the final model will have parameter $\pmb\theta_t=\{\mu_1,V_1,\lambda_t, \Sigma_t,\pmb\beta_t,V_{t+1}\}_{t=1}^H$.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Remark:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The reason we call Eq. \eqref{eq: 5},\eqref{eq: 9} hybrid models is that they can be derived from mechanistic model.&lt;/li&gt;
+&lt;li&gt;the nonlinear DBN hybrid model can be also visualized by a &lt;strong&gt;directed acyclic network.&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;In general, we can specify the initial state in any forms (e.g. fixed value, Beta random vector) and use a control strategy or policy to determine action, i.e. random policy $\pmb{a}_t\sim \pi(\pmb{a}_t|\pmb{s}_t)$ or  deterministic policy $\pmb{a}_t=\pi(\pmb{s}_t)$. We will discuss how to combine the reinforcement learning based control with this hybrid model in next blogs.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;parametric-variation-modeling&#34;&gt;Parametric Variation Modeling&lt;/h3&gt;
+&lt;p&gt;To further account for sample-to-sample variation, the model coefficients $\pmb\beta$ are modeled by random variables
+
+$$
+\pmb\beta_t=\pmb\mu_t^\beta+\pmb\epsilon_t^\beta
+$$
+
+where $\pmb\epsilon^\beta_t$ represents the random effect following a multivariate normal distribution with mean zero and covariance matrix $\Sigma^\beta$. The vector $\pmb\mu_t^\beta$ represents the fixed effect of coefficients. Then the state transition becomes
+
+$$
+\begin{equation}
+\pmb{s}_{t+1} =\pmb{g}(\pmb{s}_t,  \pmb{a}_t, \pmb{\beta}_t; \pmb{\theta}_t) + \pmb{e}^{s}_{t+1}\tag{10}\label{eq: 10}
+\end{equation}
+$$
+
+where $\pmb\beta_t\sim \mathcal{N}(\pmb\mu_t^\beta,\Sigma^\beta_t)$ and $\pmb{e}^{s}_{t+1}\sim \mathcal{N}(0,V_{t+1})$. Therefore, the hybrid model is specified by the parameters $\pmb{\theta}_t=\left(\pmb\mu_t^\beta, \Sigma_t^\beta,V^x_{t+1},V^z_{t+1}\right)^\top$.&lt;/p&gt;
+&lt;h3 id=&#34;latent-state-modeling&#34;&gt;Latent State Modeling&lt;/h3&gt;
+&lt;p&gt;In many complex systems, there often exist unobservable state variables (such as cell growth inhibitor in fermentation system, culture in economic system, single-species behavior in ecosystem), which have substantial impact on model performance. In this section, we will show how to allow DBN based hybrid mode to incorporate the latent state.&lt;/p&gt;
+&lt;p&gt;Let $\pmb{z}_t$ denote the latent state variable(s). At any time step $t$, the process state $\pmb{s}_t$ includes observable and unobservable (latent) state variables, i.e., $\pmb{s}_t=(\pmb{x}_t,\pmb{z}_t)$. Then Eq.\eqref{eq: 8} becomes
+
+$$
+\begin{align}
+\pmb{x}_{t+1} &amp;= \pmb{x}_t + \Delta t \cdot \pmb{f}_x(\pmb{x}_t,\pmb{z}_t,\pmb{a}_t; \pmb{\beta}_t) + \pmb{e}^{x}_{t+1} \\
+\pmb{z}_{t+1} &amp;= \pmb{z}_t + \Delta t \cdot \pmb{f}_z(\pmb{x}_t,\pmb{z}_t,\pmb{a}_t; \pmb{\beta}_t) + \pmb{e}^z_{t+1}
+\end{align}
+$$
+
+with unknown $d_\beta$-dimensional kinetic coefficients $\pmb{\beta}_t\in \mathbb{R}^{d_\beta}$ (e.g., cell growth and inhibition rates). The function structures of $\pmb{f}_x(\cdot)$ and $\pmb{f}_z(\cdot)$ are derived from $\pmb{f}(\cdot)$ in the mechanistic models. The residual terms are modeled by  multivariate Gaussian distributions $\pmb{e}_{t+1}^{x} \sim \mathcal{N}(0,V^{x}_{t+1})$ and $\pmb{e}_{t+1}^{z} \sim \mathcal{N}(0,V^{z}_{t+1})$ with zero means and covariance matrices $V^{x}_{t+1}$ and $V^{z}_{t+1}$.&lt;/p&gt;
+&lt;p&gt;The resuting model if often referred as to the &lt;strong&gt;probabilistic knowledge graph (KG) hybrid model&lt;/strong&gt; or &lt;strong&gt;dynamic Bayesian newtork (DBN) hybrid model&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;They can be visualized by a directed network as shown in the figure below.&lt;/p&gt;
+&lt;!-- ![BN.png](BN.png) --&gt;
 
 
 
@@ -39,55 +350,236 @@
 
 
 
-&lt;figure  id=&#34;figure-the-template-is-mobile-first-with-a-responsive-design-to-ensure-that-your-site-looks-stunning-on-every-device&#34;&gt;
+&lt;figure  id=&#34;figure-probabilistic-knowledge-graph-hybrid-model&#34;&gt;
   &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
-    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://raw.githubusercontent.com/wowchemy/wowchemy-hugo-modules/master/academic.png&#34; alt=&#34;The template is mobile first with a responsive design to ensure that your site looks stunning on every device.&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
-  &lt;/div&gt;&lt;figcaption&gt;
-      The template is mobile first with a responsive design to ensure that your site looks stunning on every device.
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;Probabilistic Knowledge Graph Hybrid Model.&#34; srcset=&#34;
+               /hua.zheng/post/dynamicbayesiannetworkbasedhybridprocessmodel/BN_hu63dbe40e14337ab41c34947728e91f33_44244_80f56804cf82d50bf929758e16cc89a0.webp 400w,
+               /hua.zheng/post/dynamicbayesiannetworkbasedhybridprocessmodel/BN_hu63dbe40e14337ab41c34947728e91f33_44244_f31ca5f94516d804de20475510a6164b.webp 760w,
+               /hua.zheng/post/dynamicbayesiannetworkbasedhybridprocessmodel/BN_hu63dbe40e14337ab41c34947728e91f33_44244_1200x1200_fit_q100_h2_lanczos_3.webp 1200w&#34;
+               src=&#34;https://zhenghuazx.github.io/hua.zheng/hua.zheng/post/dynamicbayesiannetworkbasedhybridprocessmodel/BN_hu63dbe40e14337ab41c34947728e91f33_44244_80f56804cf82d50bf929758e16cc89a0.webp&#34;
+               width=&#34;703&#34;
+               height=&#34;309&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;figcaption data-pre=&#34;Figure&amp;nbsp;&#34; data-post=&#34;:&amp;nbsp;&#34; class=&#34;numbered&#34;&gt;
+      Probabilistic Knowledge Graph Hybrid Model.
     &lt;/figcaption&gt;&lt;/figure&gt;
-&lt;h2 id=&#34;get-started&#34;&gt;Get Started&lt;/h2&gt;
+&lt;p&gt;The observable state $\pmb{x}_t$ and latent state $\pmb{z}_t$ are represented by solid and shaded nodes respectively. The directed edges represent causal interactions. At any time period $t+1$, the process state output node $\pmb{s}_{t+1}=(\pmb{x}_{t+1},\pmb{z}_{t+1})$ depends on its parent nodes: $\pmb{s}_{t+1}=\pmb{f}(Pa(\pmb{s}_{t+1});{\pmb\theta}_t)$ with parent nodes $Pa(\pmb{s}_{t+1})=(\pmb{s}_t,\pmb{a}_t,\pmb{e}_{t+1})$ and model parameter $\pmb{\theta}_t=(\pmb{\beta}_t,{V}_{t+1})$.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Complete Hybrid Model&lt;/strong&gt;
+Now let&amp;rsquo;s further incorporate the parametric variations and latent state into hybrid model. Eq.\eqref{eq: 10} becomes&lt;/p&gt;
+&lt;p&gt;
+$$
+\begin{align}    \pmb{x}_{t+1} &amp;=\pmb{g}_x(\pmb{x}_t, \pmb{z}_t, \pmb{a}_t, \pmb{\beta}_t; \pmb{\theta}_t) + \pmb{e}^{x}_{t+1} \\    \pmb{z}_{t+1} &amp;= \pmb{g}_z(\pmb{x}_t, \pmb{z}_t, \pmb{a}_t, \pmb{\beta}_t; \pmb{\theta}_t) + \pmb{e}^{z}_{t+1}    ,\end{align}
+$$
+
+where&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;👉 &lt;a href=&#34;https://wowchemy.com/templates/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;Create a new site&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;📚 &lt;a href=&#34;https://wowchemy.com/docs/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;Personalize your site&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;💬 &lt;a href=&#34;https://discord.gg/z8wNYzb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Chat with the &lt;strong&gt;Wowchemy community&lt;/strong&gt;&lt;/a&gt; or &lt;a href=&#34;https://discourse.gohugo.io&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;Hugo community&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;🐦 Twitter: &lt;a href=&#34;https://twitter.com/wowchemy&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;@wowchemy&lt;/a&gt; &lt;a href=&#34;https://twitter.com/GeorgeCushen&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;@GeorgeCushen&lt;/a&gt; &lt;a href=&#34;https://twitter.com/search?q=%28%23MadeWithWowchemy%20OR%20%23MadeWithAcademic%29&amp;amp;src=typed_query&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;#MadeWithWowchemy&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;💡 &lt;a href=&#34;https://github.com/wowchemy/wowchemy-hugo-modules/issues&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Request a &lt;strong&gt;feature&lt;/strong&gt; or report a &lt;strong&gt;bug&lt;/strong&gt; for &lt;em&gt;Wowchemy&lt;/em&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;⬆️ &lt;strong&gt;Updating Wowchemy?&lt;/strong&gt; View the &lt;a href=&#34;https://wowchemy.com/docs/guide/update/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Update Guide&lt;/a&gt; and &lt;a href=&#34;https://wowchemy.com/updates/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Release Notes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;$\pmb{g}_x(\pmb{x}_t, \pmb{z}_t, \pmb{a}_t; \pmb{\beta}_t)\equiv\pmb{x}_t + \Delta t \cdot \pmb{f}_x(\pmb{x}_t,\pmb{z}_t,\pmb{a}_t; \pmb{\beta}_t)$&lt;/li&gt;
+&lt;li&gt;$\pmb{g}_z(\pmb{x}_t, \pmb{z}_t, \pmb{a}_t; \pmb{\beta}_t)\equiv\pmb{z}_t + \Delta t \cdot \pmb{f}_z(\pmb{x}_t,\pmb{z}_t,\pmb{a}_t; \pmb{\beta}_t)$,&lt;/li&gt;
+&lt;li&gt;$\pmb{e}^{x}_{t+1}\sim \mathcal{N}(0,V^x_{t+1})$, and $\pmb{e}^{z}_{t+1}\sim \mathcal{N}(0,V^z_{t+1})$,&lt;/li&gt;
+&lt;li&gt;$\pmb\beta_t\sim \mathcal{N}(\pmb\mu_t^\beta,\Sigma^\beta_t)$.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;crowd-funded-open-source-software&#34;&gt;Crowd-funded open-source software&lt;/h2&gt;
-&lt;p&gt;To help us develop this template and software sustainably under the MIT license, we ask all individuals and businesses that use it to help support its ongoing maintenance and development via sponsorship.&lt;/p&gt;
-&lt;h3 id=&#34;-click-here-to-become-a-sponsor-and-help-support-wowchemys-future-httpswowchemycomplans&#34;&gt;&lt;a href=&#34;https://wowchemy.com/plans/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;❤️ Click here to become a sponsor and help support Wowchemy&amp;rsquo;s future ❤️&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;As a token of appreciation for sponsoring, you can &lt;strong&gt;unlock &lt;a href=&#34;https://wowchemy.com/plans/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;these&lt;/a&gt; awesome rewards and extra features 🦄✨&lt;/strong&gt;&lt;/p&gt;
-&lt;h2 id=&#34;ecosystem&#34;&gt;Ecosystem&lt;/h2&gt;
+&lt;h3 id=&#34;inference-a-bayesian-approach&#34;&gt;Inference (A Bayesian Approach)&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Observable Process Trajectory&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;By integrating out latent states $(\pmb{z}_1,\ldots,\pmb{z}_{H+1})$, we have the likelihood of the partially observed trajectory $\pmb\tau_x\equiv (\pmb{x}_1,\pmb{a}_1,\ldots,\pmb{x}_H,\pmb{a}_H,\pmb{x}_{H+1})$, i.e.,
+
+$$
+\begin{equation}
+p(\pmb{\tau}_x| \pmb\theta)= \int p(\pmb\tau|\pmb\theta) d \pmb{z}_1 \cdots d \pmb{z}_{H+1}\tag{11}\label{eq: 11}
+\end{equation}
+$$
+
+Then we can focus on estimating \pmb\theta from the likelihood \eqref{eq: 11} by using approximate Bayesian computation-sequential Monte Carlo (ABC-SMC) method.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;ABC-SMC&lt;/strong&gt; sampling procedure for generating posterior samples from $p(\pmb{\theta}|\mathcal{D})$ (see [7-9]).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Main Idea:&lt;/strong&gt; Given the observable trajectory $\pmb\tau_x=(\pmb{x}_1,\pmb{a}_1,\ldots,\pmb{x}_H,\pmb{a}_H,\pmb{x}_{H+1})$.
+
+$$
+\begin{equation}
+p(\pmb\theta|\pmb\tau_x) \propto p(\pmb\tau_x| \pmb\theta)p(\pmb\theta)
+\end{equation}
+$$
+
+The algorithm samples $\pmb\theta$ and $\pmb\tau^\star_x$ from the joint posterior:
+
+$$
+\begin{equation}
+p_\delta(\pmb\theta,\pmb\tau_x^\star| \pmb\tau_x)=\frac{p(\pmb\theta)p(\pmb\tau_x^\star|\pmb\theta)\mathbb{1}_\delta[\pmb\tau_x^\star]}{\int\int p(\pmb\theta)p(\pmb\tau^\star_x|\pmb\theta)\mathbb{1}_\delta[\pmb\tau_x^\star]d\pmb\tau_x^\star d\pmb\theta}
+\end{equation}
+$$
+
+where $\mathbb{1}_\delta[\pmb\tau_x^\star] = \mathbb{1}_\delta[d(\pmb\tau_x,\pmb\tau_x^\star)\leq \delta]$ is one if $d(\pmb\tau_x,\pmb\tau_x^\star)\leq \delta$ and zero else. When $\delta$ is small, $p_{\delta}(\pmb\theta|\pmb\tau_x)=\int p_\delta(\pmb\theta,\pmb\tau_x^\star| \pmb\tau)d\pmb\tau_x^\star$ is a good approximation to $p(\pmb\theta | \pmb\tau_x)$ because&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;&lt;a href=&#34;https://github.com/wowchemy/hugo-academic-cli&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Hugo Academic CLI&lt;/a&gt;:&lt;/strong&gt; Automatically import publications from BibTeX&lt;/li&gt;
+&lt;li&gt;When the distance $d(\pmb\tau_x,\pmb\tau_x^\star)\leq \delta$ is small, $\mathbb{1}_\delta[\pmb\tau_x^\star]\rightarrow1$ and Eq.(17) becomes
+
+    $$
+    p_\delta(\pmb\theta,\pmb\tau_x^\star| \pmb\tau_x)\rightarrow\frac{p(\pmb\theta)p(\pmb\tau_x^\star|\pmb\theta)}{\int\int p(\pmb\theta)p(\pmb\tau^\star_x|\pmb\theta)d\pmb\tau_x^\star d\pmb\theta}=p(\pmb\theta,\pmb\tau_x^\star|\pmb\tau_x)
+    $$
+    &lt;/li&gt;
+&lt;li&gt;Then $p_{\delta}(\pmb\theta|\pmb\tau_x)=\int p_\delta(\pmb\theta,\pmb\tau_x^\star| \pmb\tau)d\pmb\tau^\star_x\rightarrow\int p(\pmb\theta,\pmb\tau_x^\star|\pmb\tau_x)d\pmb\tau^\star_x=p(\pmb\theta|\pmb\tau_x)$&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;inspiration&#34;&gt;Inspiration&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://academic-demo.netlify.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Check out the latest &lt;strong&gt;demo&lt;/strong&gt;&lt;/a&gt; of what you&amp;rsquo;ll get in less than 10 minutes, or &lt;a href=&#34;https://wowchemy.com/user-stories/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;view the &lt;strong&gt;showcase&lt;/strong&gt;&lt;/a&gt; of personal, project, and business sites.&lt;/p&gt;
-&lt;h2 id=&#34;features&#34;&gt;Features&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Page builder&lt;/strong&gt; - Create &lt;em&gt;anything&lt;/em&gt; with &lt;a href=&#34;https://wowchemy.com/docs/page-builder/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;widgets&lt;/strong&gt;&lt;/a&gt; and &lt;a href=&#34;https://wowchemy.com/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;elements&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Edit any type of content&lt;/strong&gt; - Blog posts, publications, talks, slides, projects, and more!&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Create content&lt;/strong&gt; in &lt;a href=&#34;https://wowchemy.com/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;Markdown&lt;/strong&gt;&lt;/a&gt;, &lt;a href=&#34;https://wowchemy.com/docs/import/jupyter/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;Jupyter&lt;/strong&gt;&lt;/a&gt;, or &lt;a href=&#34;https://wowchemy.com/docs/install-locally/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;RStudio&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Plugin System&lt;/strong&gt; - Fully customizable &lt;a href=&#34;https://wowchemy.com/docs/customization/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;color&lt;/strong&gt; and &lt;strong&gt;font themes&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Display Code and Math&lt;/strong&gt; - Code highlighting and &lt;a href=&#34;https://en.wikibooks.org/wiki/LaTeX/Mathematics&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;LaTeX math&lt;/a&gt; supported&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Integrations&lt;/strong&gt; - &lt;a href=&#34;https://analytics.google.com&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Google Analytics&lt;/a&gt;, &lt;a href=&#34;https://disqus.com&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Disqus commenting&lt;/a&gt;, Maps, Contact Forms, and more!&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Beautiful Site&lt;/strong&gt; - Simple and refreshing one page design&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Industry-Leading SEO&lt;/strong&gt; - Help get your website found on search engines and social media&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Media Galleries&lt;/strong&gt; - Display your images and videos with captions in a customizable gallery&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Mobile Friendly&lt;/strong&gt; - Look amazing on every screen with a mobile friendly version of your site&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Multi-language&lt;/strong&gt; - 34+ language packs including English, 中文, and Português&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Multi-user&lt;/strong&gt; - Each author gets their own profile page&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Privacy Pack&lt;/strong&gt; - Assists with GDPR&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Stand Out&lt;/strong&gt; - Bring your site to life with animation, parallax backgrounds, and scroll effects&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;One-Click Deployment&lt;/strong&gt; - No servers. No databases. Only files.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;themes&#34;&gt;Themes&lt;/h2&gt;
-&lt;p&gt;Wowchemy and its templates come with &lt;strong&gt;automatic day (light) and night (dark) mode&lt;/strong&gt; built-in. Alternatively, visitors can choose their preferred mode - click the moon icon in the top right of the &lt;a href=&#34;https://academic-demo.netlify.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Demo&lt;/a&gt; to see it in action! Day/night mode can also be disabled by the site admin in &lt;code&gt;params.toml&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://wowchemy.com/docs/customization&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Choose a stunning &lt;strong&gt;theme&lt;/strong&gt; and &lt;strong&gt;font&lt;/strong&gt;&lt;/a&gt; for your site. Themes are fully customizable.&lt;/p&gt;
-&lt;h2 id=&#34;license&#34;&gt;License&lt;/h2&gt;
-&lt;p&gt;Copyright 2016-present &lt;a href=&#34;https://georgecushen.com&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;George Cushen&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Released under the &lt;a href=&#34;https://github.com/wowchemy/wowchemy-hugo-modules/blob/master/LICENSE.md&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;MIT&lt;/a&gt; license.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Problem&lt;/strong&gt;:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Low acceptation rate when using the full trajectory $\tau_x$ as summary statistics. It leads to low computational efficiency.&lt;/li&gt;
+&lt;li&gt;Directly compute the distance between simulated and observed trajectories $d(\pmb\tau_x,\pmb\tau_x^\star)$ is computationally expensive and uninformative.Thus instead of directly using trajectory, we can consider sufficient summary statistics of trajectories $\eta(\pmb\tau_x)$ and use the distance measure $d\left(\eta(\tau_x),\eta(\tau^\star_x)\right)$.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;New Inference Method&lt;/strong&gt;: [10] propose a new auxiliary based ABC-SMC method. Check out [10] on arXiv.&lt;/p&gt;
+&lt;p&gt;In short, we solved a problem with observable state ($\rho$) and latent variable ($I$) in the following form:
+
+$$
+\begin{align}    \rho_{t+1} &amp;= \rho_t + \Delta t \cdot r_g \rho_t \Bigg (1 - \Big(1+e^{(k_s(k_c-I_t))} \Big) ^{-1} \Bigg ) + e^{\rho}_{t}\\   I_{t+1} &amp;= I_t + \Delta t \cdot \Bigg (\frac{\rho_{t+1}-\rho_t}{\Delta t} - r_d I_t \Bigg) + e^I_t \end{align}
+$$
+&lt;/p&gt;
+&lt;p&gt;We compared two different approximate Bayesian computation method to estimate the posterior distribution $p(\pmb\theta|\mathcal{D})$:  LG-DBN auxiliary likelihood-based ABC-SMC approach and naive ABC-SMC.&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;Figure 4(a): Posterior predictive distributionn of inhibitor with process noise v=0.1, 0.2 and sample size m=3,6,20. (LG-DBN auxiliary based ABC-SMC)&#34; srcset=&#34;
+               /hua.zheng/post/dynamicbayesiannetworkbasedhybridprocessmodel/ABC-SMC_hu9118d3ccac408e7a3f2d5f15e5e49428_836324_37151a4275ec16f38ca8b32862e3d5ca.webp 400w,
+               /hua.zheng/post/dynamicbayesiannetworkbasedhybridprocessmodel/ABC-SMC_hu9118d3ccac408e7a3f2d5f15e5e49428_836324_d558239f790e8ce888940b62ce103f07.webp 760w,
+               /hua.zheng/post/dynamicbayesiannetworkbasedhybridprocessmodel/ABC-SMC_hu9118d3ccac408e7a3f2d5f15e5e49428_836324_1200x1200_fit_q100_h2_lanczos_3.webp 1200w&#34;
+               src=&#34;https://zhenghuazx.github.io/hua.zheng/hua.zheng/post/dynamicbayesiannetworkbasedhybridprocessmodel/ABC-SMC_hu9118d3ccac408e7a3f2d5f15e5e49428_836324_37151a4275ec16f38ca8b32862e3d5ca.webp&#34;
+               width=&#34;653&#34;
+               height=&#34;760&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;!-- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  id=&#34;figure-posterior-distributions-of-r_g-6-macro-replications-the-posterior-distributions-estimated-by-lg-dbn-auxiliary-based-abc-smc--the-black-dashed-lines-represent-the-true-value-of-parameters&#34;&gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;Posterior distributions of $r_g$ (6 macro replications). The posterior distributions estimated by LG-DBN auxiliary based ABC-SMC . The black dashed lines represent the “true” value of parameters.&#34; srcset=&#34;
+               /hua.zheng/post/dynamicbayesiannetworkbasedhybridprocessmodel/r_g_with_auxilary_hu849c0ab1aa055d985bcd607a5c33e827_41300_4dfdde34e24249c7f6e088dcfad4ced4.webp 400w,
+               /hua.zheng/post/dynamicbayesiannetworkbasedhybridprocessmodel/r_g_with_auxilary_hu849c0ab1aa055d985bcd607a5c33e827_41300_dacf63569a2bbc7e0f51e68bae5472e4.webp 760w,
+               /hua.zheng/post/dynamicbayesiannetworkbasedhybridprocessmodel/r_g_with_auxilary_hu849c0ab1aa055d985bcd607a5c33e827_41300_1200x1200_fit_q100_h2_lanczos_3.webp 1200w&#34;
+               src=&#34;https://zhenghuazx.github.io/hua.zheng/hua.zheng/post/dynamicbayesiannetworkbasedhybridprocessmodel/r_g_with_auxilary_hu849c0ab1aa055d985bcd607a5c33e827_41300_4dfdde34e24249c7f6e088dcfad4ced4.webp&#34;
+               width=&#34;760&#34;
+               height=&#34;380&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;figcaption data-pre=&#34;Figure&amp;nbsp;&#34; data-post=&#34;:&amp;nbsp;&#34; class=&#34;numbered&#34;&gt;
+      Posterior distributions of $r_g$ (6 macro replications). The posterior distributions estimated by LG-DBN auxiliary based ABC-SMC . The black dashed lines represent the “true” value of parameters.
+    &lt;/figcaption&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  id=&#34;figure-posterior-distributions-of-r_g6-macro-replications-the-posterior-distributions-estimated-by-naive-abc-smc-the-black-dashed-lines-represent-the-true-value-of-parameters&#34;&gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;Posterior distributions of $r_g$(6 macro replications). The posterior distributions estimated by naive ABC-SMC. The black dashed lines represent the “true” value of parameters.&#34; srcset=&#34;
+               /hua.zheng/post/dynamicbayesiannetworkbasedhybridprocessmodel/r_g_without_auxilary_hu849c0ab1aa055d985bcd607a5c33e827_64017_7632eb10dca4246d6ab81244f893d15d.webp 400w,
+               /hua.zheng/post/dynamicbayesiannetworkbasedhybridprocessmodel/r_g_without_auxilary_hu849c0ab1aa055d985bcd607a5c33e827_64017_f8540c69875f415ff49279bb14096a90.webp 760w,
+               /hua.zheng/post/dynamicbayesiannetworkbasedhybridprocessmodel/r_g_without_auxilary_hu849c0ab1aa055d985bcd607a5c33e827_64017_1200x1200_fit_q100_h2_lanczos_3.webp 1200w&#34;
+               src=&#34;https://zhenghuazx.github.io/hua.zheng/hua.zheng/post/dynamicbayesiannetworkbasedhybridprocessmodel/r_g_without_auxilary_hu849c0ab1aa055d985bcd607a5c33e827_64017_7632eb10dca4246d6ab81244f893d15d.webp&#34;
+               width=&#34;760&#34;
+               height=&#34;380&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;figcaption data-pre=&#34;Figure&amp;nbsp;&#34; data-post=&#34;:&amp;nbsp;&#34; class=&#34;numbered&#34;&gt;
+      Posterior distributions of $r_g$(6 macro replications). The posterior distributions estimated by naive ABC-SMC. The black dashed lines represent the “true” value of parameters.
+    &lt;/figcaption&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  id=&#34;figure-posterior-predictive-distribution-of-cell-density-with-process-noise-v01-02-and-sample-size-m3620-lg-dbn-auxiliary-based-abc-smc&#34;&gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;Posterior predictive distribution of cell density with process noise v=0.1, 0.2 and sample size m=3,6,20 (LG-DBN auxiliary based ABC-SMC)&#34; srcset=&#34;
+               /hua.zheng/post/dynamicbayesiannetworkbasedhybridprocessmodel/cell_density_with_auxilary_hu116ab78b5d377eadb056e2ab3531dae6_73930_1d9a71411f85de261f4b3f66931d9283.webp 400w,
+               /hua.zheng/post/dynamicbayesiannetworkbasedhybridprocessmodel/cell_density_with_auxilary_hu116ab78b5d377eadb056e2ab3531dae6_73930_08ddfb4d63a6edb8e60a84d7e71a9edf.webp 760w,
+               /hua.zheng/post/dynamicbayesiannetworkbasedhybridprocessmodel/cell_density_with_auxilary_hu116ab78b5d377eadb056e2ab3531dae6_73930_1200x1200_fit_q100_h2_lanczos_3.webp 1200w&#34;
+               src=&#34;https://zhenghuazx.github.io/hua.zheng/hua.zheng/post/dynamicbayesiannetworkbasedhybridprocessmodel/cell_density_with_auxilary_hu116ab78b5d377eadb056e2ab3531dae6_73930_1d9a71411f85de261f4b3f66931d9283.webp&#34;
+               width=&#34;760&#34;
+               height=&#34;456&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;figcaption data-pre=&#34;Figure&amp;nbsp;&#34; data-post=&#34;:&amp;nbsp;&#34; class=&#34;numbered&#34;&gt;
+      Posterior predictive distribution of cell density with process noise v=0.1, 0.2 and sample size m=3,6,20 (LG-DBN auxiliary based ABC-SMC)
+    &lt;/figcaption&gt;&lt;/figure&gt;
+
+
+
+![Figure 4(a): Posterior predictive distributionn of inhibitor with process noise v=0.1, 0.2 and sample size m=3,6,20. (LG-DBN auxiliary based ABC-SMC)](I_with_auxilary.png)
+
+Figure 4(a): Posterior predictive distributionn of inhibitor with process noise v=0.1, 0.2 and sample size m=3,6,20. (LG-DBN auxiliary based ABC-SMC)
+
+![Figure 3(b): Posterior predictive distribution of cell density with process noise v=0.1, 0.2 and sample size m=3,6,20. (naive ABC-SMC)](cell_density_without_auxilary.png)
+
+Figure 3(b): Posterior predictive distribution of cell density with process noise v=0.1, 0.2 and sample size m=3,6,20. (naive ABC-SMC)
+
+![Figure 4(b): Posterior predictive distributionn of inhibitor with process noise v=0.1, 0.2 and sample size m=3,6,20. (naive ABC-SMC)](I_without_auxilary.png)
+
+Figure 4(b): Posterior predictive distributionn of inhibitor with process noise v=0.1, 0.2 and sample size m=3,6,20. (naive ABC-SMC) --&gt;
+&lt;h1 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h1&gt;
+&lt;p&gt;I briefly reviewed the theoretical basics of dynamic Bayesian network based hybrid model with a short discussion about its inference. I hope this new model class could inspire other researchers to model complex stochastic process in different domain.&lt;/p&gt;
+&lt;h1 id=&#34;next&#34;&gt;Next?&lt;/h1&gt;
+&lt;p&gt;In the next blogs, I will discuss more on (1) the parameter estimation, (2) generalize the model to policy augmented dynamic Bayesian newtork (PADBN) by incoporating reinforcement learning, (3) may provide more interpretability tools such as Shaley value based factor importance (closed form); (4) more about the implementation.&lt;/p&gt;
+&lt;h1 id=&#34;reference&#34;&gt;Reference&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;Mockus, L., Peterson, J. J., Lainez, J. M., &amp;amp; Reklaitis, G. V. (2015). Batch-to-batch variation: a key component for modeling chemical manufacturing processes. &lt;em&gt;Organic Process Research &amp;amp; Development&lt;/em&gt;, &lt;em&gt;19&lt;/em&gt;(8), 908-914.&lt;/li&gt;
+&lt;li&gt;Vasdekis, A. E., Silverman, A. M., &amp;amp; Stephanopoulos, G. (2015). Origins of cell-to-cell bioprocessing diversity and implications of the extracellular environment revealed at the single-cell level. &lt;em&gt;Scientific Reports&lt;/em&gt;, &lt;em&gt;5&lt;/em&gt;(1), 1-7.&lt;/li&gt;
+&lt;li&gt;Dickens, J., Khattak, S., Matthews, T. E., Kolwyck, D., &amp;amp; Wiltberger, K. (2018). Biopharmaceutical raw material variation and control. &lt;em&gt;Current opinion in chemical engineering&lt;/em&gt;, &lt;em&gt;22&lt;/em&gt;, 236-243.&lt;/li&gt;
+&lt;li&gt;Zheng, H., Xie, W., Ryzhov, I. O., &amp;amp; Xie, D. (2021). Policy optimization in bayesian network hybrid models of biomanufacturing processes. &lt;em&gt;arXiv preprint arXiv:2105.06543&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;Murphy, K. P. (2012). &lt;em&gt;Machine learning: a probabilistic perspective&lt;/em&gt;. MIT press.&lt;/li&gt;
+&lt;li&gt;Zheng, H., Xie, W., Wang, K., &amp;amp; Li, Z. (2022). Opportunities of Hybrid Model-based Reinforcement Learning for Cell Therapy Manufacturing Process Development and Control. &lt;em&gt;arXiv preprint arXiv:2201.03116&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;Toni, T., Welch, D., Strelkowa, N., Ipsen, A., &amp;amp; Stumpf, M. P. (2009). Approximate Bayesian computation scheme for parameter inference and model selection in dynamical systems. &lt;em&gt;Journal of the Royal Society Interface&lt;/em&gt;, &lt;em&gt;6&lt;/em&gt;(31), 187-202.&lt;/li&gt;
+&lt;li&gt;Lenormand, M., Jabot, F., &amp;amp; Deffuant, G. (2013). Adaptive approximate Bayesian computation for complex models. &lt;em&gt;Computational Statistics&lt;/em&gt;, &lt;em&gt;28&lt;/em&gt;(6), 2777-2796.&lt;/li&gt;
+&lt;li&gt;Del Moral, P., Doucet, A., &amp;amp; Jasra, A. (2006). Sequential monte carlo samplers. &lt;em&gt;Journal of the Royal Statistical Society: Series B (Statistical Methodology)&lt;/em&gt;, &lt;em&gt;68&lt;/em&gt;(3), 411-436.&lt;/li&gt;
+&lt;li&gt;Xie, W., Wang K., Zheng H. &amp;amp; Feng B (2022)Dynamic Bayesian Network Auxiliary ABC-SMC for Hybrid Model Bayesian Inference to Accelerate Biomanufacturing Process Mechanism Learning and Robust Control. &lt;em&gt;arXiv preprint arXiv:2205.02410&lt;/em&gt;.&lt;/li&gt;
+&lt;/ol&gt;
 </description>
     </item>
     

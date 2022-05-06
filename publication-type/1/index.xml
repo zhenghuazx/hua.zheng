@@ -5,12 +5,20 @@
     <link>https://zhenghuazx.github.io/hua.zheng/publication-type/1/</link>
       <atom:link href="https://zhenghuazx.github.io/hua.zheng/publication-type/1/index.xml" rel="self" type="application/rss+xml" />
     <description>1</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>Hua Zheng ©2021</copyright><lastBuildDate>Sat, 01 May 2021 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>Hua Zheng ©2022</copyright><lastBuildDate>Sat, 01 Jan 2022 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://zhenghuazx.github.io/hua.zheng/media/icon_hu658dc7ef748f26cdf7d87fd659137d7d_44050_512x512_fill_lanczos_center_3.png</url>
       <title>1</title>
       <link>https://zhenghuazx.github.io/hua.zheng/publication-type/1/</link>
     </image>
+    
+    <item>
+      <title>Dynamic Bayesian Network Auxiliary ABC-SMC for Hybrid Model Bayesian Inference to Accelerate Biomanufacturing Process Mechanism Learning and Robust Control</title>
+      <link>https://zhenghuazx.github.io/hua.zheng/publication/xie-2022-dynamic/</link>
+      <pubDate>Sat, 01 Jan 2022 00:00:00 +0000</pubDate>
+      <guid>https://zhenghuazx.github.io/hua.zheng/publication/xie-2022-dynamic/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>STEM Education and Industry Workforce Life-Long Training Platform Development to Faciliate Smart Biopharmaceutical Manufacturing 4.0-4</title>
