@@ -5,12 +5,66 @@
     <link>https://zhenghuazx.github.io/hua.zheng/</link>
       <atom:link href="https://zhenghuazx.github.io/hua.zheng/index.xml" rel="self" type="application/rss+xml" />
     <description>Zheng.H</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>Hua Zheng ©2022</copyright><lastBuildDate>Thu, 05 May 2022 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>Hua Zheng ©2022</copyright><lastBuildDate>Sun, 08 May 2022 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://zhenghuazx.github.io/hua.zheng/media/icon_hu658dc7ef748f26cdf7d87fd659137d7d_44050_512x512_fill_lanczos_center_3.png</url>
       <title>Zheng.H</title>
       <link>https://zhenghuazx.github.io/hua.zheng/</link>
     </image>
+    
+    <item>
+      <title>Some Gaps Between Reinforcement Learning Practice and Theory</title>
+      <link>https://zhenghuazx.github.io/hua.zheng/post/somegapsrl/</link>
+      <pubDate>Sun, 08 May 2022 00:00:00 +0000</pubDate>
+      <guid>https://zhenghuazx.github.io/hua.zheng/post/somegapsrl/</guid>
+      <description>&lt;p&gt;I am recently encountering some theoretical problems during a reinforcement learning (RL) research project. I started to realize how much difference between how people use versus how people prove RL algorithms. Although rarely mentioned in the literature, some gaps indeed exist and may be useful to think a little deeper. It motivates me to write some of my thoughts down.&lt;/p&gt;
+&lt;p&gt;Note: Some of the practical heuristics might already have theoretical justifications that I do not know or bypassed by some reasonable assumptions. Thus, please correct me if I misunderstand or have mistakes.&lt;/p&gt;
+&lt;h1 id=&#34;experience-replay-cause-bias&#34;&gt;Experience Replay Cause Bias&lt;/h1&gt;
+&lt;p&gt;Off-policy learning is a large category of RL algorithms. it, instead of following the target policy, enables a target policy to be learned by using data from behavior policies. Experience replay is central to off-policy algorithms in deep reinforcement learning (RL). As the fundamental data-generating mechanism in off-policy deep reinforcement learning, it has been shown to improve sample efficiency and stability by storing and randomly replaying a fixed number of the most recently collected transitions for training.&lt;/p&gt;
+&lt;p&gt;One interesting problem of experience replay is that the stored transitions are inevitably dependent with the current/target policy or value function, because the policy/value function parameter is in fact constructed from those transitions. In other words, all transitions are correlated. It &lt;strong&gt;violates&lt;/strong&gt; the following conditional unbiasedness assumption in stochastic policy gradient methods.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The estimated gradient is unbiased condition on the history (filtration) $\mathcal{F}_k=\{\xi_1,\ldots,\xi_{k};\theta_0,\theta_1,\ldots,\theta_{k}\}$, such that $\mathbb{E}_\xi[g(\theta_k,\xi)|\mathcal{F}_{k}]=\nabla f(\theta_k)$. ($\mathcal{F}_{k}$ denotes the outcomes up to and including time $k$).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In the classical stochastic gradient descent (SGD), the data are assumed to be sampled from a unknown population, which is also referred as to the behavior distribution in off-policy batch RL. However, when you have a growing experience replay buffer in which transitions were continuously collected by following past policies, you won’t have a fixed unknown behavior distribution but a changing known one. The main concerns behind this conditional dependence makes theoretical study of experience replay difficult.&lt;/p&gt;
+&lt;h1 id=&#34;compatibility-of-critic-model&#34;&gt;Compatibility of Critic Model&lt;/h1&gt;
+&lt;p&gt;Compatibility is an important concept in actor-critic methods, which are a popular class of on-policy RL algorithms for computing an optimal policy. The actor-critic consists of two eponymous components. An actor adjusts the parameters of the stochastic policy by stochastic gradient ascent. A critic estimates the action-value function to evaluate the action chosen by current policy. Instead of the unknown true action-value function, an action-value function is used, which introduce the concept of compatibility.&lt;/p&gt;
+&lt;p&gt;In general, substituting a function approximator for the true action-value (or value) function may introduce bias. However, the bias is zero if the function approximator is compatible, i.e.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;the function approximator is linear in the score function of policy&lt;/li&gt;
+&lt;li&gt;parameters of the function approximator are chosen to minimize the mean-squared error of approximated and true action-value function.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;In practice, condition 2 is usually relaxed in favor of policy evaluation algorithms that estimate the value function more efficiently by temporal-difference learning. However, condition 1 is rarely satisfied. This issues applies to almost all, if not all, modern deep policy optimization algorithms.&lt;/p&gt;
+&lt;p&gt;Good news is that people has released this issue and some literature are working on relaxing the compatibility constraint for neural network [1-3].&lt;/p&gt;
+&lt;h1 id=&#34;discounted-objective&#34;&gt;Discounted Objective&lt;/h1&gt;
+&lt;p&gt;I had recently revisited the policy gradient theorem proof when working on my actor-critic related paper, which leads to this question.&lt;/p&gt;
+&lt;p&gt;Although there are little articles mentioning this problem after a quick literature review, I still found Russo Alessio mentioned the same issue in his blog [4] and Nota and Thomas [5] had raised concerns about the similar issue by constructing a counterexample. In addition, Naik et al [6] criticize discounted objective as well but in a different context.&lt;/p&gt;
+&lt;p&gt;Now let’s briefly discuss the issue in infinite-horizon MDP setting. For detailed discussion, I recommend reading the blog and literature mentioned above.&lt;/p&gt;
+&lt;p&gt;In the classic policy gradient theorem, the discounted policy gradient, tells us how to modify the policy parameters, $\theta$, in order to increase $\nabla J_\gamma(\theta)$ , and is given by:&lt;/p&gt;
+
+$$
+\begin{equation}
+\begin{split}
+\nabla J_\gamma(\theta)
+&amp;= \mathbb{E}_{s_t\sim d^\pi_\gamma,a_t\sim \pi(s_t|a_t)}\left[\left. \nabla \log\pi_\theta(a_t|s_t)Q^\pi_\gamma(s_t,a_t)\right|\theta\right]
+\end{split}
+\end{equation}
+$$
+
+&lt;p&gt;where $d^\pi_\gamma(s)=\int p(s_0)\sum^\infty_{t=0}\gamma^t p^\pi(s_t=s|s_0)d s_0$ is the discounted stationary state distribution (discounted state occupation).&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Problem&lt;/strong&gt;: the samples used to update the policy should be distributed according to the discounted state distribution $d^\pi_\gamma(s)$ however, the sample actually used in most algorithm are $s_{t+1}\sim p(s_{t+1}|s_t,a_t),a_t\sim \pi(s_t|a_t)$. In other words, the correct sampling distribution should be $(s_0,s_1,\ldots,s_t,\ldots)\sim(p(s_0),\gamma p^\pi(s_{1}|s_0),\ldots,\gamma^t p^\pi(s_{t+1}|s_t),\ldots)$.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;reference&#34;&gt;Reference&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;Wang, D., &amp;amp; Hu, M. (2021). Deep Deterministic Policy Gradient With Compatible Critic Network. &lt;em&gt;IEEE Transactions on Neural Networks and Learning Systems&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;Diddigi, R. B., Jain, P., &amp;amp; Bhatnagar, S. (2021). Neural Network Compatible Off-Policy Natural Actor-Critic Algorithm. &lt;em&gt;arXiv preprint arXiv:2110.10017&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;Balduzzi, D., &amp;amp; Ghifary, M. (2015). Compatible value gradients for reinforcement learning of continuous deep policies. &lt;em&gt;arXiv preprint arXiv:1509.03005&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;Russo Alessio. (2021) Why there is a problem with the Policy Gradient theorem in Deep Reinforcement Learning. &lt;a href=&#34;https://towardsdatascience.com/why-there-is-a-problem-with-the-policy-gradient-theorem-in-deep-reinforcement-learning-958d845218f1&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://towardsdatascience.com/why-there-is-a-problem-with-the-policy-gradient-theorem-in-deep-reinforcement-learning-958d845218f1&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Chris Nota and Philip S. Thomas. 2020. Is the Policy Gradient a Gradient?. AAMAS (2020).&lt;/li&gt;
+&lt;li&gt;Naik, A., Shariff, R., Yasui, N., Yao, H., &amp;amp; Sutton, R. S. (2019). Discounted reinforcement learning is not an optimization problem. NeurIPS 2019.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
     
     <item>
       <title>Dynamic Bayesian Network Based Hybrid Process Model</title>
