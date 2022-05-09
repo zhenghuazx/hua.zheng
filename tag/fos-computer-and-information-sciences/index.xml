@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>&#34;FOS: Computer and information sciences&#34; | Zheng.H</title>
+    <link>https://zhenghuazx.github.io/hua.zheng/tag/fos-computer-and-information-sciences/</link>
+      <atom:link href="https://zhenghuazx.github.io/hua.zheng/tag/fos-computer-and-information-sciences/index.xml" rel="self" type="application/rss+xml" />
+    <description>&#34;FOS: Computer and information sciences&#34;</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>Hua Zheng ©2022</copyright><lastBuildDate>Sat, 01 Jan 2022 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://zhenghuazx.github.io/hua.zheng/media/icon_hu658dc7ef748f26cdf7d87fd659137d7d_44050_512x512_fill_lanczos_center_3.png</url>
+      <title>&#34;FOS: Computer and information sciences&#34;</title>
+      <link>https://zhenghuazx.github.io/hua.zheng/tag/fos-computer-and-information-sciences/</link>
+    </image>
+    
+    <item>
+      <title>Variance Reduction based Partial Trajectory Reuse to Accelerate Policy Gradient Optimization</title>
+      <link>https://zhenghuazx.github.io/hua.zheng/publication/zheng-2022-variance/</link>
+      <pubDate>Sat, 01 Jan 2022 00:00:00 +0000</pubDate>
+      <guid>https://zhenghuazx.github.io/hua.zheng/publication/zheng-2022-variance/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

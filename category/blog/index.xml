@@ -37,7 +37,9 @@
 &lt;p&gt;Good news is that people has released this issue and some literature are working on relaxing the compatibility constraint for neural network [1-3].&lt;/p&gt;
 &lt;h1 id=&#34;discounted-objective&#34;&gt;Discounted Objective&lt;/h1&gt;
 &lt;p&gt;I had recently revisited the policy gradient theorem proof when working on my actor-critic related paper, which leads to this question.&lt;/p&gt;
-&lt;p&gt;Although there are little articles mentioning this problem after a quick literature review, I still found Russo Alessio mentioned the same issue in his blog [4] and Nota and Thomas [5] had raised concerns about the similar issue by constructing a counterexample. In addition, Naik et al [6] criticize discounted objective as well but in a different context.&lt;/p&gt;
+&lt;p&gt;After a quick literature review I found Russo Alessio mentioned the same issue in his blog [4] and Nota and Thomas [5] had raised concerns about the similar issue by constructing a counterexample. In addition, Naik et al [6] criticize discounted objective as well but in a different context.
+I personally used a lot of discounted objective, but still felt unclear on some concepts. Part of the reason comes from inaccurate or ambiguous description and the other part I think comes from the fact that RL is an interdisciplinary area including contribution from optimization, operations research, statistics and computer science.
+As a result, people used different terminologies and notations, which further exaggerates the ambiguity.&lt;/p&gt;
 &lt;p&gt;Now let’s briefly discuss the issue in infinite-horizon MDP setting. For detailed discussion, I recommend reading the blog and literature mentioned above.&lt;/p&gt;
 &lt;p&gt;In the classic policy gradient theorem, the discounted policy gradient, tells us how to modify the policy parameters, $\theta$, in order to increase $\nabla J_\gamma(\theta)$ , and is given by:&lt;/p&gt;
 
@@ -52,7 +54,7 @@ $$
 
 &lt;p&gt;where $d^\pi_\gamma(s)=\int p(s_0)\sum^\infty_{t=0}\gamma^t p^\pi(s_t=s|s_0)d s_0$ is the discounted stationary state distribution (discounted state occupation).&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Problem&lt;/strong&gt;: the samples used to update the policy should be distributed according to the discounted state distribution $d^\pi_\gamma(s)$ however, the sample actually used in most algorithm are $s_{t+1}\sim p(s_{t+1}|s_t,a_t),a_t\sim \pi(s_t|a_t)$. In other words, the correct sampling distribution should be $(s_0,s_1,\ldots,s_t,\ldots)\sim(p(s_0),\gamma p^\pi(s_{1}|s_0),\ldots,\gamma^t p^\pi(s_{t+1}|s_t),\ldots)$.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Problem&lt;/strong&gt;: the samples used to update the policy should be distributed according to the discounted state distribution $d^\pi_\gamma(s)$ however, the sample actually used in most algorithm are $s_{t+1}\sim p(s_{t+1}|s_t,a_t),a_t\sim \pi(s_t|a_t)$. In average return case, it is allowed because we can reach the limiting distribution by continuously running the simulation, i.e. $d^\pi(s)=\lim_{t\rightarrow \infty}p(s_{t}=s|s_0)$. But in the discounted case, we can&amp;rsquo;t naively take average of samples from reply buffer as the discounted state stationary distribution treat observations sampled at different time steps differently.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h1 id=&#34;reference&#34;&gt;Reference&lt;/h1&gt;
 &lt;ol&gt;
