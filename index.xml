@@ -5,12 +5,48 @@
     <link>https://zhenghuazx.github.io/hua.zheng/</link>
       <atom:link href="https://zhenghuazx.github.io/hua.zheng/index.xml" rel="self" type="application/rss+xml" />
     <description>Zheng.H</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>Hua Zheng ©2022</copyright><lastBuildDate>Sun, 08 May 2022 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>Hua Zheng ©2022</copyright><lastBuildDate>Tue, 11 Oct 2022 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://zhenghuazx.github.io/hua.zheng/media/icon_hu658dc7ef748f26cdf7d87fd659137d7d_44050_512x512_fill_lanczos_center_3.png</url>
       <title>Zheng.H</title>
       <link>https://zhenghuazx.github.io/hua.zheng/</link>
     </image>
+    
+    <item>
+      <title>Policy Optimization in Bayesian Network Hybrid Models of Biomanufacturing Processes</title>
+      <link>https://zhenghuazx.github.io/hua.zheng/publication/zheng-2021-policy/</link>
+      <pubDate>Tue, 11 Oct 2022 00:00:00 +0000</pubDate>
+      <guid>https://zhenghuazx.github.io/hua.zheng/publication/zheng-2021-policy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Variance Reduction based Experience Replay for Policy Optimization</title>
+      <link>https://zhenghuazx.github.io/hua.zheng/publication/zheng-2021-green/</link>
+      <pubDate>Fri, 09 Sep 2022 00:00:00 +0000</pubDate>
+      <guid>https://zhenghuazx.github.io/hua.zheng/publication/zheng-2021-green/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;Experience replay allows agents to remember and reuse historical transitions. However, the uniform reuse strategy regardless of their significance is implicitly biased toward out-of-date observations. To overcome this limitation, we propose a general variance reduction based experience reply (VRER) approach, which allows policy optimization algorithms to selectively reuse the most relevant samples and improve policy gradient estimation. It tends to put more weight on historical observations that are more likely sampled from the target distribution. Different from other ER methods VRER is a theoretically justified and simple-to-use approach. Our theoretical and empirical studies demonstrate that the proposed VRER can accelerate the learning of optimal policy and enhance the performance of state-of-the-art policy optimization approaches.Experience replay allows agents to remember and reuse historical transitions. However, the uniform reuse strategy regardless of their significance is implicitly biased toward out-of-date observations. To overcome this limitation, we propose a general variance reduction based experience reply (VRER) approach, which allows policy optimization algorithms to selectively reuse the most relevant samples and improve policy gradient estimation. It tends to put more weight on historical observations that are more likely sampled from the target distribution. Different from other ER methods VRER is a theoretically justified and simple-to-use approach. Our theoretical and empirical studies demonstrate that the proposed VRER can accelerate the learning of optimal policy and enhance the performance of state-of-the-art policy optimization approaches.&lt;/p&gt;
+&lt;h2 id=&#34;open-source-library-vrer-pg&#34;&gt;Open-source Library: vrer-pg&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;vrer-pg&lt;/strong&gt; is a tensorflow based AI library which facilitates experimentation with existing policy optimization algorithms with variance reduction based experience replay. It provides well tested components that can be easily modified or extended. The available selection of algorithms can be used directly or through command line.&lt;/p&gt;
+&lt;figure&gt;
+  &lt;img src=&#34;feature.jpg&#34;  /&gt;
+  &lt;figcaption&gt;
+      &lt;h4&gt;vrer-pg&lt;/h4&gt;
+  &lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;h2 id=&#34;results&#34;&gt;Results&lt;/h2&gt;
+&lt;p&gt;The performance improvement of state-of-the-art PO algorithms after using VRER. Results are described by the mean performance curves and 95% confidence intervals of PPO(-VRER), TRPO(-VRER) and VPG(-VRER).&lt;/p&gt;
+&lt;figure&gt;
+  &lt;img src=&#34;convergenec-VPG.png&#34;  /&gt;
+&lt;/figure&gt;
+&lt;figure&gt;
+  &lt;img src=&#34;convergenec-PPO.png&#34;  /&gt;
+&lt;/figure&gt;
+&lt;figure&gt;
+  &lt;img src=&#34;convergenec-TRPO.png&#34;  /&gt;
+&lt;/figure&gt;</description>
+    </item>
     
     <item>
       <title>Some Gaps Between Reinforcement Learning Practice and Theory</title>
@@ -742,22 +778,6 @@ including:&lt;/p&gt;
     </item>
     
     <item>
-      <title>Green Simulation Assisted Policy Gradient to Accelerate Stochastic Process Control</title>
-      <link>https://zhenghuazx.github.io/hua.zheng/publication/zheng-2021-green/</link>
-      <pubDate>Tue, 26 Oct 2021 00:00:00 +0000</pubDate>
-      <guid>https://zhenghuazx.github.io/hua.zheng/publication/zheng-2021-green/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Policy Optimization in Bayesian Network Hybrid Models of Biomanufacturing Processes</title>
-      <link>https://zhenghuazx.github.io/hua.zheng/publication/example/</link>
-      <pubDate>Thu, 13 May 2021 00:00:00 +0000</pubDate>
-      <guid>https://zhenghuazx.github.io/hua.zheng/publication/example/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>STEM Education and Industry Workforce Life-Long Training Platform Development to Faciliate Smart Biopharmaceutical Manufacturing 4.0-4</title>
       <link>https://zhenghuazx.github.io/hua.zheng/publication/xie-2020-stem/</link>
       <pubDate>Sat, 01 May 2021 00:00:00 +0000</pubDate>
@@ -770,7 +790,14 @@ including:&lt;/p&gt;
       <link>https://zhenghuazx.github.io/hua.zheng/publication/zheng-2021/</link>
       <pubDate>Mon, 01 Mar 2021 00:00:00 +0000</pubDate>
       <guid>https://zhenghuazx.github.io/hua.zheng/publication/zheng-2021/</guid>
-      <description></description>
+      <description>&lt;h2 id=&#34;prescription-by-ai-doctor&#34;&gt;Prescription by AI Doctor&lt;/h2&gt;
+&lt;p&gt;We believe the potential for the use of AI is dramatic especially as it can assist family clinicians who are usually overloaded with patients to make better choices for treatment of their type 2 patients in order to help prevent hyperglycemia, hypertension and CV risk outcomes.
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;https://www.youtube.com/embed/DJBN7dGUvWg&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+</description>
     </item>
     
     <item>
@@ -778,14 +805,6 @@ including:&lt;/p&gt;
       <link>https://zhenghuazx.github.io/hua.zheng/project/ehr-rl/</link>
       <pubDate>Thu, 11 Feb 2021 00:00:00 +0000</pubDate>
       <guid>https://zhenghuazx.github.io/hua.zheng/project/ehr-rl/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Policy Optimization in Bayesian Network Hybrid Models of Biomanufacturing Processes</title>
-      <link>https://zhenghuazx.github.io/hua.zheng/publication/zheng-2021-policy/</link>
-      <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
-      <guid>https://zhenghuazx.github.io/hua.zheng/publication/zheng-2021-policy/</guid>
       <description></description>
     </item>
     

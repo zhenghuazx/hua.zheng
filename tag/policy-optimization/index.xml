@@ -5,7 +5,7 @@
     <link>https://zhenghuazx.github.io/hua.zheng/tag/policy-optimization/</link>
       <atom:link href="https://zhenghuazx.github.io/hua.zheng/tag/policy-optimization/index.xml" rel="self" type="application/rss+xml" />
     <description>Policy Optimization</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>Hua Zheng ©2022</copyright><lastBuildDate>Sat, 23 Apr 2022 16:30:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>Hua Zheng ©2022</copyright><lastBuildDate>Tue, 11 Oct 2022 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://zhenghuazx.github.io/hua.zheng/media/icon_hu658dc7ef748f26cdf7d87fd659137d7d_44050_512x512_fill_lanczos_center_3.png</url>
       <title>Policy Optimization</title>
@@ -13,18 +13,46 @@
     </image>
     
     <item>
-      <title>32nd Annual POMS-Conference (Talk 1)</title>
-      <link>https://zhenghuazx.github.io/hua.zheng/talk/32nd-annual-poms-conference-talk-1/</link>
-      <pubDate>Sat, 23 Apr 2022 16:30:00 +0000</pubDate>
-      <guid>https://zhenghuazx.github.io/hua.zheng/talk/32nd-annual-poms-conference-talk-1/</guid>
+      <title>Policy Optimization in Bayesian Network Hybrid Models of Biomanufacturing Processes</title>
+      <link>https://zhenghuazx.github.io/hua.zheng/publication/zheng-2021-policy/</link>
+      <pubDate>Tue, 11 Oct 2022 00:00:00 +0000</pubDate>
+      <guid>https://zhenghuazx.github.io/hua.zheng/publication/zheng-2021-policy/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Policy Optimization in Bayesian Network Hybrid Models of Biomanufacturing Processes</title>
-      <link>https://zhenghuazx.github.io/hua.zheng/publication/example/</link>
-      <pubDate>Thu, 13 May 2021 00:00:00 +0000</pubDate>
-      <guid>https://zhenghuazx.github.io/hua.zheng/publication/example/</guid>
+      <title>Variance Reduction based Experience Replay for Policy Optimization</title>
+      <link>https://zhenghuazx.github.io/hua.zheng/publication/zheng-2021-green/</link>
+      <pubDate>Fri, 09 Sep 2022 00:00:00 +0000</pubDate>
+      <guid>https://zhenghuazx.github.io/hua.zheng/publication/zheng-2021-green/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;Experience replay allows agents to remember and reuse historical transitions. However, the uniform reuse strategy regardless of their significance is implicitly biased toward out-of-date observations. To overcome this limitation, we propose a general variance reduction based experience reply (VRER) approach, which allows policy optimization algorithms to selectively reuse the most relevant samples and improve policy gradient estimation. It tends to put more weight on historical observations that are more likely sampled from the target distribution. Different from other ER methods VRER is a theoretically justified and simple-to-use approach. Our theoretical and empirical studies demonstrate that the proposed VRER can accelerate the learning of optimal policy and enhance the performance of state-of-the-art policy optimization approaches.Experience replay allows agents to remember and reuse historical transitions. However, the uniform reuse strategy regardless of their significance is implicitly biased toward out-of-date observations. To overcome this limitation, we propose a general variance reduction based experience reply (VRER) approach, which allows policy optimization algorithms to selectively reuse the most relevant samples and improve policy gradient estimation. It tends to put more weight on historical observations that are more likely sampled from the target distribution. Different from other ER methods VRER is a theoretically justified and simple-to-use approach. Our theoretical and empirical studies demonstrate that the proposed VRER can accelerate the learning of optimal policy and enhance the performance of state-of-the-art policy optimization approaches.&lt;/p&gt;
+&lt;h2 id=&#34;open-source-library-vrer-pg&#34;&gt;Open-source Library: vrer-pg&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;vrer-pg&lt;/strong&gt; is a tensorflow based AI library which facilitates experimentation with existing policy optimization algorithms with variance reduction based experience replay. It provides well tested components that can be easily modified or extended. The available selection of algorithms can be used directly or through command line.&lt;/p&gt;
+&lt;figure&gt;
+  &lt;img src=&#34;feature.jpg&#34;  /&gt;
+  &lt;figcaption&gt;
+      &lt;h4&gt;vrer-pg&lt;/h4&gt;
+  &lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;h2 id=&#34;results&#34;&gt;Results&lt;/h2&gt;
+&lt;p&gt;The performance improvement of state-of-the-art PO algorithms after using VRER. Results are described by the mean performance curves and 95% confidence intervals of PPO(-VRER), TRPO(-VRER) and VPG(-VRER).&lt;/p&gt;
+&lt;figure&gt;
+  &lt;img src=&#34;convergenec-VPG.png&#34;  /&gt;
+&lt;/figure&gt;
+&lt;figure&gt;
+  &lt;img src=&#34;convergenec-PPO.png&#34;  /&gt;
+&lt;/figure&gt;
+&lt;figure&gt;
+  &lt;img src=&#34;convergenec-TRPO.png&#34;  /&gt;
+&lt;/figure&gt;</description>
+    </item>
+    
+    <item>
+      <title>32nd Annual POMS-Conference (Talk 1)</title>
+      <link>https://zhenghuazx.github.io/hua.zheng/talk/32nd-annual-poms-conference-talk-1/</link>
+      <pubDate>Sat, 23 Apr 2022 16:30:00 +0000</pubDate>
+      <guid>https://zhenghuazx.github.io/hua.zheng/talk/32nd-annual-poms-conference-talk-1/</guid>
       <description></description>
     </item>
     

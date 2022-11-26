@@ -319,7 +319,7 @@
     <meta property="twitter:image" content="https://zhenghuazx.github.io/hua.zheng/media/icon_hu658dc7ef748f26cdf7d87fd659137d7d_44050_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
   
     
-      <meta property="og:updated_time" content="2021-10-26T00:00:00&#43;00:00" />
+      <meta property="og:updated_time" content="2022-09-09T00:00:00&#43;00:00" />
     
   
 
@@ -807,13 +807,13 @@
   <div class="media-body">
 
     <div class="section-subheading article-title mb-0 mt-0">
-      <a href="/hua.zheng/publication/zheng-2021-green/" >Green Simulation Assisted Policy Gradient to Accelerate Stochastic Process Control</a>
+      <a href="/hua.zheng/publication/zheng-2021-green/" >Variance Reduction based Experience Replay for Policy Optimization</a>
     </div>
 
     
     <a href="/hua.zheng/publication/zheng-2021-green/"  class="summary-link">
       <div class="article-style">
-        This study is motivated by the critical challenges in the biopharmaceutical manufacturing, including high complexity, high uncertainty, and very limited process data. Each experiment run is often very expensive. To support the optimal and robust process control, we propose a general green simulation assisted policy gradient (GS-PG) framework for both online and offline learning settings. Basically, to address the key limitations of state-of-art reinforcement learning (RL), such as sample inefficiency and low reliability, we create a mixture likelihood ratio based policy gradient estimation that can leverage on the information from historical experiments conducted under different inputs, including process model coefficients and decision policy parameters. Then, to accelerate the learning of optimal and robust policy, we further propose a variance reduction based sample selection method that allows GS-PG to intelligently select and reuse most relevant historical trajectories. The selection rule automatically updates the samples to be reused during the learning of process mechanisms and the search for optimal policy. Our theoretical and empirical studies demonstrate that the proposed framework can perform better than the state-of-art policy gradient approach and accelerate the optimal robust process control for complex stochastic systems under high uncertainty.
+        Can a reinforcement learning (RL) agent remember and learn from the past, just like a human? Short answer: &ldquo;yes but only after selecting relevant and valuable experiences from the memory.&rdquo; I am glad to announce my new paper and its open-source project, both built on my research about &ldquo;variance reduction based experience replay&rdquo; (VRER). Long story short, VRER is a generic experience replay method with provable sample efficiency. <strong>VRER makes the reinforcementlearning agent remember by selectively replaying past experiences</strong>. This selective mechanism can adaptively filter out samples that are outdated, irrelevant and unstable. Our empirical study shows that VRER substantially improves the state-of-the-art policy optimization algorithms, such as trust region policy optimization and proximal policy optimization, in both convergence speed and robustness.
       </div>
     </a>
     
@@ -862,6 +862,14 @@
   Cite
 </a>
 
+
+  
+  
+    
+  
+<a class="btn btn-outline-primary btn-page-header btn-sm" href="https://github.com/zhenghuazx/vrer_policy_gradient" target="_blank" rel="noopener">
+  Code
+</a>
 
 
 
