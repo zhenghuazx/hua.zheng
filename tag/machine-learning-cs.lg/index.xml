@@ -5,12 +5,20 @@
     <link>https://zhenghuazx.github.io/hua.zheng/tag/machine-learning-cs.lg/</link>
       <atom:link href="https://zhenghuazx.github.io/hua.zheng/tag/machine-learning-cs.lg/index.xml" rel="self" type="application/rss+xml" />
     <description>&#34;Machine Learning (cs.LG)&#34;</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>Hua Zheng ©2022</copyright><lastBuildDate>Sat, 01 Jan 2022 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>Hua Zheng ©2022</copyright><lastBuildDate>Wed, 22 Nov 2023 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://zhenghuazx.github.io/hua.zheng/media/icon_hu658dc7ef748f26cdf7d87fd659137d7d_44050_512x512_fill_lanczos_center_3.png</url>
       <title>&#34;Machine Learning (cs.LG)&#34;</title>
       <link>https://zhenghuazx.github.io/hua.zheng/tag/machine-learning-cs.lg/</link>
     </image>
+    
+    <item>
+      <title>SiGeo: Sub-One-Shot NAS via Information Theory and Geometry of Loss Landscape</title>
+      <link>https://zhenghuazx.github.io/hua.zheng/publication/zheng-2024-sigeo/</link>
+      <pubDate>Wed, 22 Nov 2023 00:00:00 +0000</pubDate>
+      <guid>https://zhenghuazx.github.io/hua.zheng/publication/zheng-2024-sigeo/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Variance Reduction based Partial Trajectory Reuse to Accelerate Policy Gradient Optimization</title>

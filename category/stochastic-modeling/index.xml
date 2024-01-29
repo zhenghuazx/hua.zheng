@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Stochastic Modeling | Zheng.H</title>
+    <link>https://zhenghuazx.github.io/hua.zheng/category/stochastic-modeling/</link>
+      <atom:link href="https://zhenghuazx.github.io/hua.zheng/category/stochastic-modeling/index.xml" rel="self" type="application/rss+xml" />
+    <description>Stochastic Modeling</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>Hua Zheng ©2022</copyright><lastBuildDate>Mon, 01 Jan 2024 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://zhenghuazx.github.io/hua.zheng/media/icon_hu658dc7ef748f26cdf7d87fd659137d7d_44050_512x512_fill_lanczos_center_3.png</url>
+      <title>Stochastic Modeling</title>
+      <link>https://zhenghuazx.github.io/hua.zheng/category/stochastic-modeling/</link>
+    </image>
+    
+    <item>
+      <title>Stochastic biological system-of-systems modelling for iPSC culture</title>
+      <link>https://zhenghuazx.github.io/hua.zheng/publication/zheng-2024-stochastic/</link>
+      <pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>https://zhenghuazx.github.io/hua.zheng/publication/zheng-2024-stochastic/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
