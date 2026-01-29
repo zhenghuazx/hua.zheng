@@ -279,10 +279,10 @@ with unknown $d_\beta$-dimensional kinetic coefficients $\pmb{\beta}_t\in \mathb
 &lt;figure id="figure-probabilistic-knowledge-graph-hybrid-model">
 &lt;div class="d-flex justify-content-center">
 &lt;div class="w-100" >&lt;img alt="Probabilistic Knowledge Graph Hybrid Model." srcset="
-/hua.zheng/post/dynamicbayesiannetworkbasedhybridprocessmodel/BN_hu63dbe40e14337ab41c34947728e91f33_44244_0fde4dc0c77effb563c400e168c06811.webp 400w,
+/hua.zheng/post/dynamicbayesiannetworkbasedhybridprocessmodel/BN_hu63dbe40e14337ab41c34947728e91f33_44244_80f56804cf82d50bf929758e16cc89a0.webp 400w,
 /hua.zheng/post/dynamicbayesiannetworkbasedhybridprocessmodel/BN_hu63dbe40e14337ab41c34947728e91f33_44244_f31ca5f94516d804de20475510a6164b.webp 760w,
 /hua.zheng/post/dynamicbayesiannetworkbasedhybridprocessmodel/BN_hu63dbe40e14337ab41c34947728e91f33_44244_1200x1200_fit_q100_h2_lanczos_3.webp 1200w"
-src="https://zhenghuazx.github.io/hua.zheng/hua.zheng/post/dynamicbayesiannetworkbasedhybridprocessmodel/BN_hu63dbe40e14337ab41c34947728e91f33_44244_0fde4dc0c77effb563c400e168c06811.webp"
+src="https://zhenghuazx.github.io/hua.zheng/hua.zheng/post/dynamicbayesiannetworkbasedhybridprocessmodel/BN_hu63dbe40e14337ab41c34947728e91f33_44244_80f56804cf82d50bf929758e16cc89a0.webp"
 width="703"
 height="309"
 loading="lazy" data-zoomable />&lt;/div>
@@ -350,10 +350,10 @@ $$
 &lt;figure >
 &lt;div class="d-flex justify-content-center">
 &lt;div class="w-100" >&lt;img alt="Figure 4(a): Posterior predictive distributionn of inhibitor with process noise v=0.1, 0.2 and sample size m=3,6,20. (LG-DBN auxiliary based ABC-SMC)" srcset="
-/hua.zheng/post/dynamicbayesiannetworkbasedhybridprocessmodel/ABC-SMC_hu9118d3ccac408e7a3f2d5f15e5e49428_836324_8e9f189858c0c0eea0966d11b199b529.webp 400w,
+/hua.zheng/post/dynamicbayesiannetworkbasedhybridprocessmodel/ABC-SMC_hu9118d3ccac408e7a3f2d5f15e5e49428_836324_37151a4275ec16f38ca8b32862e3d5ca.webp 400w,
 /hua.zheng/post/dynamicbayesiannetworkbasedhybridprocessmodel/ABC-SMC_hu9118d3ccac408e7a3f2d5f15e5e49428_836324_d558239f790e8ce888940b62ce103f07.webp 760w,
 /hua.zheng/post/dynamicbayesiannetworkbasedhybridprocessmodel/ABC-SMC_hu9118d3ccac408e7a3f2d5f15e5e49428_836324_1200x1200_fit_q100_h2_lanczos_3.webp 1200w"
-src="https://zhenghuazx.github.io/hua.zheng/hua.zheng/post/dynamicbayesiannetworkbasedhybridprocessmodel/ABC-SMC_hu9118d3ccac408e7a3f2d5f15e5e49428_836324_8e9f189858c0c0eea0966d11b199b529.webp"
+src="https://zhenghuazx.github.io/hua.zheng/hua.zheng/post/dynamicbayesiannetworkbasedhybridprocessmodel/ABC-SMC_hu9118d3ccac408e7a3f2d5f15e5e49428_836324_37151a4275ec16f38ca8b32862e3d5ca.webp"
 width="653"
 height="760"
 loading="lazy" data-zoomable />&lt;/div>
@@ -363,10 +363,10 @@ loading="lazy" data-zoomable />&lt;/div>
 &lt;figure id="figure-posterior-distributions-of-r_g-6-macro-replications-the-posterior-distributions-estimated-by-lg-dbn-auxiliary-based-abc-smc--the-black-dashed-lines-represent-the-true-value-of-parameters">
 &lt;div class="d-flex justify-content-center">
 &lt;div class="w-100" >&lt;img alt="Posterior distributions of $r_g$ (6 macro replications). The posterior distributions estimated by LG-DBN auxiliary based ABC-SMC . The black dashed lines represent the “true” value of parameters." srcset="
-/hua.zheng/post/dynamicbayesiannetworkbasedhybridprocessmodel/r_g_with_auxilary_hu849c0ab1aa055d985bcd607a5c33e827_41300_b06bdfe310f3ba4732018d16efddfffd.webp 400w,
+/hua.zheng/post/dynamicbayesiannetworkbasedhybridprocessmodel/r_g_with_auxilary_hu849c0ab1aa055d985bcd607a5c33e827_41300_4dfdde34e24249c7f6e088dcfad4ced4.webp 400w,
 /hua.zheng/post/dynamicbayesiannetworkbasedhybridprocessmodel/r_g_with_auxilary_hu849c0ab1aa055d985bcd607a5c33e827_41300_dacf63569a2bbc7e0f51e68bae5472e4.webp 760w,
 /hua.zheng/post/dynamicbayesiannetworkbasedhybridprocessmodel/r_g_with_auxilary_hu849c0ab1aa055d985bcd607a5c33e827_41300_1200x1200_fit_q100_h2_lanczos_3.webp 1200w"
-src="https://zhenghuazx.github.io/hua.zheng/hua.zheng/post/dynamicbayesiannetworkbasedhybridprocessmodel/r_g_with_auxilary_hu849c0ab1aa055d985bcd607a5c33e827_41300_b06bdfe310f3ba4732018d16efddfffd.webp"
+src="https://zhenghuazx.github.io/hua.zheng/hua.zheng/post/dynamicbayesiannetworkbasedhybridprocessmodel/r_g_with_auxilary_hu849c0ab1aa055d985bcd607a5c33e827_41300_4dfdde34e24249c7f6e088dcfad4ced4.webp"
 width="760"
 height="380"
 loading="lazy" data-zoomable />&lt;/div>
@@ -376,10 +376,10 @@ Posterior distributions of $r_g$ (6 macro replications). The posterior distribut
 &lt;figure id="figure-posterior-distributions-of-r_g6-macro-replications-the-posterior-distributions-estimated-by-naive-abc-smc-the-black-dashed-lines-represent-the-true-value-of-parameters">
 &lt;div class="d-flex justify-content-center">
 &lt;div class="w-100" >&lt;img alt="Posterior distributions of $r_g$(6 macro replications). The posterior distributions estimated by naive ABC-SMC. The black dashed lines represent the “true” value of parameters." srcset="
-/hua.zheng/post/dynamicbayesiannetworkbasedhybridprocessmodel/r_g_without_auxilary_hu849c0ab1aa055d985bcd607a5c33e827_64017_ea7c741bceedfc30aaafb83e60b3ff48.webp 400w,
+/hua.zheng/post/dynamicbayesiannetworkbasedhybridprocessmodel/r_g_without_auxilary_hu849c0ab1aa055d985bcd607a5c33e827_64017_7632eb10dca4246d6ab81244f893d15d.webp 400w,
 /hua.zheng/post/dynamicbayesiannetworkbasedhybridprocessmodel/r_g_without_auxilary_hu849c0ab1aa055d985bcd607a5c33e827_64017_f8540c69875f415ff49279bb14096a90.webp 760w,
 /hua.zheng/post/dynamicbayesiannetworkbasedhybridprocessmodel/r_g_without_auxilary_hu849c0ab1aa055d985bcd607a5c33e827_64017_1200x1200_fit_q100_h2_lanczos_3.webp 1200w"
-src="https://zhenghuazx.github.io/hua.zheng/hua.zheng/post/dynamicbayesiannetworkbasedhybridprocessmodel/r_g_without_auxilary_hu849c0ab1aa055d985bcd607a5c33e827_64017_ea7c741bceedfc30aaafb83e60b3ff48.webp"
+src="https://zhenghuazx.github.io/hua.zheng/hua.zheng/post/dynamicbayesiannetworkbasedhybridprocessmodel/r_g_without_auxilary_hu849c0ab1aa055d985bcd607a5c33e827_64017_7632eb10dca4246d6ab81244f893d15d.webp"
 width="760"
 height="380"
 loading="lazy" data-zoomable />&lt;/div>
@@ -389,10 +389,10 @@ Posterior distributions of $r_g$(6 macro replications). The posterior distributi
 &lt;figure id="figure-posterior-predictive-distribution-of-cell-density-with-process-noise-v01-02-and-sample-size-m3620-lg-dbn-auxiliary-based-abc-smc">
 &lt;div class="d-flex justify-content-center">
 &lt;div class="w-100" >&lt;img alt="Posterior predictive distribution of cell density with process noise v=0.1, 0.2 and sample size m=3,6,20 (LG-DBN auxiliary based ABC-SMC)" srcset="
-/hua.zheng/post/dynamicbayesiannetworkbasedhybridprocessmodel/cell_density_with_auxilary_hu116ab78b5d377eadb056e2ab3531dae6_73930_9240ea72d78e882240e57f20fac58390.webp 400w,
+/hua.zheng/post/dynamicbayesiannetworkbasedhybridprocessmodel/cell_density_with_auxilary_hu116ab78b5d377eadb056e2ab3531dae6_73930_1d9a71411f85de261f4b3f66931d9283.webp 400w,
 /hua.zheng/post/dynamicbayesiannetworkbasedhybridprocessmodel/cell_density_with_auxilary_hu116ab78b5d377eadb056e2ab3531dae6_73930_08ddfb4d63a6edb8e60a84d7e71a9edf.webp 760w,
 /hua.zheng/post/dynamicbayesiannetworkbasedhybridprocessmodel/cell_density_with_auxilary_hu116ab78b5d377eadb056e2ab3531dae6_73930_1200x1200_fit_q100_h2_lanczos_3.webp 1200w"
-src="https://zhenghuazx.github.io/hua.zheng/hua.zheng/post/dynamicbayesiannetworkbasedhybridprocessmodel/cell_density_with_auxilary_hu116ab78b5d377eadb056e2ab3531dae6_73930_9240ea72d78e882240e57f20fac58390.webp"
+src="https://zhenghuazx.github.io/hua.zheng/hua.zheng/post/dynamicbayesiannetworkbasedhybridprocessmodel/cell_density_with_auxilary_hu116ab78b5d377eadb056e2ab3531dae6_73930_1d9a71411f85de261f4b3f66931d9283.webp"
 width="760"
 height="456"
 loading="lazy" data-zoomable />&lt;/div>
