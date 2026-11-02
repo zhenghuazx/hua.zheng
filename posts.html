@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Writing — Hua Zheng</title>
+<style>
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:#14202e;line-height:1.7}
+  .wrap{max-width:820px;margin:0 auto;padding:0 22px 50px}
+  a{color:#0b5fff;text-decoration:none} a:hover{text-decoration:underline}
+  header{border-bottom:1px solid #e3e9ef;padding:16px 0;margin-bottom:8px}
+  h1{font-size:30px;letter-spacing:-.3px} h2{font-size:23px;margin-top:38px} h3{font-size:18px;margin-top:26px}
+  .meta{color:#5b6b7c;font-size:14px}
+  blockquote{border-left:3px solid #0b5fff;background:#f5f8fa;margin:16px 0;padding:10px 16px}
+  .formula{background:#f5f8fa;border:1px solid #e3e9ef;border-radius:10px;padding:12px 16px;font-family:Georgia,serif;overflow-x:auto}
+  .note{background:#fff8e6;border:1px solid #f0dfa8;border-radius:10px;padding:10px 14px;font-size:13.5px;color:#6b5510}
+  li{margin:5px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><a href="index.html">← Hua Zheng — home</a></header>
+
+<article id="gaps">
+<h1>Some Gaps Between Reinforcement Learning Practice and Theory</h1>
+<p class="meta">May 8, 2022 · Blog · 5 min read</p>
+
+<p>I am recently encountering some theoretical problems during a reinforcement learning (RL) research project. I started to realize how much difference between how people use versus how people prove RL algorithms. Although rarely mentioned in the literature, some gaps indeed exist and may be useful to think a little deeper. It motivates me to write some of my thoughts down.</p>
+<p><i>Note: Some of the practical heuristics might already have theoretical justifications that I do not know or bypassed by some reasonable assumptions. Thus, please correct me if I misunderstand or have mistakes.</i></p>
+
+<h3>Experience Replay Cause Bias</h3>
+<p>Off-policy learning is a large category of RL algorithms. It, instead of following the target policy, enables a target policy to be learned by using data from behavior policies. Experience replay is central to off-policy algorithms in deep reinforcement learning (RL). As the fundamental data-generating mechanism in off-policy deep reinforcement learning, it has been shown to improve sample efficiency and stability by storing and randomly replaying a fixed number of the most recently collected transitions for training.</p>
+<p>One interesting problem of experience replay is that the stored transitions are inevitably dependent with the current/target policy or value function, because the policy/value function parameter is in fact constructed from those transitions. In other words, all transitions are correlated. It <b>violates</b> the following conditional unbiasedness assumption in stochastic policy gradient methods:</p>
+<ul><li>The estimated gradient is unbiased conditional on the history (filtration) F<sub>k</sub> = {ξ<sub>1</sub>, …, ξ<sub>k</sub>; θ<sub>0</sub>, θ<sub>1</sub>, …, θ<sub>k</sub>}, such that E<sub>ξ</sub>[g(θ<sub>k</sub>, ξ) | F<sub>k</sub>] = ∇f(θ<sub>k</sub>).</li></ul>
+<p>In classical stochastic gradient descent (SGD), the data are assumed to be sampled from an unknown population, also referred to as the behavior distribution in off-policy batch RL. However, when you have a growing experience replay buffer in which transitions were continuously collected by following past policies, you won't have a fixed unknown behavior distribution but a changing known one. The main concerns behind this conditional dependence make theoretical study of experience replay difficult.</p>
+
+<h3>Compatibility of Critic Model</h3>
+<p>Compatibility is an important concept in actor-critic methods, which are a popular class of on-policy RL algorithms for computing an optimal policy. The actor-critic consists of two eponymous components. An actor adjusts the parameters of the stochastic policy by stochastic gradient ascent. A critic estimates the action-value function to evaluate the action chosen by the current policy. Instead of the unknown true action-value function, an approximate action-value function is used, which introduces the concept of compatibility.</p>
+<p>In general, substituting a function approximator for the true action-value (or value) function may introduce bias. However, the bias is zero if the function approximator is compatible, i.e.</p>
+<ol>
+<li>the function approximator is linear in the score function of the policy;</li>
+<li>the parameters of the function approximator are chosen to minimize the mean-squared error between the approximated and true action-value functions.</li>
+</ol>
+<p>In practice, condition 2 is usually relaxed in favor of policy evaluation algorithms that estimate the value function more efficiently by temporal-difference learning. However, condition 1 is rarely satisfied. This issue applies to almost all, if not all, modern deep policy optimization algorithms.</p>
+<p>Good news is that people have realized this issue and some literature is working on relaxing the compatibility constraint for neural networks [1–3].</p>
+
+<h3>Discounted Objective</h3>
+<p>I had recently revisited the policy gradient theorem proof when working on my actor-critic related paper, which leads to this question. After a quick literature review I found Russo Alessio mentioned the same issue in his blog [4] and Nota and Thomas [5] had raised concerns about a similar issue by constructing a counterexample. In addition, Naik et al. [6] criticize the discounted objective as well but in a different context.</p>
+<p>I personally used a lot of discounted objective, but still felt unclear on some concepts. Part of the reason comes from inaccurate or ambiguous description and the other part I think comes from the fact that RL is an interdisciplinary area including contributions from optimization, operations research, statistics and computer science. As a result, people used different terminologies and notations, which further exaggerates the ambiguity.</p>
+<p>Now let's briefly discuss the issue in the infinite-horizon MDP setting. In the classic policy gradient theorem, the discounted policy gradient tells us how to modify the policy parameters θ in order to increase ∇J<sub>γ</sub>(θ), and is given by:</p>
+<p class="formula">∇J<sub>γ</sub>(θ) = E<sub>s<sub>t</sub> ∼ d<sup>π</sup><sub>γ</sub>, a<sub>t</sub> ∼ π(·|s<sub>t</sub>)</sub> [ ∇ log π<sub>θ</sub>(a<sub>t</sub>|s<sub>t</sub>) · Q<sup>π</sup><sub>γ</sub>(s<sub>t</sub>, a<sub>t</sub>) ]</p>
+<p>where d<sup>π</sup><sub>γ</sub>(s) = ∫ p(s<sub>0</sub>) Σ<sub>t=0</sub><sup>∞</sup> γ<sup>t</sup> p<sup>π</sup>(s<sub>t</sub> = s | s<sub>0</sub>) ds<sub>0</sub> is the discounted stationary state distribution (discounted state occupation).</p>
+<blockquote><b>Problem:</b> the samples used to update the policy should be distributed according to the discounted state distribution d<sup>π</sup><sub>γ</sub>(s); however, the samples actually used in most algorithms are s<sub>t+1</sub> ∼ p(s<sub>t+1</sub>|s<sub>t</sub>,a<sub>t</sub>), a<sub>t</sub> ∼ π(·|s<sub>t</sub>). In the average-return case this is allowed because we can reach the limiting distribution by continuously running the simulation, i.e. d<sup>π</sup>(s) = lim<sub>t→∞</sub> p(s<sub>t</sub> = s | s<sub>0</sub>). But in the discounted case, we can't naively take the average of samples from the replay buffer as the discounted stationary distribution, because it treats observations sampled at different time steps differently.</blockquote>
+
+<h3>References</h3>
+<ol>
+<li>Wang, D., &amp; Hu, M. (2021). Deep Deterministic Policy Gradient With Compatible Critic Network. <i>IEEE Transactions on Neural Networks and Learning Systems</i>.</li>
+<li>Diddigi, R. B., Jain, P., &amp; Bhatnagar, S. (2021). Neural Network Compatible Off-Policy Natural Actor-Critic Algorithm. <i>arXiv:2110.10017</i>.</li>
+<li>Balduzzi, D., &amp; Ghifary, M. (2015). Compatible value gradients for reinforcement learning of continuous deep policies. <i>arXiv:1509.03005</i>.</li>
+<li>Russo Alessio (2021). Why there is a problem with the Policy Gradient theorem in Deep Reinforcement Learning. <i>Towards Data Science</i>.</li>
+<li>Nota, C., &amp; Thomas, P. S. (2020). Is the Policy Gradient a Gradient? <i>AAMAS 2020</i>.</li>
+<li>Naik, A., Shariff, R., Yasui, N., Yao, H., &amp; Sutton, R. S. (2019). Discounted reinforcement learning is not an optimization problem. <i>NeurIPS 2019</i>.</li>
+</ol>
+</article>
+
+<article id="dbn">
+<h1>Dynamic Bayesian Network Based Hybrid Process Model</h1>
+<p class="meta">May 5, 2022 · Tutorial · 15 min read</p>
+<p>This is a tutorial about a series of advanced hybrid process models for people with some background in mathematical and statistical modeling who are interested in process modeling. The class of process models presented here is mainly based on Bayesian networks and Bayesian inference.</p>
+
+<h3>1–2. Introduction &amp; Motivation</h3>
+<p>Mechanistic ODE/PDE process models ignore process stochasticity — batch-to-batch variation, bioprocess noise, and raw-material variability (Mockus et al. 2015; Vasdekis et al. 2015; Dickens et al. 2018). Hybrid models augment the mechanistic core with a probabilistic layer so uncertainty is modeled rather than assumed away.</p>
+
+<h3>3.1 Linear Gaussian DBN Hybrid Model</h3>
+<p>Start from an ODE dynamical system ṡ = f(s, a), linearize it by first-order Taylor approximation, and rewrite it as a Linear Gaussian Dynamic Bayesian Network with Gaussian state transitions. Inference is covered two ways: a Bayesian approach (full likelihood, conjugate priors, Gibbs sampling) and a frequentist approach — the LG-DBN as a linear system τ ∼ N(μ, (I − B)<sup>−1</sup> Σ (I − B)<sup>−⊤</sup>), where parameter estimation reduces to centering the data and running per-timestep linear regressions.</p>
+
+<h3>3.2 Nonlinear DBN Hybrid Model</h3>
+<p>The nonlinear extension adds <b>parametric variation modeling</b> (random coefficients capturing batch-to-batch differences) and <b>latent state modeling</b> (observable x<sub>t</sub> plus latent z<sub>t</sub> — the resulting "probabilistic knowledge graph (KG) hybrid model"). For partially observed trajectories, Bayesian inference runs through ABC-SMC, including the LG-DBN auxiliary likelihood-based ABC-SMC improvement that avoids matching raw trajectories (see also Xie, Wang, Zheng &amp; Feng 2022, arXiv:2205.02410).</p>
+
+<h3>4. Conclusion</h3>
+<p>"I briefly reviewed the theoretical basics of dynamic Bayesian network based hybrid models with a short discussion about its inference. I hope this new model class could inspire other researchers to model complex stochastic processes in different domains."</p>
+
+<h3>5. Next</h3>
+<p>Follow-ups promised in the original post — parameter estimation, a policy-augmented DBN (PADBN) with RL, Shapley-value interpretability, and implementation — connect directly to the publications on the <a href="index.html#research">research page</a>.</p>
+
+<h3>6. References (selection)</h3>
+<ol>
+<li>Mockus, L., Peterson, J. J., Lainez, J. M., &amp; Reklaitis, G. V. (2015). Batch-to-batch variation: a key component for modeling chemical manufacturing processes. <i>Organic Process Research &amp; Development</i>, 19(8), 908–914.</li>
+<li>Zheng, H., Xie, W., Ryzhov, I. O., &amp; Xie, D. (2021). Policy optimization in Bayesian network hybrid models of biomanufacturing processes. <i>arXiv:2105.06543</i>.</li>
+<li>Murphy, K. P. (2012). <i>Machine Learning: A Probabilistic Perspective</i>. MIT Press.</li>
+<li>Zheng, H., Xie, W., Wang, K., &amp; Li, Z. (2022). Opportunities of hybrid model-based reinforcement learning for cell therapy manufacturing. <i>arXiv:2201.03116</i>.</li>
+<li>Toni, T., et al. (2009). Approximate Bayesian computation scheme for parameter inference and model selection in dynamical systems. <i>J. Royal Society Interface</i>, 6(31), 187–202.</li>
+<li>Del Moral, P., Doucet, A., &amp; Jasra, A. (2006). Sequential Monte Carlo samplers. <i>JRSS-B</i>, 68(3), 411–436.</li>
+</ol>
+<p class="note">Migration note (not part of the original post): this page carries the tutorial's full structure, framing, and conclusions. The original's ~670 lines of step-by-step derivations will be ported verbatim from the source files when the new site is published, so no mathematics is lost.</p>
+</article>
+
+</div>
+</body>
+</html>
