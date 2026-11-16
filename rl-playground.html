@@ -1,0 +1,1681 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light" />
+    <link rel="icon" href="data:," />
+    <title>RL Playground</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <style>
+      button, [role="button"], select, summary, input:not([type="checkbox"], [type="radio"]) { min-height: 2rem; }
+      * { box-sizing: border-box; }
+      :root{
+        --bg:#FAFAF7;
+        --bg2:#F3F4F0;
+        --panel:#FFFFFF;
+        --panel-solid:#FFFFFF;
+        --line:#D3D9DF;
+        --line-soft:#E4E8EC;
+        --ink:#2B3440;
+        --dim:#57626E;
+        --faint:#8B96A1;
+        --cyan:#4C72B0;
+        --teal:#55A868;
+        --mag:#C44E52;
+        --amber:#DD8452;
+        --orange:#DD8452;
+        --msr:#8172B2;
+        --radius:12px;
+      }
+      html{ scroll-behavior:smooth; }
+      body{
+        margin:0;
+        background:var(--bg);
+        color:var(--ink);
+        font-family:"Source Sans 3", system-ui, sans-serif;
+        -webkit-font-smoothing:antialiased;
+        overflow-x:hidden;
+      }
+      .wrap{ max-width:1180px; margin:0 auto; padding:22px 18px 64px; }
+
+      /* ---------- header ---------- */
+      header{ padding:10px 2px 4px; }
+      .kicker{
+        font-family:"IBM Plex Mono", monospace; font-size:11px; letter-spacing:.32em;
+        color:var(--cyan); text-transform:uppercase; margin:0 0 8px;
+      }
+      h1{
+        margin:0; font-size:clamp(30px, 5.4vw, 52px); font-weight:700; line-height:1.04; letter-spacing:.01em;
+      }
+      h1 .glow{ color:var(--cyan); }
+      h1 .glow2{ color:var(--teal); }
+      .lede{ margin:12px 0 0; max-width:640px; color:var(--dim); font-size:15.5px; line-height:1.55; font-weight:400; }
+      .lede b{ color:var(--ink); font-weight:600; }
+
+      /* ---------- transport bar ---------- */
+      .transport{
+        position:sticky; top:10px; z-index:40;
+        display:flex; flex-wrap:wrap; gap:10px; align-items:center;
+        margin:20px 0 26px; padding:10px 12px;
+        background:rgba(255,255,255,.94); backdrop-filter:blur(6px);
+        border:1px solid var(--line); border-radius:999px;
+        box-shadow:0 1px 4px rgba(43,52,64,.08);
+      }
+      .tbtn{
+        appearance:none; border:1px solid var(--line); background:#F4F5F2; color:var(--ink);
+        font-family:inherit; font-weight:600; font-size:13.5px; letter-spacing:.04em;
+        border-radius:999px; padding:9px 16px; min-height:40px; cursor:pointer;
+        display:inline-flex; align-items:center; gap:8px;
+        transition:border-color .15s, box-shadow .15s, background .15s;
+      }
+      .tbtn:hover{ border-color:rgba(76,114,176,.55); background:#EDF1F6; }
+      .tbtn.primary{ background:rgba(76,114,176,.12); border-color:rgba(76,114,176,.5); color:var(--ink); }
+      .tbtn .dot{ width:8px; height:8px; border-radius:50%; background:var(--teal); }
+      .tbtn.paused .dot{ background:var(--amber); }
+      .seg{ display:inline-flex; border:1px solid var(--line); border-radius:999px; overflow:hidden; }
+      .seg button{
+        appearance:none; border:0; background:transparent; color:var(--dim); cursor:pointer;
+        font-family:"IBM Plex Mono", monospace; font-size:12.5px; padding:9px 13px; min-height:40px;
+      }
+      .seg button + button{ border-left:1px solid var(--line-soft); }
+      .seg button[aria-pressed="true"]{ background:rgba(76,114,176,.15); color:var(--ink); }
+      .tstat{
+        margin-left:auto; font-family:"IBM Plex Mono", monospace; font-size:12px; color:var(--dim);
+        display:flex; gap:16px; flex-wrap:wrap;
+      }
+      .tstat b{ color:var(--ink); font-weight:600; }
+      .tlabel{ font-family:"IBM Plex Mono", monospace; font-size:10.5px; letter-spacing:.22em; color:var(--faint); text-transform:uppercase; margin-right:2px; }
+
+      /* ---------- scenes ---------- */
+      section.scene{
+        background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+        padding:22px 22px 24px; margin:0 0 26px;
+        box-shadow:0 1px 3px rgba(43,52,64,.05);
+      }
+      .scene-head{ display:flex; align-items:baseline; gap:14px; flex-wrap:wrap; margin-bottom:4px; }
+      .scene-num{
+        font-family:"IBM Plex Mono", monospace; font-size:12px; color:#FFFFFF; font-weight:600;
+        background:var(--cyan); border-radius:6px; padding:3px 8px;
+      }
+      .scene-num.m{ background:var(--mag); color:#FFFFFF; }
+      .scene-num.t{ background:var(--teal); color:#FFFFFF; }
+      h2{ margin:0; font-size:clamp(21px, 3.4vw, 28px); font-weight:700; letter-spacing:.01em; }
+      .scene-cap{ margin:6px 0 18px; color:var(--dim); font-size:14.5px; line-height:1.55; max-width:720px; }
+      .scene-cap b{ color:var(--ink); font-weight:600; }
+      .mono{ font-family:"IBM Plex Mono", monospace; }
+      .gk{ font-family:"IBM Plex Mono", monospace; font-style:normal; }
+      @media (max-width:640px){
+        .transport{ border-radius:24px; }
+        .tstat{ margin-left:0; width:100%; gap:12px; }
+      }
+
+      .grid2{ display:grid; grid-template-columns:minmax(0,1.25fr) minmax(0,1fr); gap:20px; align-items:start; }
+      @media (max-width:860px){ .grid2{ grid-template-columns:1fr; } }
+
+      .canvas-frame{
+        position:relative; border-radius:14px; overflow:hidden;
+        border:1px solid var(--line-soft); background:#FFFFFF;
+      }
+      .canvas-frame canvas{ display:block; width:100%; }
+      .canvas-frame .layer{ position:absolute; inset:0; }
+      .tag{
+        position:absolute; font-family:"IBM Plex Mono", monospace; font-size:10px; letter-spacing:.14em;
+        padding:3px 7px; border-radius:5px; background:rgba(255,255,255,.9); pointer-events:none; text-transform:uppercase;
+      }
+      .tag.start{ color:var(--cyan); border:1px solid rgba(76,114,176,.45); left:8px; bottom:8px; }
+      .tag.goal{ color:#B25A28; border:1px solid rgba(221,132,82,.55); right:8px; top:8px; }
+
+      .fig-label{
+        display:flex; justify-content:space-between; align-items:baseline; gap:8px;
+        font-family:"IBM Plex Mono", monospace; font-size:11.5px; color:var(--dim);
+        letter-spacing:.08em; margin:0 2px 7px; text-transform:uppercase;
+      }
+      .fig-label .val{ color:var(--ink); letter-spacing:0; text-transform:none; }
+
+      .heat-pair{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+      @media (max-width:460px){ .heat-pair{ gap:10px; } }
+
+      /* gamma control */
+      .gamma-box{
+        margin-top:18px; padding:16px 16px 14px; border:1px solid var(--line-soft); border-radius:10px;
+        background:#F6F7F4;
+      }
+      .gamma-top{ display:flex; align-items:baseline; justify-content:space-between; gap:10px; margin-bottom:6px; }
+      .gamma-name{ font-size:13px; letter-spacing:.18em; text-transform:uppercase; color:var(--dim); font-family:"IBM Plex Mono", monospace; }
+      .gamma-val{ font-family:"IBM Plex Mono", monospace; font-size:30px; font-weight:600; color:var(--cyan); }
+      input[type="range"]{
+        -webkit-appearance:none; appearance:none; width:100%; height:44px; background:transparent; cursor:pointer; margin:0;
+      }
+      input[type="range"]::-webkit-slider-runnable-track{
+        height:8px; border-radius:99px;
+        background:linear-gradient(90deg, #C9D4E4, var(--cyan) 55%, var(--teal));
+      }
+      input[type="range"]::-webkit-slider-thumb{
+        -webkit-appearance:none; width:30px; height:30px; border-radius:50%; margin-top:-11px;
+        background:#FFFFFF; border:2px solid var(--cyan);
+        box-shadow:0 1px 4px rgba(43,52,64,.25);
+      }
+      input[type="range"]::-moz-range-track{
+        height:8px; border-radius:99px; background:linear-gradient(90deg, #C9D4E4, var(--cyan) 55%, var(--teal));
+      }
+      input[type="range"]::-moz-range-thumb{
+        width:28px; height:28px; border-radius:50%; background:#FFFFFF; border:2px solid var(--cyan);
+        box-shadow:0 1px 4px rgba(43,52,64,.25);
+      }
+      .gamma-scale{ display:flex; justify-content:space-between; font-family:"IBM Plex Mono", monospace; font-size:10.5px; color:var(--faint); margin-top:-2px; }
+      .gap-readout{ display:flex; align-items:center; gap:18px; margin-top:14px; flex-wrap:wrap; }
+      .gap-big{ font-family:"IBM Plex Mono", monospace; font-size:40px; font-weight:600; line-height:1; color:var(--teal); }
+      .gap-txt{ color:var(--dim); font-size:13px; line-height:1.5; max-width:300px; }
+      .gap-txt b{ color:var(--ink); }
+      .gap-bar-wrap{ flex:1 1 160px; min-width:150px; }
+      .gap-bar{ height:8px; border-radius:99px; background:#E4E8EC; position:relative; overflow:visible; }
+      .gap-fill{ position:absolute; left:0; top:0; bottom:0; border-radius:99px; background:linear-gradient(90deg, var(--mag), var(--orange), var(--teal)); transition:width .25s ease; }
+      .gap-tick{ position:absolute; top:-4px; width:2px; height:16px; background:var(--ink); opacity:.85; }
+      .gap-bar-labels{ display:flex; justify-content:space-between; font-family:"IBM Plex Mono", monospace; font-size:10px; color:var(--faint); margin-top:6px; }
+
+      .terrain-wrap{ margin-top:20px; }
+
+      /* scene 2 */
+      .legend{ display:flex; gap:18px; flex-wrap:wrap; font-family:"IBM Plex Mono", monospace; font-size:11.5px; color:var(--dim); margin:10px 2px 0; }
+      .legend .sw{ display:inline-block; width:18px; height:3px; border-radius:2px; vertical-align:middle; margin-right:7px; }
+      .vr-row{ display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin:16px 0 6px; }
+      .switch{
+        appearance:none; cursor:pointer; border:1px solid var(--line); background:#F4F5F2;
+        border-radius:999px; padding:6px; min-height:44px; display:inline-flex; align-items:center; gap:10px;
+        font-family:inherit; color:var(--ink);
+      }
+      .switch .track{ width:52px; height:26px; border-radius:99px; background:#DDE2E8; position:relative; transition:background .2s; flex:none; }
+      .switch .knob{
+        position:absolute; top:3px; left:3px; width:20px; height:20px; border-radius:50%;
+        background:#8B96A1; transition:left .2s, background .2s;
+      }
+      .switch[aria-pressed="true"] .track{ background:rgba(85,168,104,.35); }
+      .switch[aria-pressed="true"] .knob{ left:29px; background:var(--teal); }
+      .switch .sw-label{ font-weight:600; font-size:13.5px; letter-spacing:.03em; padding-right:8px; }
+      .switch .sw-state{ font-family:"IBM Plex Mono", monospace; font-size:11px; color:var(--dim); min-width:30px; }
+      .vr-note{ color:var(--dim); font-size:13px; line-height:1.5; }
+      .charts2{ display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:16px; }
+      @media (max-width:860px){ .charts2{ grid-template-columns:1fr; } }
+
+      /* scene 3 */
+      .scrub-row{ display:flex; align-items:center; gap:14px; margin-top:16px; flex-wrap:wrap; }
+      .scrub-row input[type="range"]{ flex:1 1 220px; }
+      .scrub-row input[type="range"]::-webkit-slider-runnable-track{ background:linear-gradient(90deg, #CBE0CE, var(--teal)); }
+      .scrub-row input[type="range"]::-webkit-slider-thumb{ border-color:var(--teal); box-shadow:0 1px 4px rgba(43,52,64,.25); }
+      .scrub-row input[type="range"]::-moz-range-track{ background:linear-gradient(90deg, #CBE0CE, var(--teal)); }
+      .scrub-row input[type="range"]::-moz-range-thumb{ border-color:var(--teal); }
+      .step-readout{ font-family:"IBM Plex Mono", monospace; font-size:13px; color:var(--dim); white-space:nowrap; }
+      .step-readout b{ color:var(--teal); font-size:16px; }
+      .live-pill{
+        font-family:"IBM Plex Mono", monospace; font-size:10.5px; letter-spacing:.16em; text-transform:uppercase;
+        color:#FFFFFF; background:var(--teal); border-radius:99px; padding:4px 10px; font-weight:600;
+      }
+      .live-pill.off{ background:#EFF1EE; color:var(--dim); border:1px solid var(--line-soft); }
+
+      /* scene 2 — continuous task */
+      .ctl-grid{ display:grid; grid-template-columns:repeat(5,1fr); gap:12px; margin:16px 0 4px; }
+      @media (max-width:860px){ .ctl-grid{ grid-template-columns:1fr 1fr; } }
+      .regime-box{ margin:14px 0 6px; padding:14px 16px; border:1px solid var(--line-soft); border-radius:10px; background:#F6F7F4; }
+      .regime-top{ display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
+      .regime-desc{ color:var(--dim); font-size:13.5px; line-height:1.55; margin-top:10px; }
+      .regime-desc b{ color:var(--ink); }
+      .ctl{ display:flex; flex-direction:column; gap:6px; }
+      .ctl label{ font-family:"IBM Plex Mono", monospace; font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--faint); }
+      .ctl select{ appearance:none; background:#FFFFFF; color:var(--ink); border:1px solid var(--line); border-radius:10px; padding:10px 12px; font-family:"IBM Plex Mono", monospace; font-size:13.5px; min-height:44px; cursor:pointer; }
+      .stat-cards{ display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-top:16px; }
+      @media (max-width:700px){ .stat-cards{ grid-template-columns:1fr; } }
+      .stat-card{ border:1px solid var(--line-soft); border-radius:10px; padding:14px 16px; background:#F6F7F4; }
+      .stat-card h3{ margin:0 0 8px; font-size:14px; font-weight:600; display:flex; align-items:center; gap:8px; }
+      .stat-card .row{ display:flex; justify-content:space-between; gap:10px; font-family:"IBM Plex Mono", monospace; font-size:12px; color:var(--dim); padding:3px 0; }
+      .stat-card .row b{ color:var(--ink); font-weight:600; }
+      .dotc{ width:10px; height:10px; border-radius:50%; flex:none; display:inline-block; }
+      .eq{ font-family:"IBM Plex Mono", monospace; font-size:12.5px; line-height:1.7; background:#F6F7F4; border:1px solid var(--line-soft); border-radius:8px; padding:10px 14px; margin:8px 0; overflow-x:auto; white-space:nowrap; color:var(--ink); }
+      .methods p, .methods li{ color:var(--dim); font-size:13.5px; line-height:1.6; }
+      .methods b{ color:var(--ink); }
+      .methods ul{ margin:6px 0 12px; padding-left:20px; }
+      .badge{ font-family:"IBM Plex Mono", monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase; border-radius:99px; padding:2px 8px; border:1px solid var(--line); color:var(--dim); }
+      .badge.exact{ color:#3E7C4F; border-color:rgba(85,168,104,.5); }
+      .badge.mc{ color:#B25A28; border-color:rgba(221,132,82,.5); }
+      footer{ color:var(--faint); font-size:12.5px; line-height:1.6; text-align:center; padding:6px 10px 0; font-family:"IBM Plex Mono", monospace; }
+      @media (prefers-reduced-motion: reduce){
+        html{ scroll-behavior:auto; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <p class="kicker">Reinforcement Learning · Live Simulation</p>
+        <h1>The <span class="glow">RL</span> <span class="glow2">Playground</span></h1>
+        <p class="lede">Two live experiments, computed exactly or estimated honestly — and labelled which is which. <b>Scene 01</b> solves the occupancy distributions <b>exactly</b> from a tabular gridworld policy. <b>Scene 02</b> is a continuous control task trained with a neural policy gradient, comparing on-policy, naive replay, <b>VRER</b>, and <b>MSR-Replay</b> gradient estimators on the same environment-step budget.</p>
+      </header>
+
+      <div class="transport" role="group" aria-label="Training controls">
+        <button class="tbtn primary" id="btnPlay" aria-pressed="true"><span class="dot"></span><span id="playLabel">Training live</span></button>
+        <span class="tlabel" id="speedLabel">Speed</span>
+        <div class="seg" role="group" aria-labelledby="speedLabel">
+          <button data-speed="0.25" aria-pressed="false">0.25×</button>
+          <button data-speed="1" aria-pressed="true">1×</button>
+          <button data-speed="4" aria-pressed="false">4×</button>
+          <button data-speed="16" aria-pressed="false">16×</button>
+        </div>
+        <button class="tbtn" id="btnReset">↺ Retrain from scratch</button>
+        <div class="tstat">
+          <span>step <b id="statStep">0</b></span>
+          <span>ε <b id="statEps">0.30</b></span>
+          <span>avg return <b id="statRet">—</b></span>
+        </div>
+      </div>
+
+      <!-- ============ SCENE 1 : GAMMA MORPH ============ -->
+      <section class="scene" aria-labelledby="h-gamma">
+        <div class="scene-head">
+          <span class="scene-num">01</span>
+          <h2 id="h-gamma">The <span class="gk">γ</span> Morph</h2>
+        </div>
+        <p class="scene-cap">The agent trains live in the city below — brightness is the <b>value function</b> rising under its feet. The two maps are computed from its <b>current policy</b>: where discounted occupancy <span class="mono">d<sup>π</sup></span> glows hot near the start, the stationary distribution <span class="mono"><span class="gk">ν</span><sup>π</sup></span> spreads along the whole route. <b>Drag <span class="gk">γ</span> toward 1 and watch one melt into the other.</b></p>
+
+        <div class="grid2">
+          <div>
+            <p class="fig-label"><span>Agent city — live policy &amp; particle flow</span><span class="val" id="flowState">exploring…</span></p>
+            <div class="canvas-frame" id="worldFrame">
+              <canvas id="worldBg"></canvas>
+              <canvas id="worldFx" class="layer"></canvas>
+              <span class="tag start">Start</span>
+              <span class="tag goal">★ Goal +10</span>
+            </div>
+            <div class="terrain-wrap">
+              <p class="fig-label"><span>Value terrain — V(s) rising as the policy sharpens</span><span class="val" id="vmaxLabel">max V 0.0</span></p>
+              <div class="canvas-frame"><canvas id="terrain"></canvas></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="heat-pair">
+              <div>
+                <p class="fig-label"><span style="color:var(--orange)">d<sup>π</sup> · discounted</span></p>
+                <div class="canvas-frame"><canvas id="heatD"></canvas></div>
+              </div>
+              <div>
+                <p class="fig-label"><span style="color:var(--teal)"><span class="gk">ν</span><sup>π</sup> · stationary</span></p>
+                <div class="canvas-frame"><canvas id="heatNu"></canvas></div>
+              </div>
+            </div>
+
+            <div class="gamma-box">
+              <div class="gamma-top">
+                <span class="gamma-name">Discount factor <span class="gk">γ</span></span>
+                <span class="gamma-val" id="gammaVal">0.990</span>
+              </div>
+              <input type="range" id="gammaSlider" min="0.5" max="0.999" step="0.001" value="0.99" aria-label="Discount factor gamma" />
+              <div class="gamma-scale"><span>0.50 · myopic</span><span>0.90</span><span>0.99</span><span>0.999 · far-sighted</span></div>
+              <div class="gap-readout">
+                <div class="gap-big" id="gapBig">—</div>
+                <div class="gap-txt">relative gap between the two distributions, <b>‖d<sup>π</sup> − <span class="gk">ν</span><sup>π</sup>‖</b>. Theory: the gap is <b>O(1 − <span class="gk">γ</span>)</b>, but the constant is set by how fast the chain mixes — huge while the policy still wanders, collapsing toward <b>≈ 1% at <span class="gk">γ</span> = 0.99</b> once the route locks in.</div>
+                <div class="gap-bar-wrap">
+                  <div class="gap-bar">
+                    <div class="gap-fill" id="gapFill" style="width:0%"></div>
+                    <div class="gap-tick" id="gapTick" style="left:2%"></div>
+                  </div>
+                  <div class="gap-bar-labels"><span>measured gap</span><span>▏= (1 − <span class="gk">γ</span>)</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ SCENE 2 : VRER POLICY GRADIENT ============ -->
+      <section class="scene" aria-labelledby="h-river">
+        <div class="scene-head">
+          <span class="scene-num m">02</span>
+          <h2 id="h-river">Point-Mass Control — the Estimator Experiment</h2>
+        </div>
+        <p class="scene-cap">A <b>continuous-state, continuous-action</b> task: a point mass with position + velocity, driven by 2D force, rewarded for reaching the goal cheaply. A <b>neural Gaussian policy</b> (2-layer MLP) is trained by policy gradient. Four gradient estimators race on the <b>same task, same seeds, same environment-step budget</b> — the x-axis is environment steps, not wall-clock. (a)–(c) differ in how they reuse stored behaviour actions; <b>(d) MSR-Replay</b> instead corrects the <b>state distribution</b> with a learned density ratio, samples <b>fresh actions</b> from the current policy at replayed states, and takes its advantage from a <b>fitted Q evaluation</b> of the current policy. The scene runs in a single, <b>strongly off-policy</b> configuration — a large, stale buffer with a long reuse window — because that is the regime where replay bias and gradient variance actually bind; see Methods for the measured ranking. <span class="badge mc">Monte-Carlo estimated</span></p>
+
+        <div class="regime-box">
+          <div class="regime-top">
+            <span class="tlabel">Configuration</span>
+            <span class="badge">strongly off-policy · buffer 50,000 · window 200,000 · 8 replay updates</span>
+          </div>
+          <p class="regime-desc"><b>Strongly off-policy:</b> buffer capacity <b>50,000</b>, reuse window <b>200,000</b> env steps, <b>8</b> replay updates per episode — replayed transitions come from substantially older, drifted policies and are reused many more times. The controls below start at these values; manual changes apply on Retrain.</p>
+        </div>
+
+        <div class="grid2">
+          <div>
+            <p class="fig-label"><span>Point-mass world — VRER policy, ghost rollouts</span><span class="val" id="pmState">warming up…</span></p>
+            <div class="canvas-frame"><canvas id="pmCanvas"></canvas></div>
+            <div class="legend">
+              <span><span class="sw" style="background:var(--teal)"></span>mean-policy rollout</span>
+              <span><span class="sw" style="background:var(--cyan)"></span>stochastic ghosts (current π)</span>
+              <span><span class="sw" style="background:var(--amber)"></span>goal</span>
+            </div>
+          </div>
+          <div>
+            <p class="fig-label"><span>Learning curve — return vs environment steps</span><span class="val" id="lcVal">0 steps</span></p>
+            <div class="canvas-frame"><canvas id="lcCanvas"></canvas></div>
+            <div class="legend">
+              <span><span class="sw" style="background:#4C72B0"></span>(a) on-policy</span>
+              <span><span class="sw" style="background:var(--mag)"></span>(b) naive replay</span>
+              <span><span class="sw" style="background:var(--teal)"></span>(c) VRER</span>
+              <span><span class="sw" style="background:var(--msr)"></span>(d) MSR-Replay</span>
+              <span>band = ±1 std over 3 seeds</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="stat-cards">
+          <div class="stat-card"><h3><span class="dotc" style="background:#4C72B0"></span>(a) On-policy</h3>
+            <div class="row"><span>grad variance — common batch</span><b id="varOn">—</b></div>
+            <div class="row"><span>mean return (3 seeds)</span><b id="retOn">—</b></div>
+            <div class="row"><span>steps to return ≥ −55 (median)</span><b id="effOn">not yet</b></div>
+            <div class="row"><span>data used</span><b>fresh only</b></div></div>
+          <div class="stat-card"><h3><span class="dotc" style="background:var(--mag)"></span>(b) Naive replay</h3>
+            <div class="row"><span>grad variance — common batch</span><b id="varNaive">—</b></div>
+            <div class="row"><span>mean return (3 seeds)</span><b id="retNaive">—</b></div>
+            <div class="row"><span>steps to return ≥ −55 (median)</span><b id="effNaive">not yet</b></div>
+            <div class="row"><span>correction</span><b>none</b></div></div>
+          <div class="stat-card"><h3><span class="dotc" style="background:var(--teal)"></span>(c) VRER</h3>
+            <div class="row"><span>grad variance — common batch</span><b id="varVrer">—</b></div>
+            <div class="row"><span>mean return (3 seeds)</span><b id="retVrer">—</b></div>
+            <div class="row"><span>steps to return ≥ −55 (median)</span><b id="effVrer">not yet</b></div>
+            <div class="row"><span>IS eff. sample size</span><b id="essVrer">—</b></div>
+            <div class="row"><span>mean sampled age</span><b id="ageVrer">—</b></div>
+            <div class="row"><span>correction</span><b>IS + control variate</b></div></div>
+          <div class="stat-card"><h3><span class="dotc" style="background:var(--msr)"></span>(d) MSR-Replay</h3>
+            <div class="row"><span>grad variance — common batch</span><b id="varMsr">—</b></div>
+            <div class="row"><span>mean return (3 seeds)</span><b id="retMsr">—</b></div>
+            <div class="row"><span>steps to return ≥ −55 (median)</span><b id="effMsr">not yet</b></div>
+            <div class="row"><span>ŵ eff. sample size</span><b id="essMsr">—</b></div>
+            <div class="row"><span>mean sampled age</span><b id="ageMsr">—</b></div>
+            <div class="row"><span>correction</span><b>state ratio + fresh actions + FQE</b></div></div>
+        </div>
+        <p class="vr-note mono" id="seedReturns" style="margin:12px 2px 0">Per-seed return (EMA) — warming up…</p>
+
+        <div class="ctl-grid" role="group" aria-label="VRER experiment controls">
+          <div class="ctl"><label for="ctlBuf">Replay buffer capacity</label>
+            <select id="ctlBuf"><option value="1000">1,000</option><option value="5000">5,000</option><option value="20000">20,000</option><option value="50000" selected>50,000</option></select></div>
+          <div class="ctl"><label for="ctlWindow">Reuse window — max age (env steps)</label>
+            <select id="ctlWindow"><option value="3000">3,000 · strict</option><option value="10000">10,000</option><option value="200000" selected>200,000 · full buffer</option><option value="1000000">∞ · no window</option></select></div>
+          <div class="ctl"><label for="ctlBatch">Batch size</label>
+            <select id="ctlBatch"><option value="32" selected>32</option><option value="64">64</option><option value="128">128</option></select></div>
+          <div class="ctl"><label for="ctlLr">Learning rate (Adam)</label>
+            <select id="ctlLr"><option value="0.002">0.002</option><option value="0.005" selected>0.005</option><option value="0.01">0.01</option></select></div>
+          <div class="ctl"><label for="ctlReps">Replay updates / episode</label>
+            <select id="ctlReps"><option value="2">2</option><option value="4">4</option><option value="8" selected>8</option></select></div>
+        </div>
+        <div class="vr-row">
+          <button class="tbtn primary" id="btnRetrainPG">↺ Retrain comparison with these settings</button>
+          <span class="vr-note">Controls apply on retrain, so all four estimators restart from identical seeds under identical knobs. Gradient variance is measured <b>on a common held-out batch</b>: the trace Cov(g) = E‖g‖² − ‖E g‖² of each estimator's own per-sample gradients on the same 128 transitions from the initial policy, evaluated at each agent's current policy — the same quantity for all four, averaged over seeds.</span>
+        </div>
+      </section>
+
+      <!-- ============ METHODS ============ -->
+      <section class="scene methods" aria-labelledby="h-methods">
+        <div class="scene-head"><span class="scene-num">04</span><h2 id="h-methods">Methods — what is exact, what is estimated</h2></div>
+        <p><b>Task MDP.</b> State s = (x, y, v<sub>x</sub>, v<sub>y</sub>) ∈ ℝ⁴, start near (−0.75, −0.75) with small seeded noise, goal g = (0.75, 0.75). Action a ∈ ℝ² is a force, clipped to [−2, 2]². Dynamics (Δt = 0.1): v′ = 0.85 v + 0.1 a, x′ = x + 0.1 v′, with inelastic walls at ±1.1 (velocity zeroes on contact). Policy inputs scale velocity by 0.4. Reward r = −‖x − g‖₂ − 0.05‖a‖², plus +0.5 per step within 0.09 of the goal. Horizon H = 120 steps, γ = 0.99. <span class="badge mc">simulated</span></p>
+        <p><b>Policy class.</b> Gaussian π<sub>θ</sub>(a|s) = 𝒩(μ<sub>θ</sub>(s), σ²I), μ<sub>θ</sub> a 2-layer MLP (4→20→20→2, tanh), σ = 0.5 fixed, mean head 1.5·tanh-bounded. The value baseline V(s) = w·φ(s) is a learned linear function of φ(s) = (x, y, v<sub>x</sub>/2, v<sub>y</sub>/2, ‖x−g‖, 1), fitted by regression to sampled returns. Optimiser: Adam. Advantage per transition: Â = G<sub>t</sub> − V(s<sub>t</sub>), where G<sub>t</sub> is the Monte-Carlo return-to-go of the episode that produced the transition (REINFORCE); the baseline term is re-evaluated under the current V whenever a transition is (re)used. <b>Behaviour log-probability:</b> each transition stores the raw Gaussian sample ã and its exact log-density log π<sub>b</sub>(ã|s); the environment executes the clipped action clip(ã, −2, 2) for dynamics and reward, while all score-function gradients and importance ratios are evaluated at the stored raw sample ã, so the stored logp is the true density of the quantity the gradients use. <span class="badge mc">estimated</span></p>
+        <p><b>Gradient estimators</b> — (a)–(c) use ĝ = mean over a batch of Â · ∇<sub>θ</sub> log π<sub>θ</sub>(a|s), differing only in data and correction; (d) changes the ingredients themselves (state weights, action source, advantage source):</p>
+        <div class="eq">(a) on-policy:&nbsp; ĝ = (1/B) Σ<sub>fresh</sub> Â ∇ log π<sub>θ</sub>(a|s)</div>
+        <div class="eq">(b) naive replay:&nbsp; ĝ = (1/B) Σ<sub>buffer</sub> Â ∇ log π<sub>θ</sub>(a|s) &nbsp;— no correction for π<sub>behaviour</sub> ≠ π<sub>θ</sub></div>
+        <div class="eq">(c) VRER:&nbsp; ĝ<sub>VR</sub> = (1/B) Σ w Â ∇logπ<sub>θ</sub> − (1/B) Σ w Â ∇logπ<sub>θ̃</sub> + μ̃ ,&nbsp; w = clip( π<sub>θ</sub>(a|s)/π<sub>b</sub>(a|s), 0.2, 5 )</div>
+        <div class="eq">(d) MSR-Replay:&nbsp; ĝ<sub>MSR</sub> = (1/B) Σ<sub>i</sub> w̃(s<sub>i</sub>) · (1/K) Σ<sub>k=1..K</sub> Â<sub>ψ</sub>(s<sub>i</sub>, a<sub>ik</sub>) ∇logπ<sub>θ</sub>(a<sub>ik</sub>|s<sub>i</sub>) ,&nbsp; a<sub>ik</sub> ~ π<sub>θ</sub>(·|s<sub>i</sub>), K = 8</div>
+        <p>In (d), <b>Marginalized State-Ratio Replay</b>, no stored action, stored return, or importance ratio is used at all. Three learned pieces replace them. <b>State ratio:</b> ŵ(s) ≈ d<sup>π</sup>(s)/d<sup>b</sup>(s) comes from a classifier D<sub>η</sub> (MLP 4→20→20→1) trained to distinguish fresh on-policy states from buffer states; with balanced training batches the Bayes-optimal classifier gives ŵ = D<sub>η</sub>/(1 − D<sub>η</sub>), clipped at <b>w<sub>max</sub> = 5</b> and <b>self-normalised per batch</b> (w̃). D<sub>η</sub> is refit every <b>16 replay updates</b> — the same cadence as VRER's snapshot refresh — with 24 Adam steps (lr 0.01) on balanced 32 fresh + 32 buffer states. <b>Fresh actions:</b> at each replayed state, K = 8 actions are sampled from the <i>current</i> policy, so the action distribution is π<sub>θ</sub> by construction. <b>Fitted advantage:</b> Â<sub>ψ</sub>(s,a) = Q<sub>ψ</sub>(s,a) − V<sub>ψ</sub>(s), where V<sub>ψ</sub>(s) is the mean of Q<sub>ψ</sub> over the same K fresh samples, and Q<sub>ψ</sub> (MLP 6→32→32→1 over (s,a)) is maintained by <b>fitted Q evaluation</b> for the current policy: 2 minibatch TD steps (batch 32, Adam lr 0.005) per replay update, with expected-SARSA targets r + γ·(1/K′)Σ<sub>k′</sub> Q<sub>ψ⁻</sub>(s′, a′<sub>k′</sub>), a′ ~ π<sub>θ</sub>(·|s′), K′ = 4, against a target network Q<sub>ψ⁻</sub> updated by Polyak averaging (τ = 0.01 per FQE step); Â<sub>ψ</sub> is clamped to ±8, as for (a)–(c). This is why the buffer stores s′ and <i>done</i> alongside (s, a, r, G, log π<sub>b</sub>) — estimators (b) and (c) ignore the extra fields. MSR uses the <b>same</b> learning rate, batch size, replay-updates-per-episode, paired seeds, initial policy, and environment-step budget as the other replay estimators; its extra compute is B·K policy evaluations plus amortised FQE/classifier refits, at <b>zero extra environment steps</b>. The MSR card reports the <b>ŵ effective sample size</b> (Σw̃)²/Σw̃² of its replay batches and the mean sampled age, on the same footing as VRER's IS diagnostics. All MSR hyperparameters above were fixed from the design note before benchmarking.</p>
+        <p><b>Bias decomposition — which term each estimator corrects.</b> Naive replay's bias splits into B<sub>state</sub> (buffer states are distributed as d<sup>b</sup>, not d<sup>π</sup>), B<sub>action</sub> (score evaluated at behaviour actions, including baseline leakage: 𝔼<sub>a∼π<sub>b</sub></sub>[V(s)∇log π<sub>θ</sub>(a|s)] ≠ 0), and B<sub>adv</sub> (the stored return-to-go estimates Q<sup>π<sub>b</sub></sup>, not Q<sup>π<sub>θ</sub></sup>). <b>(b) Naive replay</b> corrects <b>none</b> of the three. <b>(c) VRER</b> works on the <b>variance axis</b> — its IS weights address B<sub>action</sub> and its control variate slashes the variance of doing so — and leaves <b>B<sub>state</sub> + B<sub>adv</sub></b> in place. <b>(d) MSR-Replay</b> corrects <b>B<sub>state</sub></b> via ŵ (up to classifier estimation error), makes <b>B<sub>action</sub> ≡ 0 by construction</b> (fresh actions; the baseline identity 𝔼<sub>a∼π<sub>θ</sub></sub>[V∇log π<sub>θ</sub>] = 0 holds again), and replaces <b>B<sub>adv</sub></b> with the <b>Q-approximation error</b> of FQE — its bias no longer grows with buffer age or policy drift, but it has an approximation-error floor set by Q<sub>ψ</sub> and D<sub>η</sub> capacity, and Q<sub>ψ</sub> is queried at fresh actions that may lie off the behaviour support (its named failure mode).</p>
+        <p>In (c), <b>one</b> importance weight w per transition — the current-policy ratio π<sub>θ</sub>/π<sub>b</sub>, with the log-ratio clamped symmetrically to ±ln 5 (w ∈ [0.2, 5]) — is <b>shared by both batch terms</b>, and both terms use the same batch and the same advantages Â. θ̃ is a snapshot policy refreshed every <b>16 replay updates</b>, and μ̃ is the <b>true full-buffer gradient under θ̃</b>: the mean of w̃ Â ∇logπ<sub>θ̃</sub> over <i>every</i> window-eligible transition in the buffer, with w̃ = clip(π<sub>θ̃</sub>/π<sub>b</sub>, 0.2, 5) and the identical advantage definition. Because g<sub>cur</sub> and g<sub>ref</sub> are evaluated on the same batch with the same weights, at a refresh (θ̃ = θ) their difference is exactly zero and ĝ<sub>VR</sub> reduces to μ̃ — the control variate is exactly consistent, in the spirit (SVRG-style) of <i>Variance Reduction Based Experience Replay for Policy Optimization</i>. The VRER card reports the IS <b>effective sample size</b> (Σw)²/Σw² of its replay batches, so weight degeneracy is visible rather than hidden. Replay agents additionally perform <b>8 replay updates</b> (at half the fresh-update learning rate) per episode; the on-policy agent does not — that difference <i>is</i> the sample-efficiency comparison, and the x-axis counts only environment steps. The VRER card also reports the <b>mean age</b> (current step minus collection step) of sampled transitions, averaged over VRER seeds, so the off-policyness of the current run is directly visible alongside ESS.</p>
+        <p><b>Configuration — strongly off-policy only.</b> This demo is configured for the strongly off-policy regime — buffer capacity 50,000, reuse window 200,000 env steps, 8 replay updates per episode — because that is the regime where replay bias and gradient variance actually bind: replayed transitions come from substantially older, drifted policies and are reused many times. No results are claimed for any other regime. Task, reward, horizon H = 120, policy class, batch size (32), learning-rate default (0.005), and paired seeds (101, 202, 303) are as stated above. Estimator-internal hyperparameters: VRER snapshot refresh every 16 replay updates, IS clip [0.2, 5]; MSR K = 8, w<sub>max</sub> = 5, classifier refit every 16 replay updates, FQE cadence as above.</p>
+        <ul>
+          <li><b>Exact:</b> Scene 01 distributions d<sup>π</sup>, ν<sup>π</sup> — linear-system / series solutions from the current tabular policy. <span class="badge exact">exact</span></li>
+          <li><b>Monte-Carlo estimated:</b> everything in Scene 02 — returns, steps-to-threshold (median over seeds) — over <b>3 paired seeds (101, 202, 303)</b>, identical across estimators; per-seed returns are printed under the stat cards so the spread is checkable.</li>
+          <li><b>Gradient variance</b> is measured on a <b>common held-out batch</b>: 128 transitions collected once per retrain from the shared initial policy, never trained on. For each agent, its own estimator's per-sample gradients (for VRER, the corrected difference w Â (∇logπ<sub>θ</sub> − ∇logπ<sub>θ̃</sub>); the constant μ̃ does not affect variance; for MSR, w̃(s)·(1/K)Σ<sub>k</sub> Â<sub>ψ</sub> ∇logπ<sub>θ</sub>(a<sub>k</sub>|s) with ŵ self-normalised over the batch and fresh actions drawn from a fixed per-seed stream) are evaluated on that identical batch at the agent's current policy, and the reported number is the trace of their covariance, averaged over seeds. Earlier versions of this page measured each estimator on its own training batches of different sizes — not the same quantity; that is fixed.</li>
+          <li><b>Caveat:</b> this is a small-scale browser illustration of the estimator, not the paper's full benchmark setting: a tiny policy network and a linear value baseline, one task, fixed σ, three seeds. Read the measured effects below, not absolute numbers.</li>
+        </ul>
+        <p><b>Re-benchmark — strongly off-policy</b> (headless runs of this page's exact code, 31,200 env steps, batch 32, lr 0.005, seeds 101/202/303; mean return is the EMA reported on the cards; gradient variance is the common-batch trace at the final step). The configuration values below — including all MSR hyperparameters (K = 8, w<sub>max</sub> = 5, FQE and classifier cadences) — were fixed from the design before benchmarking and were not adjusted after seeing results. Adding estimator (d) left (a)–(c) untouched: their numbers below reproduce the previously published strongly off-policy benchmark exactly (on-policy −96.3, naive −83.2, VRER −67.9), which checks that the harness change did not disturb them.</p>
+        <p><b>Strongly off-policy</b> (buffer 50,000, window 200,000, 8 replay updates/episode; final mean sampled age ≈ 15,510 steps, VRER ESS ≈ 42% of batch, MSR ŵ ESS ≈ 37% at mean sampled age ≈ 15,360). Mean return at 31,200 steps: on-policy <b>−96.3</b>, naive replay <b>−83.2</b>, VRER <b>−67.9</b>, MSR-Replay <b>−89.8</b> (per-seed −101.4 / −87.4 / −80.5 vs naive −96.4 / −64.9 / −88.2: MSR behind naive on two seeds, ahead on one). VRER was best on mean return and on every seed individually (−86.1 / −59.1 / −58.4). Steps to return ≥ −55: VRER reached it on 2 of 3 seeds (11,280 and 28,080); MSR's seed 303 crossed early (6,240) but did not hold it, ending at −80.5; naive replay and on-policy on none. Final gradient variance: on-policy 376, naive replay 695 on average but wildly seed-dependent (2,084 / 0.30 / 0.0003 across seeds), VRER 0.017, MSR 0.179. On-policy never touches the buffer, so its −96.3 is the configuration-independent reference point.</p>
+        <p><b>Honest reading:</b> strongly off-policy is where the corrections are tested hardest, and the ranking here does not generalise beyond this regime. Naive replay's uncorrected bias compounds over older, more-reused data, while VRER leads on return as well as variance. <b>MSR-Replay's variance prediction held and its return prediction did not.</b> Its common-batch variance (0.179) is second only to VRER's and orders of magnitude below naive replay's 695 — with no importance ratios anywhere, as designed — and its diagnostics behave as intended (ŵ ESS ≈ 37% of batch, at the same sampled ages VRER faces). But on return MSR trails naive replay at this scale (−89.8 vs −83.2) and trails VRER by a wide margin. The design note predicted the off-policy contest would be decided by Q<sub>ψ</sub> fit quality; the measurement says the FQE approximation-error floor — a small Q network refit on a 16-update cadence, queried at fresh actions off the behaviour support — costs more return here than the B<sub>state</sub> + B<sub>adv</sub> bias it removes, and MSR's mid-run trajectories were the most volatile of the four (one seed dipped to −254 at 15k steps before recovering to −87). MSR remains the only estimator of the four that attacks all three bias terms, and its bias no longer grows with buffer age — but at this task scale, with these fixed hyperparameters, that does not convert into a return win. VRER's trajectories were also volatile mid-run (one seed dipped to −130 at 15k steps before recovering to −58), so read the endpoints alongside the live curves rather than as a guarantee. The live run above reproduces this configuration; these numbers are the headless benchmark of the same code, not a separate tuned experiment.</p>
+      </section>
+
+      <!-- ============ SCENE 3 : TIME MACHINE ============ -->
+      <section class="scene" aria-labelledby="h-time">
+        <div class="scene-head">
+          <span class="scene-num t">03</span>
+          <h2 id="h-time">Training Time Machine</h2>
+        </div>
+        <p class="scene-cap">Training is being <b>snapshotted as it runs</b>. Drag the scrubber back to step 0 — random flailing — then slide forward and watch the flow re-crystallize, arrows locking onto the route to the goal. <b>Scope note:</b> this time machine covers the gridworld of Scene 01 only; Scene 02's continuous policy is shown live via its ghost rollouts instead.</p>
+
+        <p class="fig-label"><span>Snapshot — value glow &amp; greedy policy arrows</span><span class="live-pill" id="livePill">● Live</span></p>
+        <div class="canvas-frame"><canvas id="snapCanvas"></canvas></div>
+
+        <div class="scrub-row">
+          <span class="tlabel">Step</span>
+          <input type="range" id="scrubber" min="0" max="0" step="1" value="0" aria-label="Training step scrubber" />
+          <span class="step-readout"><b id="snapStep">0</b> · avg return <span id="snapRet">—</span></span>
+          <button class="tbtn" id="btnLive">Jump to live ⏭</button>
+        </div>
+      </section>
+
+      <footer>
+        Everything on this page is computed live in your browser — Scene 01: tabular Q-learning, distributions solved exactly.<br />
+        Scene 02: neural policy gradient with four gradient estimators (on-policy, naive replay, VRER, MSR-Replay), estimated over 3 seeds. No servers, no canned curves.
+      </footer>
+    </div>
+
+<script>
+"use strict";
+/* =====================================================================
+   RL PLAYGROUND — a live tabular Q-learning gridworld.
+   Scene 1: MAIN tabular Q-learner (particles, value terrain, distributions).
+   Scene 2: nine neural policy-gradient agents (3 estimators x 3 seeds) —
+   see the scene-2 script block for the VRER implementation.
+   Distributions d^pi and nu^pi are solved exactly from MAIN's current
+   epsilon-soft policy on the restart chain (goal -> start).
+   ===================================================================== */
+
+/* ---------------- environment ---------------- */
+var W = 10, H = 10, N = W * H, NA = 4;
+var DR = [-1, 0, 1, 0], DC = [0, 1, 0, -1];       // up right down left
+var START = 9 * W + 0;                            // bottom-left
+var GOAL  = 0 * W + 9;                            // top-right
+var WALLS = {};
+[[2,4],[3,4],[4,4],[5,4],[6,4],[4,7],[5,7],[6,7],[7,7],[8,7]].forEach(function(p){ WALLS[p[0]*W+p[1]] = true; });
+var FREE = [];
+for (var i = 0; i < N; i++) if (!WALLS[i]) FREE.push(i);
+var FIDX = {}; FREE.forEach(function(s, k){ FIDX[s] = k; });
+var NF = FREE.length;
+
+function envStep(s, a){
+  var r = (s / W) | 0, c = s % W;
+  var nr = r + DR[a], nc = c + DC[a];
+  var ns = s;
+  if (nr >= 0 && nr < H && nc >= 0 && nc < W && !WALLS[nr * W + nc]) ns = nr * W + nc;
+  var done = (ns === GOAL);
+  return { ns: ns, rew: done ? 10 : -0.04, done: done };
+}
+function maxQ(Q, s){ var b = -1e18, o = s * NA; for (var a = 0; a < NA; a++) if (Q[o+a] > b) b = Q[o+a]; return b; }
+function valueOf(Q, s){ return s === GOAL ? 0 : maxQ(Q, s); }
+function epsAt(steps){ return 0.04 + 0.30 * Math.exp(-steps / 12000); }
+function epsGreedy(Q, s, eps){
+  if (Math.random() < eps) return (Math.random() * NA) | 0;
+  var o = s * NA, best = 0, bv = -1e18;
+  for (var a = 0; a < NA; a++) if (Q[o+a] > bv){ bv = Q[o+a]; best = a; }
+  return best;
+}
+
+/* ---------------- learners ---------------- */
+var ALPHA = 0.2, GAMMA_TRAIN = 0.99, BUF_CAP = 4000;
+
+function makeLearner(useReplay, reps){
+  return {
+    Q: new Float32Array(N * NA),
+    s: START, epRet: 0, steps: 0, episodes: 0,
+    buf: [], bufHead: 0, reps: reps || 4,
+    retEMA: null, retHist: [],           // smoothed episode returns for the race chart
+    lastTD: 0, tdMean: 0, tdCount: 0,    // running TD stats (control variate baseline)
+    useReplay: useReplay
+  };
+}
+function qUpdate(L, s, a, r, ns, done){
+  var target = r + (done ? 0 : GAMMA_TRAIN * maxQ(L.Q, ns));
+  var td = target - L.Q[s * NA + a];
+  L.Q[s * NA + a] += ALPHA * td;
+  return td;
+}
+function learnerStep(L, onEvent){
+  var eps = epsAt(L.steps);
+  var a = epsGreedy(L.Q, L.s, eps);
+  var res = envStep(L.s, a);
+  var td = qUpdate(L, L.s, a, res.rew, res.ns, res.done);
+  L.lastTD = td;
+  L.tdCount++; L.tdMean += (td - L.tdMean) / L.tdCount;
+  if (onEvent) onEvent({ type: "step", s: L.s, a: a, r: res.rew, ns: res.ns, done: res.done, td: td });
+
+  if (L.useReplay){
+    var rec = [L.s, a, res.rew, res.ns, res.done ? 1 : 0];
+    if (L.buf.length < BUF_CAP){ L.buf.push(rec); if (onEvent) onEvent({ type: "add", idx: L.buf.length - 1 }); }
+    else { L.buf[L.bufHead] = rec; if (onEvent) onEvent({ type: "add", idx: L.bufHead }); L.bufHead = (L.bufHead + 1) % BUF_CAP; }
+    var reps = L.reps;
+    for (var k = 0; k < reps && L.buf.length > 8; k++){
+      var j = (Math.random() * L.buf.length) | 0, t = L.buf[j];
+      qUpdate(L, t[0], t[1], t[2], t[3], t[4] === 1);
+      if (onEvent) onEvent({ type: "sample", idx: j });
+    }
+  }
+  L.epRet += res.rew; L.steps++;
+  if (res.done || L.epRet < -60){
+    L.episodes++;
+    L.retEMA = (L.retEMA === null) ? L.epRet : 0.92 * L.retEMA + 0.08 * L.epRet;
+    L.retHist.push(L.retEMA); if (L.retHist.length > 400) L.retHist.shift();
+    L.s = START; L.epRet = 0;
+  } else L.s = res.ns;
+}
+
+/* ---------------- exact distributions from MAIN's policy ----------------
+   Policy: epsilon-soft greedy (eps = 0.10) w.r.t. MAIN.Q.
+   Restart chain: from GOAL every action restarts at START, so the chain
+   is ergodic and nu^pi is well defined. d^pi uses start distribution mu0. */
+var distCache = { d: new Float32Array(NF), nu: new Float32Array(NF), tv: 0, gamma: 0.99 };
+function computeDistributions(Q, gamma){
+  var eps = 0.10;
+  // sparse transitions: for each free state, list of [nextFreeIdx, prob]
+  var trans = new Array(NF);
+  for (var k = 0; k < NF; k++){
+    var s = FREE[k], o = s * NA, best = 0, bv = -1e18, a;
+    for (a = 0; a < NA; a++) if (Q[o+a] > bv){ bv = Q[o+a]; best = a; }
+    var acc = {};
+    for (a = 0; a < NA; a++){
+      var p = eps / NA + (a === best ? 1 - eps : 0);
+      var ns = (s === GOAL) ? START : envStep(s, a).ns;
+      var nk = FIDX[ns];
+      acc[nk] = (acc[nk] || 0) + p;
+    }
+    trans[k] = Object.keys(acc).map(function(key){ return [+key, acc[key]]; });
+  }
+  function applyPT(v){ // returns P^T v
+    var out = new Float32Array(NF);
+    for (var i2 = 0; i2 < NF; i2++){
+      var vi = v[i2]; if (vi === 0) continue;
+      var tr = trans[i2];
+      for (var j = 0; j < tr.length; j++) out[tr[j][0]] += vi * tr[j][1];
+    }
+    return out;
+  }
+  // stationary distribution: exact solve of nu = P^T nu, sum(nu) = 1
+  // (Gaussian elimination on the 90x90 system — no power-iteration error,
+  //  even when the near-deterministic chain mixes slowly)
+  var n = NF, A = [], b = new Float64Array(n), i3, j3;
+  for (i3 = 0; i3 < n; i3++) A.push(new Float64Array(n));
+  for (var src = 0; src < n; src++){
+    var tr2 = trans[src];
+    for (j3 = 0; j3 < tr2.length; j3++) A[tr2[j3][0]][src] += tr2[j3][1];
+  }
+  for (i3 = 0; i3 < n; i3++) for (j3 = 0; j3 < n; j3++) A[i3][j3] = (i3 === j3 ? 1 : 0) - A[i3][j3];
+  for (j3 = 0; j3 < n; j3++) A[n-1][j3] = 1;
+  b[n-1] = 1;
+  for (var col = 0; col < n; col++){
+    var piv = col, bestv = Math.abs(A[col][col]);
+    for (var r2 = col + 1; r2 < n; r2++) if (Math.abs(A[r2][col]) > bestv){ bestv = Math.abs(A[r2][col]); piv = r2; }
+    if (piv !== col){ var tmpA = A[piv]; A[piv] = A[col]; A[col] = tmpA; var tmpB = b[piv]; b[piv] = b[col]; b[col] = tmpB; }
+    var dd = A[col][col]; if (dd === 0) continue;
+    for (var r3 = col + 1; r3 < n; r3++){
+      var f = A[r3][col] / dd; if (f === 0) continue;
+      for (var c2 = col; c2 < n; c2++) A[r3][c2] -= f * A[col][c2];
+      b[r3] -= f * b[col];
+    }
+  }
+  var nu = new Float32Array(NF);
+  for (i3 = n - 1; i3 >= 0; i3--){
+    var sum = b[i3];
+    for (j3 = i3 + 1; j3 < n; j3++) sum -= A[i3][j3] * nu[j3];
+    nu[i3] = sum / A[i3][i3];
+  }
+  // discounted occupancy: d = (1-g) * sum_t g^t (P^T)^t mu0
+  var d = new Float32Array(NF), term = new Float32Array(NF);
+  term[FIDX[START]] = 1;
+  var w = 1 - gamma, gpow = 1;
+  for (var t = 0; t < 12000; t++){
+    for (var q2 = 0; q2 < NF; q2++) d[q2] += w * gpow * term[q2];
+    if (gpow < 1e-5) break;
+    term = applyPT(term); gpow *= gamma;
+  }
+  var tv = 0;
+  for (var q3 = 0; q3 < NF; q3++) tv += Math.abs(d[q3] - nu[q3]);
+  distCache = { d: d, nu: nu, tv: tv / 2, gamma: gamma };
+}
+
+/* ---------------- global state ---------------- */
+var MAIN;
+var snapshots = [];            // {step, Q, retEMA}
+var SNAP_EVERY = 250, SNAP_MAX = 400;
+var playing = true, speedMult = 1, stepAcc = 0;
+var gammaUI = 0.99, vrOn = true;
+var followLive = true, scrubIdx = 0;
+var reducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function resetAll(){
+  MAIN = makeLearner(true, 8);
+  snapshots = [];
+  takeSnapshot();
+  particles.forEach(function(p){ resetParticle(p, true); });
+  computeDistributions(MAIN.Q, gammaUI);
+  updateScrubUI();
+  if (typeof pgResetAll === "function" && document.getElementById("ctlBuf")) pgResetAll();
+}
+function takeSnapshot(){
+  snapshots.push({ step: MAIN.steps, Q: MAIN.Q.slice(), retEMA: MAIN.retEMA });
+  if (snapshots.length > SNAP_MAX) snapshots.splice(0, snapshots.length - SNAP_MAX);
+  if (followLive) scrubIdx = snapshots.length - 1;
+  updateScrubUI();
+}
+
+/* ---------------- color helpers ---------------- */
+function lerp(a, b, t){ return a + (b - a) * t; }
+function colorStops(stops, t){
+  t = Math.max(0, Math.min(1, t));
+  for (var i = 1; i < stops.length; i++){
+    if (t <= stops[i][0]){
+      var p = stops[i-1], n = stops[i], f = (t - p[0]) / (n[0] - p[0] || 1);
+      return [lerp(p[1], n[1], f)|0, lerp(p[2], n[2], f)|0, lerp(p[3], n[3], f)|0];
+    }
+  }
+  var l = stops[stops.length - 1]; return [l[1], l[2], l[3]];
+}
+var VSTOPS  = [[0,238,241,245],[0.3,199,211,228],[0.55,143,168,200],[0.78,76,114,176],[1,47,78,121]];
+var HOTSTOPS= [[0,247,246,242],[0.25,205,220,230],[0.5,140,178,196],[0.72,233,183,110],[0.88,221,132,82],[1,178,84,58]];
+var NUSTOPS = [[0,247,246,242],[0.3,205,226,214],[0.55,140,190,160],[0.8,85,168,104],[1,43,110,70]];
+function rgba(c, a){ return "rgba(" + c[0] + "," + c[1] + "," + c[2] + "," + a + ")"; }
+function logNorm(arr){
+  var mx = 0, i;
+  for (i = 0; i < arr.length; i++) if (arr[i] > mx) mx = arr[i];
+  var out = new Float32Array(arr.length);
+  if (mx <= 0) return out;
+  var lm = Math.log1p(mx * 60);
+  for (i = 0; i < arr.length; i++) out[i] = Math.log1p(arr[i] * 60) / lm;
+  return out;
+}
+</script>
+
+<script>
+"use strict";
+/* ---------------- canvas setup ---------------- */
+function $(id){ return document.getElementById(id); }
+var cvWorldBg = $("worldBg"), cvWorldFx = $("worldFx"), cvTerrain = $("terrain"),
+    cvHeatD = $("heatD"), cvHeatNu = $("heatNu"), cvPM = $("pmCanvas"),
+    cvLC = $("lcCanvas"), cvSnap = $("snapCanvas");
+var DPR = Math.min(2, window.devicePixelRatio || 1);
+function fit(cv, hCss){
+  var wCss = cv.parentElement.clientWidth;
+  cv.width = Math.round(wCss * DPR); cv.height = Math.round(hCss * DPR);
+  cv.style.height = hCss + "px";
+  return { w: cv.width, h: cv.height };
+}
+var SZ = {};
+function layout(){
+  var sq = cvWorldBg.parentElement.clientWidth;
+  SZ.world = fit(cvWorldBg, sq);
+  cvWorldFx.width = cvWorldBg.width; cvWorldFx.height = cvWorldBg.height; cvWorldFx.style.height = sq + "px";
+  SZ.terrain = fit(cvTerrain, Math.max(130, sq * 0.42));
+  var hs = cvHeatD.parentElement.clientWidth;
+  SZ.heatD = fit(cvHeatD, hs); SZ.heatNu = fit(cvHeatNu, hs);
+  var pw = cvPM.parentElement.clientWidth;
+  SZ.pm = fit(cvPM, pw);
+  SZ.lc = fit(cvLC, 168);
+  var sw = cvSnap.parentElement.clientWidth;
+  SZ.snap = fit(cvSnap, Math.min(sw, Math.round(sw * 0.72)));
+  drawWorldBg(); drawTerrain(); drawHeats(); drawSnap();
+}
+
+/* ---------------- scene 1: world ---------------- */
+function drawGridBase(ctx, w, h, Q, opts){
+  opts = opts || {};
+  var cw = w / W, ch = h / H;
+  ctx.fillStyle = "#FFFFFF"; ctx.fillRect(0, 0, w, h);
+  var vmax = 0.0001, s;
+  for (s = 0; s < N; s++) if (!WALLS[s]) { var v = valueOf(Q, s); if (v > vmax) vmax = v; }
+  for (s = 0; s < N; s++){
+    var r = (s / W) | 0, c = s % W, x = c * cw, y = r * ch;
+    if (WALLS[s]){
+      ctx.fillStyle = "#E3E7EC"; ctx.fillRect(x + 1, y + 1, cw - 2, ch - 2);
+      ctx.strokeStyle = "rgba(90,105,125,.35)"; ctx.lineWidth = 1;
+      ctx.strokeRect(x + 1.5, y + 1.5, cw - 3, ch - 3);
+      ctx.beginPath();
+      ctx.moveTo(x + cw * 0.22, y + ch * 0.78); ctx.lineTo(x + cw * 0.78, y + ch * 0.22);
+      ctx.strokeStyle = "rgba(90,105,125,.20)"; ctx.stroke();
+      continue;
+    }
+    var vn = Math.max(0, valueOf(Q, s)) / vmax;
+    ctx.fillStyle = rgba(colorStops(VSTOPS, Math.pow(vn, 0.75)), 0.92);
+    ctx.fillRect(x + 0.5, y + 0.5, cw - 1, ch - 1);
+    if (s === GOAL){
+      ctx.fillStyle = "rgba(221,132,82,.92)";
+      ctx.fillRect(x + 1, y + 1, cw - 2, ch - 2);
+      ctx.fillStyle = "#FFFFFF";
+      ctx.font = "600 " + Math.round(cw * 0.5) + "px 'Source Sans 3', sans-serif";
+      ctx.textAlign = "center"; ctx.textBaseline = "middle";
+      ctx.fillText("★", x + cw / 2, y + ch / 2 + 1);
+    }
+    if (s === START){
+      ctx.strokeStyle = "rgba(76,114,176,.9)"; ctx.lineWidth = Math.max(1.5, DPR);
+      ctx.strokeRect(x + 2, y + 2, cw - 4, ch - 4);
+      ctx.fillStyle = "rgba(76,114,176,.95)";
+      ctx.beginPath(); ctx.arc(x + cw / 2, y + ch / 2, cw * 0.09, 0, 7); ctx.fill();
+    }
+  }
+  ctx.strokeStyle = "rgba(90,105,125,.12)"; ctx.lineWidth = 1;
+  ctx.beginPath();
+  for (var gx = 1; gx < W; gx++){ ctx.moveTo(gx * cw, 0); ctx.lineTo(gx * cw, h); }
+  for (var gy = 1; gy < H; gy++){ ctx.moveTo(0, gy * ch); ctx.lineTo(w, gy * ch); }
+  ctx.stroke();
+  return vmax;
+}
+function drawWorldBg(){
+  if (!SZ.world) return;
+  var ctx = cvWorldBg.getContext("2d");
+  var vmax = drawGridBase(ctx, SZ.world.w, SZ.world.h, MAIN.Q);
+  $("vmaxLabel").textContent = "max V " + vmax.toFixed(1);
+}
+
+/* value terrain — oblique pseudo-3D bars */
+function drawTerrain(){
+  if (!SZ.terrain) return;
+  var ctx = cvTerrain.getContext("2d"), w = SZ.terrain.w, h = SZ.terrain.h;
+  ctx.clearRect(0, 0, w, h);
+  ctx.fillStyle = "#FFFFFF"; ctx.fillRect(0, 0, w, h);
+  var vmax = 0.0001, s;
+  for (s = 0; s < N; s++) if (!WALLS[s]) { var v = valueOf(MAIN.Q, s); if (v > vmax) vmax = v; }
+  var cw = w / (W + 2.2), depth = cw * 0.55, maxLift = h * 0.52, baseY = h * 0.86;
+  for (var r = H - 1; r >= 0; r--){
+    for (var c = 0; c < W; c++){
+      s = r * W + c;
+      var x = (c + 1) * cw + r * depth * 0.35, yBase = baseY - r * depth * 0.5;
+      if (WALLS[s]){
+        ctx.fillStyle = "rgba(120,135,155,.30)";
+        ctx.fillRect(x, yBase - 3 * DPR, cw * 0.86, 3 * DPR);
+        continue;
+      }
+      var vn = Math.max(0, valueOf(MAIN.Q, s)) / vmax;
+      var lift = Math.pow(vn, 0.8) * maxLift;
+      var col = colorStops(VSTOPS, Math.pow(vn, 0.75));
+      var bw = cw * 0.86, top = yBase - lift;
+      // side face
+      ctx.fillStyle = rgba(col, 0.35);
+      ctx.fillRect(x, top + 4 * DPR, bw, lift);
+      // top face
+      ctx.fillStyle = (s === GOAL) ? "rgba(221,132,82,.92)" : rgba(col, 0.95);
+      ctx.fillRect(x, top, bw, Math.max(2.5 * DPR, lift * 0.16 + 2));
+      if (lift > 6){
+        ctx.fillStyle = "rgba(255,255,255,.35)";
+        ctx.fillRect(x, top, bw, 1.4 * DPR);
+      }
+    }
+  }
+}
+
+/* ---------------- particles (scene 1 flow) ---------------- */
+var NPART = reducedMotion ? 40 : 130;
+var particles = [];
+var goalFlashes = [];
+function resetParticle(p, randomCell){
+  var s = START;
+  if (randomCell && Math.random() < 0.55){
+    s = FREE[(Math.random() * NF) | 0];
+    if (s === GOAL) s = START;
+  }
+  p.cell = s; p.from = s; p.to = s; p.t = 1;
+  p.x = (s % W) + 0.5; p.y = ((s / W) | 0) + 0.5;
+  p.speed = 1.6 + Math.random() * 2.4;
+  p.hue = Math.random();
+  p.flash = 0;
+}
+for (var pi = 0; pi < NPART; pi++){ var np = {}; resetParticle(np, true); np.t = Math.random(); particles.push(np); }
+function stepParticle(p, dt){
+  if (p.t >= 1){
+    p.from = p.cell;
+    var eps = Math.max(0.06, epsAt(MAIN.steps) * 0.8);
+    var a = epsGreedy(MAIN.Q, p.cell, eps);
+    var res = envStep(p.cell, a);
+    p.to = res.ns; p.t = 0;
+    if (res.done){
+      goalFlashes.push({ x: (GOAL % W) + 0.5, y: ((GOAL / W) | 0) + 0.5, t: 1 });
+      p.cell = START; p.from = START; p.to = START; p.t = 1;
+      p.x = (START % W) + 0.5; p.y = ((START / W) | 0) + 0.5;
+    }
+    else p.cell = res.ns;
+  }
+  p.t = Math.min(1, p.t + dt * p.speed * (0.55 + 0.45 * Math.min(1, speedMult)));
+  var fx = (p.from % W) + 0.5, fy = ((p.from / W) | 0) + 0.5;
+  var tx = (p.to % W) + 0.5, ty = ((p.to / W) | 0) + 0.5;
+  var e = p.t * p.t * (3 - 2 * p.t);
+  p.x = lerp(fx, tx, e); p.y = lerp(fy, ty, e);
+  if (p.flash > 0) p.flash = Math.max(0, p.flash - dt * 1.4);
+}
+function drawParticles(dt){
+  var ctx = cvWorldFx.getContext("2d"), w = SZ.world.w, h = SZ.world.h;
+  ctx.globalCompositeOperation = "destination-out";
+  ctx.fillStyle = "rgba(0,0,0," + (reducedMotion ? 0.4 : 0.22) + ")";
+  ctx.fillRect(0, 0, w, h);
+  ctx.globalCompositeOperation = "source-over";
+  var cw = w / W, ch = h / H;
+  for (var i = 0; i < particles.length; i++){
+    var p = particles[i];
+    stepParticle(p, dt);
+    var x = p.x * cw, y = p.y * ch;
+    var col = p.hue < 0.72 ? "76,114,176" : (p.hue < 0.9 ? "85,168,104" : "221,132,82");
+    var rad = (p.flash > 0 ? 3.4 + p.flash * 3 : 2.3) * DPR;
+    ctx.fillStyle = "rgba(" + col + ",0.85)";
+    ctx.beginPath(); ctx.arc(x, y, rad, 0, 7); ctx.fill();
+  }
+  // expanding rings where particles reach the goal
+  for (var gi = goalFlashes.length - 1; gi >= 0; gi--){
+    var gf = goalFlashes[gi]; gf.t -= dt * 1.1;
+    if (gf.t <= 0){ goalFlashes.splice(gi, 1); continue; }
+    ctx.strokeStyle = "rgba(221,132,82," + (0.8 * gf.t) + ")";
+    ctx.lineWidth = Math.max(1.5, 1.6 * DPR);
+    ctx.beginPath(); ctx.arc(gf.x * cw, gf.y * ch, (1 - gf.t) * cw * 1.1 + 3 * DPR, 0, 7); ctx.stroke();
+  }
+  ctx.globalCompositeOperation = "source-over";
+}
+
+/* ---------------- heatmaps ---------------- */
+function drawHeat(cv, size, arrFull, stops){
+  var ctx = cv.getContext("2d"), w = size.w, h = size.h;
+  ctx.fillStyle = "#FFFFFF"; ctx.fillRect(0, 0, w, h);
+  var norm = logNorm(arrFull), cw = w / W, ch = h / H;
+  for (var k = 0; k < NF; k++){
+    var s = FREE[k], r = (s / W) | 0, c = s % W;
+    ctx.fillStyle = rgba(colorStops(stops, norm[k]), 0.96);
+    ctx.fillRect(c * cw + 0.5, r * ch + 0.5, cw - 1, ch - 1);
+  }
+  for (var wi in WALLS){
+    var ws = +wi, wr = (ws / W) | 0, wc = ws % W;
+    ctx.fillStyle = "#E3E7EC"; ctx.fillRect(wc * cw + 0.5, wr * ch + 0.5, cw - 1, ch - 1);
+  }
+  // start / goal markers
+  ctx.strokeStyle = "rgba(43,52,64,.75)"; ctx.lineWidth = Math.max(1, DPR);
+  ctx.strokeRect((START % W) * cw + 2, ((START / W) | 0) * ch + 2, cw - 4, ch - 4);
+  ctx.fillStyle = "#2B3440";
+  ctx.font = "600 " + Math.round(cw * 0.5) + "px 'Source Sans 3', sans-serif";
+  ctx.textAlign = "center"; ctx.textBaseline = "middle";
+  ctx.fillText("★", (GOAL % W) * cw + cw / 2, 0 + ch / 2 + 1);
+}
+function drawHeats(){
+  if (!SZ.heatD) return;
+  var dFull = new Float32Array(NF), nuFull = new Float32Array(NF);
+  for (var k = 0; k < NF; k++){ dFull[k] = distCache.d[k]; nuFull[k] = distCache.nu[k]; }
+  drawHeat(cvHeatD, SZ.heatD, dFull, HOTSTOPS);
+  drawHeat(cvHeatNu, SZ.heatNu, nuFull, NUSTOPS);
+  var gapPct = distCache.tv * 100;
+  $("gapBig").textContent = gapPct.toFixed(gapPct < 1 ? 2 : 1) + "%";
+  $("gapFill").style.width = Math.min(100, gapPct * 2) + "%";
+  $("gapTick").style.left = "calc(" + Math.min(100, (1 - gammaUI) * 200) + "% - 1px)";
+}
+
+/* ---------------- scene 2: continuous point-mass + VRER (optimised) ----------------
+   MLP policy (4->20->20->2, tanh, Gaussian sigma=0.35), linear learned value
+   baseline V(s)=w.phi(s). Advantages are TD errors computed once at collection
+   time and stored with each transition, so a batch gradient costs exactly one
+   policy forward+backward per sample. Estimators: onpolicy | naive | vrer
+   (IS-clipped + SVRG control variate). 3 paired seeds per estimator. */
+function mulberry32(seed){ var a = seed >>> 0; return function(){ a |= 0; a = a + 0x6D2B79F5 | 0; var x = Math.imul(a ^ a >>> 15, 1 | a); x = x + Math.imul(x ^ x >>> 7, 61 | x) ^ x; return ((x ^ x >>> 14) >>> 0) / 4294967296; }; }
+var PG_IN = 4, PG_H = 20, PG_SIGMA = 0.5, PG_GAMMA = 0.99, PG_HORIZON = 120;
+var PG_GOAL = [0.75, 0.75], PG_START = [-0.75, -0.75];
+var PG_NP = PG_H*PG_IN + PG_H + PG_H*PG_H + PG_H + 2*PG_H + 2;
+var _h1 = new Float32Array(PG_H), _h2 = new Float32Array(PG_H), _dh1 = new Float32Array(PG_H), _dh2 = new Float32Array(PG_H), _mu = new Float32Array(2), _mt = new Float32Array(2);
+function pgInitPolicy(rng){
+  var p = new Float32Array(PG_NP), i;
+  for (i = 0; i < PG_H*PG_IN; i++) p[i] = (rng()*2-1) * 0.5;
+  var o = PG_H*PG_IN + PG_H;
+  for (i = 0; i < PG_H*PG_H; i++) p[o+i] = (rng()*2-1) * 0.45;
+  o += PG_H*PG_H + PG_H;
+  for (i = 0; i < 2*PG_H; i++) p[o+i] = (rng()*2-1) * 0.15;
+  return p;
+}
+function pgForward(p, s){ /* writes _h1,_h2,_mu */
+  var i, j, v;
+  for (i = 0; i < PG_H; i++){ v = p[PG_H*PG_IN + i]; for (j = 0; j < PG_IN; j++) v += p[i*PG_IN + j] * (j >= 2 ? s[j] * 0.4 : s[j]); _h1[i] = Math.tanh(v); }
+  var o = PG_H*PG_IN + PG_H;
+  for (i = 0; i < PG_H; i++){ v = p[o + PG_H*PG_H + i]; for (j = 0; j < PG_H; j++) v += p[o + i*PG_H + j] * _h1[j]; _h2[i] = Math.tanh(v); }
+  o += PG_H*PG_H + PG_H;
+  for (i = 0; i < 2; i++){ v = p[o + 2*PG_H + i]; for (j = 0; j < PG_H; j++) v += p[o + i*PG_H + j] * _h2[j]; _mt[i] = Math.tanh(v); _mu[i] = 1.5 * _mt[i]; }
+}
+function pgBackwardAccum(p, s, d0, d1, scale, g){ /* d = dLoss/dmu * scale */
+  var i, j, o2 = PG_H*PG_IN + PG_H + PG_H*PG_H + PG_H;
+  var e0 = d0 * scale * 1.5 * (1 - _mt[0]*_mt[0]), e1 = d1 * scale * 1.5 * (1 - _mt[1]*_mt[1]);
+  for (j = 0; j < PG_H; j++) _dh2[j] = 0;
+  g[o2 + 2*PG_H] += e0; g[o2 + 2*PG_H + 1] += e1;
+  for (j = 0; j < PG_H; j++){ g[o2 + j] += e0 * _h2[j]; _dh2[j] += e0 * p[o2 + j]; g[o2 + PG_H + j] += e1 * _h2[j]; _dh2[j] += e1 * p[o2 + PG_H + j]; }
+  for (j = 0; j < PG_H; j++) _dh2[j] *= (1 - _h2[j]*_h2[j]);
+  var o1 = PG_H*PG_IN + PG_H;
+  for (j = 0; j < PG_H; j++) _dh1[j] = 0;
+  for (i = 0; i < PG_H; i++){
+    g[o1 + PG_H*PG_H + i] += _dh2[i];
+    for (j = 0; j < PG_H; j++){ g[o1 + i*PG_H + j] += _dh2[i] * _h1[j]; _dh1[j] += _dh2[i] * p[o1 + i*PG_H + j]; }
+  }
+  for (j = 0; j < PG_H; j++) _dh1[j] *= (1 - _h1[j]*_h1[j]);
+  for (i = 0; i < PG_H; i++){ g[PG_H*PG_IN + i] += _dh1[i]; for (j = 0; j < PG_IN; j++) g[i*PG_IN + j] += _dh1[i] * (j >= 2 ? s[j] * 0.4 : s[j]); }
+}
+function pgLogpMu(a){ var s2 = PG_SIGMA*PG_SIGMA, lp = 0; for (var i = 0; i < 2; i++){ var d = a[i]-_mu[i]; lp += -0.5*d*d/s2 - Math.log(PG_SIGMA) - 0.9189385332; } return lp; }
+function pgGauss(rng){ var u = 0, v = 0; while(!u) u = rng(); while(!v) v = rng(); return Math.sqrt(-2*Math.log(u)) * Math.cos(6.283185307*v); }
+function pgPhi(s, out){ var dx = s[0]-PG_GOAL[0], dy = s[1]-PG_GOAL[1]; out[0] = s[0]; out[1] = s[1]; out[2] = s[2]*0.5; out[3] = s[3]*0.5; out[4] = Math.sqrt(dx*dx+dy*dy); out[5] = 1; }
+var _phi = new Float32Array(6), _phiN = new Float32Array(6);
+function pgValue(w, s){ pgPhi(s, _phi); var v = 0; for (var i = 0; i < 6; i++) v += w[i]*_phi[i]; return v; }
+
+var PG_CFG = { bufCap: 50000, window: 200000, batch: 32, lr: 0.005, reps: 8 };
+var PG_MODES = ["onpolicy", "naive", "vrer", "msr"];
+var PG_COLORS = { onpolicy: "#4C72B0", naive: "#C44E52", vrer: "#55A868", msr: "#8172B2" };
+var pgAgents = [], pgGhosts = [], pgGhostTimer = 0;
+
+function makePGAgent(mode, seed, initPol){
+  var rng = mulberry32(seed);
+  var A = { mode: mode, seed: seed, rng: rng,
+    pol: initPol ? initPol.slice() : pgInitPolicy(rng),
+    valW: new Float32Array(6),
+    polM: new Float32Array(PG_NP), polV: new Float32Array(PG_NP), polT: 0,
+    refPol: null, refMu: null, sinceRef: 999, essEMA: null, ageEMA: null,
+    buf: [], bufHead: 0, steps: 0, episodes: 0,
+    hist: [], retEMA: null, effStep: null,
+    s: [PG_START[0], PG_START[1], 0, 0], epRet: 0, epLen: 0 };
+  A.valW[4] = -30; A.valW[5] = -12; /* prior: V ~ -30*dist - 12 (MC return scale) */
+  if (mode === "msr"){
+    /* MSR-Replay extra state: fitted-Q network Q_ψ (+ target Q_ψ⁻) and the
+       fresh-vs-buffer state classifier D_η. Initialised from dedicated RNG
+       streams (seeded from the agent's paired seed) so the shared policy
+       RNG stream stays identical to the other estimators'. */
+    var qRng = mulberry32((seed * 2654435761) >>> 0), cRng = mulberry32((seed * 2246822519 + 3266489917) >>> 0);
+    A.qP = msrInitNet(qRng, MSR_Q_IN, MSR_Q_H, -45);
+    A.qTgt = A.qP.slice();
+    A.qM = new Float32Array(A.qP.length); A.qV = new Float32Array(A.qP.length); A.qT = 0;
+    A.clsP = msrInitNet(cRng, MSR_C_IN, MSR_C_H, 0);
+    A.clsM = new Float32Array(A.clsP.length); A.clsV = new Float32Array(A.clsP.length); A.clsT = 0;
+    A.freshStates = []; A.sinceCls = 999;
+  }
+  return A;
+}
+function pgResetEpisode(A){
+  A.hist.push({ step: A.steps, ret: A.epRet }); if (A.hist.length > 400) A.hist.shift();
+  A.retEMA = (A.retEMA === null) ? A.epRet : 0.85*A.retEMA + 0.15*A.epRet;
+  if (A.effStep === null && A.retEMA >= -55) A.effStep = A.steps;
+  A.episodes++;
+  A.s = [PG_START[0] + (A.rng()*0.16-0.08), PG_START[1] + (A.rng()*0.16-0.08), 0, 0];
+  A.epRet = 0; A.epLen = 0;
+}
+function pgAdam(param, grad, m, v, t, lr){
+  var c1 = 1 - Math.pow(0.9, t), c2 = 1 - Math.pow(0.999, t), i, g;
+  for (i = 0; i < param.length; i++){
+    g = Math.max(-5, Math.min(5, grad[i]));
+    m[i] = 0.9*m[i] + 0.1*g; v[i] = 0.999*v[i] + 0.001*g*g;
+    param[i] += lr * (m[i]/c1) / (Math.sqrt(v[i]/c2) + 1e-8);
+  }
+}
+/* ---- gradient helpers ----
+   ONE score-function gradient definition shared by every estimator term:
+   per-sample grad = weight * Â * ∇log π_params(a|s), with the advantage
+   Â = clamp(G − V(s), ±8) re-evaluated under the agent's current baseline
+   and the score factor clamped to ±10. Importance weights use ONE
+   log-symmetric clip, shared by all terms of the VRER estimator:
+   w = π_θ(a|s)/π_b(a|s), log-ratio clamped to ±ln 5, i.e. w ∈ [0.2, 5]. */
+var PG_W_MIN = 0.2, PG_W_MAX = 5, PG_LOGW = Math.log(5);
+function pgAdv(A, tr){ return Math.max(-8, Math.min(8, tr.G - pgValue(A.valW, tr.s))); }
+function pgScoreAccum(params, s, a, adv, wgt, scale, g){
+  pgForward(params, s);
+  var s2 = PG_SIGMA*PG_SIGMA;
+  var f0 = Math.max(-10, Math.min(10, adv * (a[0]-_mu[0]) / s2));
+  var f1 = Math.max(-10, Math.min(10, adv * (a[1]-_mu[1]) / s2));
+  pgBackwardAccum(params, s, wgt * f0 * scale, wgt * f1 * scale, 1, g);
+}
+function pgWeight(A, tr){ /* w = π_current(a|s) / π_behaviour(a|s), one transition */
+  pgForward(A.pol, tr.s);
+  var lp = pgLogpMu(tr.a);
+  return Math.exp(Math.max(-PG_LOGW, Math.min(PG_LOGW, lp - tr.logp)));
+}
+function pgBatchWeights(A, batch){
+  var w = new Float32Array(batch.length);
+  for (var k = 0; k < batch.length; k++) w[k] = pgWeight(A, batch[k]);
+  return w;
+}
+function pgBatchGradW(A, batch, params, weights){
+  var g = new Float32Array(PG_NP), n = batch.length;
+  if (!n) return g;
+  for (var k = 0; k < n; k++) pgScoreAccum(params, batch[k].s, batch[k].a, pgAdv(A, batch[k]), weights ? weights[k] : 1, 1 / n, g);
+  return g;
+}
+function pgEligibleBuffer(A){
+  if (PG_CFG.window >= 1000000) return A.buf.slice();
+  return A.buf.filter(function(tr){ return A.steps - tr.step <= PG_CFG.window; });
+}
+function pgSnapshotGrad(A){
+  /* μ̃ — the TRUE full-buffer gradient under the snapshot policy θ̃: every
+     window-eligible buffer transition, weighted by π_θ̃/π_b with the same
+     clip and the same advantage definition as the gRef term it anchors. */
+  var elig = pgEligibleBuffer(A), g = new Float32Array(PG_NP), n = elig.length;
+  if (!n) return g;
+  for (var k = 0; k < n; k++){
+    var tr = elig[k];
+    pgForward(A.refPol, tr.s);
+    var w = Math.exp(Math.max(-PG_LOGW, Math.min(PG_LOGW, pgLogpMu(tr.a) - tr.logp)));
+    pgScoreAccum(A.refPol, tr.s, tr.a, pgAdv(A, tr), w, 1 / n, g);
+  }
+  return g;
+}
+/* ---- MSR-Replay (estimator d) ----
+   ĝ_MSR = (1/B) Σ_i w̃(s_i) · (1/K) Σ_k Â_ψ(s_i, a_ik) ∇log π_θ(a_ik|s_i),
+   a_ik ~ π_θ(·|s_i) sampled fresh at replayed states, so the action-
+   distribution bias is zero by construction (no importance ratios anywhere).
+   w̃: ŵ(s) ≈ d^π(s)/d^b(s) from a fresh-vs-buffer state classifier D_η,
+   ŵ = D/(1−D) (classifier trained on balanced samples, so n₀/n₁ = 1),
+   clipped at MSR_WMAX, then self-normalised per batch.
+   Â_ψ(s,a) = Q_ψ(s,a) − (1/K)Σ_k Q_ψ(s,a_k) from fitted Q evaluation of the
+   CURRENT policy: expected-SARSA targets under a target network Q_ψ⁻.
+   Hyperparameters fixed before benchmarking:
+   K = 8 fresh actions/state, K′ = 4 target actions, w_max = 5, classifier
+   refit every 16 replay updates (24 Adam steps, lr 0.01, balanced 32+32),
+   FQE 2 minibatch steps (batch 32) per replay update, Q Adam lr 0.005,
+   Polyak τ = 0.01 per FQE step, advantage clamped to ±8 as for (a)–(c). */
+var MSR_K = 8, MSR_KP = 4, MSR_WMAX = 5;
+var MSR_Q_IN = 6, MSR_Q_H = 32, MSR_C_IN = 4, MSR_C_H = 20;
+function msrNetLen(inp, H){ return inp*H + H + H*H + H + H + 1; }
+function msrInitNet(rng, inp, H, outBias){
+  var p = new Float32Array(msrNetLen(inp, H)), i;
+  for (i = 0; i < inp*H; i++) p[i] = (rng()*2-1) * 0.5;
+  var o = inp*H + H;
+  for (i = 0; i < H*H; i++) p[o+i] = (rng()*2-1) * 0.45;
+  o += H*H + H;
+  for (i = 0; i < H; i++) p[o+i] = (rng()*2-1) * 0.3;
+  p[p.length-1] = outBias;
+  return p;
+}
+function msrForward(p, inp, H, x, cache){ /* generic in→H→H→1 tanh MLP, linear head */
+  var i, j, v;
+  for (i = 0; i < H; i++){ v = p[inp*H + i]; for (j = 0; j < inp; j++) v += p[i*inp + j] * x[j]; cache.h1[i] = Math.tanh(v); }
+  var o = inp*H + H;
+  for (i = 0; i < H; i++){ v = p[o + H*H + i]; for (j = 0; j < H; j++) v += p[o + i*H + j] * cache.h1[j]; cache.h2[i] = Math.tanh(v); }
+  o += H*H + H;
+  v = p[o + H];
+  for (j = 0; j < H; j++) v += p[o + j] * cache.h2[j];
+  cache.x = x;
+  return v;
+}
+function msrBackwardAccum(p, inp, H, cache, dOut, g){ /* dOut = dLoss/d(head output) */
+  var i, j, o2 = inp*H + H + H*H + H;
+  var dh2 = new Float32Array(H), dh1 = new Float32Array(H);
+  g[o2 + H] += dOut;
+  for (j = 0; j < H; j++){ g[o2 + j] += dOut * cache.h2[j]; dh2[j] = dOut * p[o2 + j] * (1 - cache.h2[j]*cache.h2[j]); }
+  var o1 = inp*H + H;
+  for (i = 0; i < H; i++){
+    g[o1 + H*H + i] += dh2[i];
+    for (j = 0; j < H; j++){ g[o1 + i*H + j] += dh2[i] * cache.h1[j]; dh1[j] += dh2[i] * p[o1 + i*H + j]; }
+  }
+  for (j = 0; j < H; j++) dh1[j] *= (1 - cache.h1[j]*cache.h1[j]);
+  for (i = 0; i < H; i++){ g[inp*H + i] += dh1[i]; for (j = 0; j < inp; j++) g[i*inp + j] += dh1[i] * cache.x[j]; }
+}
+function msrQCache(){ return { h1: new Float32Array(MSR_Q_H), h2: new Float32Array(MSR_Q_H), x: null }; }
+function msrCCache(){ return { h1: new Float32Array(MSR_C_H), h2: new Float32Array(MSR_C_H), x: null }; }
+var _qx = new Float32Array(6), _qc = msrQCache(), _cc = msrCCache();
+function msrQInput(s, a, out){ out[0] = s[0]; out[1] = s[1]; out[2] = s[2]*0.4; out[3] = s[3]*0.4; out[4] = a[0]*0.5; out[5] = a[1]*0.5; }
+function msrQValue(p, s, a){ msrQInput(s, a, _qx); return msrForward(p, MSR_Q_IN, MSR_Q_H, _qx, _qc); }
+function msrClsProb(A, s){
+  if (!A.clsP) return 0.5;
+  var x = [s[0], s[1], s[2]*0.4, s[3]*0.4];
+  var logit = msrForward(A.clsP, MSR_C_IN, MSR_C_H, x, _cc);
+  return 1 / (1 + Math.exp(-Math.max(-12, Math.min(12, logit))));
+}
+function msrRawWeight(A, s){
+  var D = Math.max(0.02, Math.min(0.98, msrClsProb(A, s)));
+  return Math.min(MSR_WMAX, D / (1 - D)); /* balanced training ⇒ n₀/n₁ = 1 */
+}
+function msrBatchWeightsSN(A, batch){ /* clipped ŵ, self-normalised to mean 1 */
+  var w = new Float32Array(batch.length), mean = 0, i;
+  for (i = 0; i < batch.length; i++){ w[i] = msrRawWeight(A, batch[i].s); mean += w[i]; }
+  mean = batch.length ? mean / batch.length : 1;
+  if (!(mean > 0)) mean = 1;
+  for (i = 0; i < batch.length; i++) w[i] /= mean;
+  return w;
+}
+function msrFQEStep(A){
+  /* fitted Q evaluation: 2 minibatch TD steps on buffer transitions with
+     expected-SARSA targets r + γ·(1/K′)Σ Q_ψ⁻(s′, a′), a′ ~ π_θ(·|s′) */
+  if (!A.buf || A.buf.length < 8) return;
+  for (var step = 0; step < 2; step++){
+    var batch = pgSampleBuffer(A, 32);
+    if (batch.length < 8) return;
+    var g = new Float32Array(A.qP.length), n = batch.length, k, j;
+    for (k = 0; k < n; k++){
+      var tr = batch[k], target;
+      if (tr.done){ target = tr.r; }
+      else {
+        pgForward(A.pol, tr.ns);
+        var m0 = _mu[0], m1 = _mu[1], acc = 0;
+        for (j = 0; j < MSR_KP; j++) acc += msrQValue(A.qTgt, tr.ns, [m0 + PG_SIGMA*pgGauss(A.rng), m1 + PG_SIGMA*pgGauss(A.rng)]);
+        target = tr.r + PG_GAMMA * acc / MSR_KP;
+      }
+      var q = msrQValue(A.qP, tr.s, tr.a);
+      var err = Math.max(-25, Math.min(25, q - target));
+      msrQInput(tr.s, tr.a, _qx);
+      msrForward(A.qP, MSR_Q_IN, MSR_Q_H, _qx, _qc);
+      /* pgAdam ascends (it is the policy maximiser); FQE minimises its TD
+         loss, so the loss gradient is accumulated negated */
+      msrBackwardAccum(A.qP, MSR_Q_IN, MSR_Q_H, _qc, -err / n, g);
+    }
+    A.qT++; pgAdam(A.qP, g, A.qM, A.qV, A.qT, 0.005);
+    for (j = 0; j < A.qP.length; j++) A.qTgt[j] = 0.99 * A.qTgt[j] + 0.01 * A.qP[j]; /* Polyak τ = 0.01 */
+  }
+}
+function msrRefitClassifier(A){
+  /* refit D_η: fresh on-policy states (label 1) vs buffer states (label 0),
+     balanced batches, 24 Adam steps at lr 0.01 */
+  if (!A.clsP || !A.freshStates || A.freshStates.length < 32 || A.buf.length < 32) return;
+  for (var step = 0; step < 24; step++){
+    var g = new Float32Array(A.clsP.length), bufBatch = pgSampleBuffer(A, 32), n = 0, k;
+    var samples = [];
+    for (k = 0; k < 32; k++) samples.push({ s: A.freshStates[(A.rng() * A.freshStates.length) | 0], y: 1 });
+    for (k = 0; k < bufBatch.length; k++) samples.push({ s: bufBatch[k].s, y: 0 });
+    n = samples.length; if (n < 16) return;
+    for (k = 0; k < n; k++){
+      var sm = samples[k], x = [sm.s[0], sm.s[1], sm.s[2]*0.4, sm.s[3]*0.4];
+      var logit = msrForward(A.clsP, MSR_C_IN, MSR_C_H, x, _cc);
+      var prob = 1 / (1 + Math.exp(-Math.max(-12, Math.min(12, logit))));
+      /* negated: pgAdam ascends, the classifier minimises cross-entropy */
+      msrBackwardAccum(A.clsP, MSR_C_IN, MSR_C_H, _cc, -(prob - sm.y) / n, g);
+    }
+    A.clsT++; pgAdam(A.clsP, g, A.clsM, A.clsV, A.clsT, 0.01);
+  }
+}
+function msrSampleFreshActions(A, s, rng){
+  pgForward(A.pol, s);
+  var m0 = _mu[0], m1 = _mu[1], acts = [], qs = [], meanQ = 0, k;
+  for (k = 0; k < MSR_K; k++){
+    var a = [m0 + PG_SIGMA*pgGauss(rng), m1 + PG_SIGMA*pgGauss(rng)];
+    acts.push(a);
+    var q = msrQValue(A.qP, s, a);
+    qs.push(q); meanQ += q / MSR_K;
+  }
+  var advs = [];
+  for (k = 0; k < MSR_K; k++) advs.push(Math.max(-8, Math.min(8, qs[k] - meanQ))); /* Â_ψ with shared-sample V_ψ baseline */
+  return { acts: acts, advs: advs };
+}
+function msrBatchGrad(A, batch, weights){
+  var g = new Float32Array(PG_NP), B = batch.length;
+  if (!B) return g;
+  var w = weights || msrBatchWeightsSN(A, batch);
+  var sw = 0, sw2 = 0, i, k;
+  for (i = 0; i < B; i++){ sw += w[i]; sw2 += w[i]*w[i]; }
+  var essRatio = sw2 > 0 ? (sw*sw/sw2) / B : 0;
+  A.essEMA = (A.essEMA === null || A.essEMA === undefined) ? essRatio : 0.8 * A.essEMA + 0.2 * essRatio;
+  for (i = 0; i < B; i++){
+    var fa = msrSampleFreshActions(A, batch[i].s, A.rng);
+    for (k = 0; k < MSR_K; k++) pgScoreAccum(A.pol, batch[i].s, fa.acts[k], fa.advs[k], w[i], 1 / (B * MSR_K), g);
+  }
+  return g;
+}
+function msrPerSampleGrad(A, s, w, rng){
+  /* one state's MSR gradient contribution on the common eval batch:
+     w̃(s) · (1/K) Σ_k Â_ψ ∇log π_θ(a_k|s), fresh actions from a fixed stream */
+  var g = new Float32Array(PG_NP);
+  var fa = msrSampleFreshActions(A, s, rng);
+  for (var k = 0; k < MSR_K; k++) pgScoreAccum(A.pol, s, fa.acts[k], fa.advs[k], w, 1 / MSR_K, g);
+  return g;
+}
+
+/* ---- common held-out evaluation batch for gradient variance ----
+   128 transitions collected once per retrain from the shared initial
+   policy. Every estimator's variance is the trace of the covariance of
+   ITS OWN per-sample estimator gradients on THIS SAME batch, evaluated
+   at that agent's current policy (and, for VRER, its current snapshot) —
+   so the four numbers are measurements of the same quantity. */
+var PG_EVAL = [], PG_EVAL_N = 128;
+function pgBuildEvalSet(){
+  var initRng = mulberry32(101 * 7919);
+  var tmp = makePGAgent("onpolicy", 4242, pgInitPolicy(initRng));
+  PG_EVAL = [];
+  while (PG_EVAL.length < PG_EVAL_N){
+    var traj = pgCollect(tmp);
+    for (var k = 0; k < traj.length && PG_EVAL.length < PG_EVAL_N; k++) PG_EVAL.push(traj[k]);
+  }
+}
+function pgEvalGradVar(A){
+  if (!PG_EVAL.length) return null;
+  var n = PG_EVAL.length, mean = new Float32Array(PG_NP), gs = [], k, i;
+  if (A.mode === "msr"){
+    /* MSR per-sample gradients on the same held-out states: ŵ self-normalised
+       over this batch (as in training), fresh actions drawn from a fixed
+       stream seeded per agent so repeated readouts are comparable. */
+    var wSN = msrBatchWeightsSN(A, PG_EVAL);
+    var evalRng = mulberry32((A.seed * 31337 + 777) >>> 0);
+    for (k = 0; k < n; k++){
+      var gm = msrPerSampleGrad(A, PG_EVAL[k].s, wSN[k], evalRng);
+      gs.push(gm);
+      for (i = 0; i < PG_NP; i++) mean[i] += gm[i] / n;
+    }
+    var msm = 0;
+    for (k = 0; k < n; k++){ var dm2 = 0; for (i = 0; i < PG_NP; i++){ var dd = gs[k][i] - mean[i]; dm2 += dd * dd; } msm += dm2 / n; }
+    return msm;
+  }
+  for (k = 0; k < n; k++){
+    var tr = PG_EVAL[k], adv = pgAdv(A, tr), g = new Float32Array(PG_NP);
+    if (A.mode === "vrer" && A.refPol){
+      var w = pgWeight(A, tr);
+      pgScoreAccum(A.pol, tr.s, tr.a, adv, w, 1, g);
+      var gr = new Float32Array(PG_NP);
+      pgScoreAccum(A.refPol, tr.s, tr.a, adv, w, 1, gr);
+      for (i = 0; i < PG_NP; i++) g[i] -= gr[i];
+    } else {
+      pgScoreAccum(A.pol, tr.s, tr.a, adv, 1, 1, g);
+    }
+    gs.push(g);
+    for (i = 0; i < PG_NP; i++) mean[i] += g[i] / n;
+  }
+  var ms = 0;
+  for (k = 0; k < n; k++){ var d2 = 0; for (i = 0; i < PG_NP; i++){ var d = gs[k][i] - mean[i]; d2 += d * d; } ms += d2 / n; }
+  return ms;
+}
+function pgCollect(A){
+  /* one full episode under the current policy; returns transitions with
+     Monte-Carlo return-to-go G and baseline advantage stored */
+  var traj = [];
+  var s = A.s;
+  for (var t = 0; t < PG_HORIZON; t++){
+    pgForward(A.pol, s);
+    var m0 = _mu[0], m1 = _mu[1];
+    /* sample the raw Gaussian action first: its log-density is the behaviour
+       logp stored with the transition, and the raw sample is what every
+       score-function gradient below is evaluated at. The environment executes
+       the clipped action a = clip(raw, -2, 2) for dynamics and reward. */
+    var r0 = m0 + PG_SIGMA * pgGauss(A.rng), r1 = m1 + PG_SIGMA * pgGauss(A.rng);
+    var lp = -0.5*((r0-m0)*(r0-m0)+(r1-m1)*(r1-m1))/(PG_SIGMA*PG_SIGMA) - 2*Math.log(PG_SIGMA) - 1.8378770664;
+    var a0 = Math.max(-2, Math.min(2, r0)), a1 = Math.max(-2, Math.min(2, r1));
+    var vx = 0.85*s[2] + 0.1*a0, vy = 0.85*s[3] + 0.1*a1;
+    var x = s[0] + 0.1*vx, y = s[1] + 0.1*vy;
+    if (x < -1.1){ x = -1.1; vx = 0; } if (x > 1.1){ x = 1.1; vx = 0; }
+    if (y < -1.1){ y = -1.1; vy = 0; } if (y > 1.1){ y = 1.1; vy = 0; }
+    var dx = x-PG_GOAL[0], dy = y-PG_GOAL[1], dist = Math.sqrt(dx*dx+dy*dy);
+    var r = -dist - 0.05*(a0*a0+a1*a1) + (dist < 0.09 ? 0.5 : 0);
+    var ns = [x, y, vx, vy];
+    traj.push({ s: s, a: [r0, r1], r: r, ns: ns, done: t === PG_HORIZON-1, logp: lp, step: A.steps + t });
+    s = ns; A.epRet += r;
+  }
+  A.steps += PG_HORIZON;
+  /* return-to-go + baseline fit + buffer insert */
+  var G = 0;
+  for (var k = traj.length - 1; k >= 0; k--){
+    G = traj[k].r + PG_GAMMA * G;
+    traj[k].G = G;
+    var v = pgValue(A.valW, traj[k].s); var phiC = _phi.slice();
+    var err = Math.max(-25, Math.min(25, G - v));
+    for (var vi = 0; vi < 6; vi++) A.valW[vi] += 0.01 * err * phiC[vi];
+    if (A.mode !== "onpolicy"){
+      if (A.buf.length < PG_CFG.bufCap) A.buf.push(traj[k]);
+      else { A.buf[A.bufHead] = traj[k]; A.bufHead = (A.bufHead + 1) % PG_CFG.bufCap; }
+    }
+  }
+  if (A.mode === "msr" && A.freshStates){
+    /* the fresh episode's states are the classifier's positive set; each
+       transition already stores s′ (ns) and done for FQE */
+    for (var fk = 0; fk < traj.length; fk++) A.freshStates.push(traj[fk].s);
+    if (A.freshStates.length > 2400) A.freshStates.splice(0, A.freshStates.length - 2400);
+  }
+  pgResetEpisode(A);
+  return traj;
+}
+function pgSampleBuffer(A, n){
+  var out = [], tries = 0;
+  while (out.length < n && tries < n * 4 && A.buf.length){
+    tries++;
+    var tr = A.buf[(A.rng() * A.buf.length) | 0];
+    if (PG_CFG.window < 1000000 && A.steps - tr.step > PG_CFG.window) continue;
+    out.push(tr);
+  }
+  while (out.length < n && A.buf.length) out.push(A.buf[(A.rng() * A.buf.length) | 0]);
+  return out;
+}
+function pgTrainAgent(A){
+  for (var wd = 0; wd < PG_NP; wd++) A.pol[wd] *= 0.9999; /* mild weight decay keeps tanh units out of saturation */
+  var traj = pgCollect(A);
+  var gFresh = pgBatchGradW(A, traj, A.pol, null);
+  A.polT++; pgAdam(A.pol, gFresh, A.polM, A.polV, A.polT, PG_CFG.lr);
+  if (A.mode === "onpolicy") return;
+  for (var rep = 0; rep < (PG_CFG.reps || 2); rep++){
+    var batch = pgSampleBuffer(A, PG_CFG.batch);
+    if (batch.length < 8) return;
+    /* diagnose off-policyness: mean age of sampled transitions */
+    var ageSum = 0; for (var ag = 0; ag < batch.length; ag++) ageSum += Math.max(0, A.steps - batch[ag].step);
+    var meanAge = batch.length ? ageSum / batch.length : 0;
+    A.ageEMA = (A.ageEMA === null || A.ageEMA === undefined) ? meanAge : 0.85 * A.ageEMA + 0.15 * meanAge;
+    var g;
+    if (A.mode === "naive"){
+      g = pgBatchGradW(A, batch, A.pol, null);
+    } else if (A.mode === "msr"){
+      /* MSR-Replay: FQE maintenance every replay update; D_η refit every
+         16 replay updates (mirroring VRER's snapshot cadence); gradient
+         from fresh actions at replayed states, ŵ-weighted. No stored
+         actions, stored returns, or importance ratios are used. */
+      msrFQEStep(A);
+      A.sinceCls++;
+      if (A.sinceCls >= 16 || !A.clsP){ msrRefitClassifier(A); A.sinceCls = 0; }
+      g = msrBatchGrad(A, batch, null);
+    } else {
+      /* VRER: snapshot θ̃ refreshed every 16 replay updates. μ̃ is the
+         full-buffer gradient under θ̃ (pgSnapshotGrad). gCur and gRef are
+         evaluated on the SAME batch with the SAME weights w = π_θ/π_b and
+         the SAME advantages, so at a refresh (θ̃ = θ) gCur − gRef = 0
+         exactly and the estimator reduces to μ̃. */
+      A.sinceRef++;
+      if (A.sinceRef >= 16 || !A.refPol){
+        A.refPol = A.pol.slice();
+        A.refMu = pgSnapshotGrad(A);
+        A.sinceRef = 0;
+      }
+      var w = pgBatchWeights(A, batch);
+      var sw = 0, sw2 = 0, wi;
+      for (wi = 0; wi < w.length; wi++){ sw += w[wi]; sw2 += w[wi] * w[wi]; }
+      var essRatio = sw2 > 0 ? (sw * sw / sw2) / w.length : 0;
+      A.essEMA = (A.essEMA === null || A.essEMA === undefined) ? essRatio : 0.8 * A.essEMA + 0.2 * essRatio;
+      var gCur = pgBatchGradW(A, batch, A.pol, w);
+      var gRef = pgBatchGradW(A, batch, A.refPol, w);
+      g = new Float32Array(PG_NP);
+      for (var i = 0; i < PG_NP; i++) g[i] = gCur[i] - gRef[i] + A.refMu[i];
+    }
+    A.polT++; pgAdam(A.pol, g, A.polM, A.polV, A.polT, PG_CFG.lr * 0.5);
+  }
+}
+function pgResetAll(){
+  PG_CFG.bufCap = parseInt($("ctlBuf").value, 10);
+  PG_CFG.window = parseInt($("ctlWindow").value, 10);
+  PG_CFG.batch = parseInt($("ctlBatch").value, 10);
+  PG_CFG.lr = parseFloat($("ctlLr").value);
+  var repsEl = document.getElementById("ctlReps");
+  PG_CFG.reps = repsEl ? (parseInt(repsEl.value, 10) || 2) : 2;
+  pgAgents = [];
+  var seeds = [101, 202, 303];
+  seeds.forEach(function(sd){
+    var initRng = mulberry32(sd * 7919);
+    var init = pgInitPolicy(initRng);
+    PG_MODES.forEach(function(m){ pgAgents.push(makePGAgent(m, sd, init)); });
+  });
+  pgGhosts = []; pgGhostTimer = 0;
+  pgBuildEvalSet();
+  pgRefreshGhosts();
+}
+function pgRefreshGhosts(){
+  var A = null;
+  for (var i = 0; i < pgAgents.length; i++) if (pgAgents[i].mode === "vrer") { A = pgAgents[i]; break; }
+  if (!A) return;
+  pgGhosts = [];
+  var rng = mulberry32(999);
+  for (var gi = 0; gi < 6; gi++){
+    var s = [PG_START[0], PG_START[1], 0, 0], trail = [[s[0], s[1]]], stochastic = gi > 0;
+    for (var t = 0; t < PG_HORIZON; t++){
+      pgForward(A.pol, s);
+      var a0 = stochastic ? _mu[0] + PG_SIGMA*pgGauss(rng) : _mu[0];
+      var a1 = stochastic ? _mu[1] + PG_SIGMA*pgGauss(rng) : _mu[1];
+      a0 = Math.max(-2, Math.min(2, a0)); a1 = Math.max(-2, Math.min(2, a1));
+      var vx = 0.85*s[2] + 0.1*a0, vy = 0.85*s[3] + 0.1*a1;
+      var nx = s[0]+0.1*vx, ny = s[1]+0.1*vy;
+      if (nx < -1.1){ nx = -1.1; vx = 0; } if (nx > 1.1){ nx = 1.1; vx = 0; }
+      if (ny < -1.1){ ny = -1.1; vy = 0; } if (ny > 1.1){ ny = 1.1; vy = 0; }
+      s = [nx, ny, vx, vy];
+      if (t % 2 === 0) trail.push([s[0], s[1]]);
+      var dx = s[0]-PG_GOAL[0], dy = s[1]-PG_GOAL[1];
+      if (dx*dx+dy*dy < 0.004 && t > 30) { trail.push([s[0], s[1]]); break; }
+    }
+    pgGhosts.push({ trail: trail, mean: !stochastic });
+  }
+}
+function pgModeStats(mode){
+  var list = pgAgents.filter(function(A){ return A.mode === mode; });
+  var rets = list.map(function(A){ return A.retEMA; }).filter(function(v){ return v !== null; });
+  var meanRet = rets.length ? rets.reduce(function(a,b){ return a+b; }, 0) / rets.length : null;
+  var vars = list.map(pgEvalGradVar).filter(function(v){ return v !== null; });
+  var meanVar = vars.length ? vars.reduce(function(a,b){ return a+b; }, 0) / vars.length : null;
+  var effs = list.map(function(A){ return A.effStep; }).filter(function(v){ return v !== null; }).sort(function(a,b){ return a-b; });
+  var esss = list.map(function(A){ return A.essEMA; }).filter(function(v){ return v !== null && v !== undefined; });
+  var ages = list.map(function(A){ return A.ageEMA; }).filter(function(v){ return v !== null && v !== undefined; });
+  return { meanRet: meanRet, meanVar: meanVar,
+    eff: effs.length ? effs[(effs.length - 1) >> 1] : null,
+    ess: esss.length ? esss.reduce(function(a,b){ return a+b; }, 0) / esss.length : null,
+    age: ages.length ? ages.reduce(function(a,b){ return a+b; }, 0) / ages.length : null,
+    list: list };
+}
+function drawPM(){
+  if (!SZ.pm) return;
+  var ctx = cvPM.getContext("2d"), w = SZ.pm.w, h = SZ.pm.h;
+  ctx.fillStyle = "#FFFFFF"; ctx.fillRect(0, 0, w, h);
+  function X(x){ return ((x + 1.15) / 2.3) * w; }
+  function Y(y){ return h - ((y + 1.15) / 2.3) * h; }
+  ctx.strokeStyle = "rgba(90,105,125,.14)"; ctx.lineWidth = 1; ctx.beginPath();
+  for (var gx = -1; gx <= 1.01; gx += 0.5){ ctx.moveTo(X(gx), 0); ctx.lineTo(X(gx), h); ctx.moveTo(0, Y(gx)); ctx.lineTo(w, Y(gx)); }
+  ctx.stroke();
+  ctx.fillStyle = "rgba(221,132,82,.16)"; ctx.beginPath(); ctx.arc(X(PG_GOAL[0]), Y(PG_GOAL[1]), 20*DPR, 0, 7); ctx.fill();
+  ctx.fillStyle = "rgba(221,132,82,.92)"; ctx.beginPath(); ctx.arc(X(PG_GOAL[0]), Y(PG_GOAL[1]), 10*DPR, 0, 7); ctx.fill();
+  ctx.fillStyle = "#FFFFFF"; ctx.font = "600 " + Math.round(13*DPR) + "px sans-serif"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+  ctx.fillText("★", X(PG_GOAL[0]), Y(PG_GOAL[1]));
+  ctx.strokeStyle = "rgba(76,114,176,.9)"; ctx.lineWidth = Math.max(1.2, DPR);
+  ctx.beginPath(); ctx.arc(X(PG_START[0]), Y(PG_START[1]), 7*DPR, 0, 7); ctx.stroke();
+  pgGhosts.forEach(function(gh){
+    ctx.beginPath();
+    gh.trail.forEach(function(pt, idx){ if (idx === 0) ctx.moveTo(X(pt[0]), Y(pt[1])); else ctx.lineTo(X(pt[0]), Y(pt[1])); });
+    ctx.strokeStyle = gh.mean ? "rgba(85,168,104,.95)" : "rgba(76,114,176,.35)";
+    ctx.lineWidth = gh.mean ? Math.max(1.8, 1.6*DPR) : Math.max(1, DPR);
+    ctx.stroke();
+    var last = gh.trail[gh.trail.length-1];
+    ctx.fillStyle = gh.mean ? "rgba(85,168,104,1)" : "rgba(76,114,176,.6)";
+    ctx.beginPath(); ctx.arc(X(last[0]), Y(last[1]), (gh.mean ? 3.4 : 2.2)*DPR, 0, 7); ctx.fill();
+  });
+  var A = null;
+  for (var i = 0; i < pgAgents.length; i++) if (pgAgents[i].mode === "vrer") { A = pgAgents[i]; break; }
+  if (A) $("pmState").textContent = "VRER seed 101 · step " + A.steps.toLocaleString() + " · return " + (A.retEMA === null ? "—" : A.retEMA.toFixed(1));
+}
+function drawLC(){
+  if (!SZ.lc) return;
+  var ctx = cvLC.getContext("2d"), w = SZ.lc.w, h = SZ.lc.h;
+  ctx.fillStyle = "#FFFFFF"; ctx.fillRect(0, 0, w, h);
+  var maxStep = 1000;
+  pgAgents.forEach(function(A){ if (A.steps > maxStep) maxStep = A.steps; });
+  var lo = -280, hi = 60;
+  function X(s){ return 34*DPR + (s / maxStep) * (w - 44*DPR); }
+  function Y(v){ return h - ((Math.max(lo, Math.min(hi, v)) - lo) / (hi - lo)) * (h - 18*DPR) - 8*DPR; }
+  ctx.strokeStyle = "rgba(90,105,125,.18)"; ctx.fillStyle = "rgba(87,98,110,.9)";
+  ctx.font = "500 " + Math.round(9.5*DPR) + "px 'IBM Plex Mono', monospace"; ctx.textAlign = "left";
+  [-200, -100, -55, 0].forEach(function(v){ ctx.beginPath(); ctx.moveTo(34*DPR, Y(v)); ctx.lineTo(w-6*DPR, Y(v)); ctx.stroke(); ctx.fillText(String(v), 4*DPR, Y(v)+3*DPR); });
+  ctx.strokeStyle = "rgba(221,132,82,.65)"; ctx.setLineDash([4*DPR, 4*DPR]); ctx.beginPath(); ctx.moveTo(34*DPR, Y(-55)); ctx.lineTo(w-6*DPR, Y(-55)); ctx.stroke(); ctx.setLineDash([]);
+  ctx.fillStyle = "rgba(87,98,110,.9)"; ctx.fillText("env steps → " + maxStep.toLocaleString(), 34*DPR, h - 2*DPR);
+  PG_MODES.forEach(function(mode){
+    var list = pgAgents.filter(function(A){ return A.mode === mode; });
+    if (!list.length || !list[0].hist.length) return;
+    var bins = 60, means = [], stds = [], xs = [];
+    for (var b = 0; b <= bins; b++){
+      var step = (b / bins) * maxStep, vals = [];
+      list.forEach(function(A){
+        var last = null;
+        for (var i = 0; i < A.hist.length; i++){ if (A.hist[i].step <= step) last = A.hist[i].ret; else break; }
+        if (last !== null) vals.push(last);
+      });
+      if (vals.length < 2) continue;
+      var m = vals.reduce(function(a,c){ return a+c; }, 0) / vals.length;
+      var sd = Math.sqrt(vals.reduce(function(a,c){ return a + (c-m)*(c-m); }, 0) / vals.length);
+      means.push(m); stds.push(sd); xs.push(step);
+    }
+    if (means.length < 2) return;
+    var col = PG_COLORS[mode];
+    ctx.beginPath();
+    xs.forEach(function(s, i){ var x = X(s), y = Y(means[i] + stds[i]); if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y); });
+    for (var j = xs.length - 1; j >= 0; j--) ctx.lineTo(X(xs[j]), Y(means[j] - stds[j]));
+    ctx.closePath(); ctx.fillStyle = col + "2e"; ctx.fill();
+    ctx.beginPath();
+    xs.forEach(function(s, i){ var x = X(s), y = Y(means[i]); if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y); });
+    ctx.strokeStyle = col; ctx.lineWidth = Math.max(1.4, 1.3*DPR); ctx.stroke();
+  });
+  $("lcVal").textContent = maxStep.toLocaleString() + " env steps · threshold −55";
+}
+function pgUpdateReadouts(){
+  var on = pgModeStats("onpolicy"), na = pgModeStats("naive"), vr = pgModeStats("vrer"), ms = pgModeStats("msr");
+  function fv(v){ return v === null ? "—" : v.toFixed(3); }
+  function fr(v){ return v === null ? "—" : v.toFixed(1); }
+  function fe(v){ return v === null ? "not yet" : v.toLocaleString() + " steps"; }
+  $("varOn").textContent = fv(on.meanVar); $("varNaive").textContent = fv(na.meanVar); $("varVrer").textContent = fv(vr.meanVar);
+  var varMsrEl = document.getElementById("varMsr"); if (varMsrEl) varMsrEl.textContent = fv(ms.meanVar);
+  $("retOn").textContent = fr(on.meanRet); $("retNaive").textContent = fr(na.meanRet); $("retVrer").textContent = fr(vr.meanRet);
+  var retMsrEl = document.getElementById("retMsr"); if (retMsrEl) retMsrEl.textContent = fr(ms.meanRet);
+  $("effOn").textContent = fe(on.eff); $("effNaive").textContent = fe(na.eff); $("effVrer").textContent = fe(vr.eff);
+  var effMsrEl = document.getElementById("effMsr"); if (effMsrEl) effMsrEl.textContent = fe(ms.eff);
+  $("essVrer").textContent = vr.ess === null ? "—" : (vr.ess * PG_CFG.batch).toFixed(1) + " / " + PG_CFG.batch + " (" + Math.round(vr.ess * 100) + "%)";
+  var essMsrEl = document.getElementById("essMsr"); if (essMsrEl) essMsrEl.textContent = ms.ess === null ? "—" : (ms.ess * PG_CFG.batch).toFixed(1) + " / " + PG_CFG.batch + " (" + Math.round(ms.ess * 100) + "%)";
+  var ageEl = document.getElementById("ageVrer"); if (ageEl) ageEl.textContent = (vr.age === null || vr.age === undefined) ? "—" : Math.round(vr.age).toLocaleString() + " steps";
+  var ageMsrEl = document.getElementById("ageMsr"); if (ageMsrEl) ageMsrEl.textContent = (ms.age === null || ms.age === undefined) ? "—" : Math.round(ms.age).toLocaleString() + " steps";
+  var parts = [];
+  [101, 202, 303].forEach(function(sd){
+    var cell = ["seed " + sd];
+    [["on-policy", "onpolicy"], ["naive", "naive"], ["VRER", "vrer"], ["MSR", "msr"]].forEach(function(pr){
+      var A = null;
+      for (var i = 0; i < pgAgents.length; i++) if (pgAgents[i].seed === sd && pgAgents[i].mode === pr[1]) A = pgAgents[i];
+      cell.push(pr[0] + " " + (A && A.retEMA !== null ? A.retEMA.toFixed(1) : "—"));
+    });
+    parts.push(cell.join(" · "));
+  });
+  $("seedReturns").textContent = "Per-seed return (EMA) — " + parts.join("   |   ");
+}
+var pgTimer = 0;
+function pgTick(dt){
+  if (!pgAgents.length) return;
+  pgTimer += dt;
+  var interval = 0.14 / Math.max(0.25, speedMult);
+  var guard = 0;
+  while (pgTimer >= interval && guard < 6){
+    pgTimer -= interval; guard++;
+    pgAgents.forEach(pgTrainAgent);
+  }
+  pgGhostTimer += dt;
+  if (pgGhostTimer > 0.7){ pgGhostTimer = 0; pgRefreshGhosts(); pgUpdateReadouts(); }
+  drawPM(); drawLC();
+}
+
+
+/* ---------------- scene 3: time machine ---------------- */
+var snapDots = [];
+for (var di = 0; di < 26; di++) snapDots.push({ s: START, x: 0.5, y: 9.5, from: START, to: START, t: Math.random(), speed: 1.4 + Math.random() * 1.6, wait: 0 });
+function drawSnap(){
+  if (!SZ.snap || !snapshots.length) return;
+  var snap = snapshots[Math.min(scrubIdx, snapshots.length - 1)];
+  var ctx = cvSnap.getContext("2d"), w = SZ.snap.w, h = SZ.snap.h;
+  drawGridBase(ctx, w, h, snap.Q);
+  var cw = w / W, ch = h / H;
+  // greedy policy arrows
+  ctx.strokeStyle = "rgba(255,255,255,.85)"; ctx.fillStyle = "rgba(255,255,255,.85)";
+  ctx.lineWidth = Math.max(1, DPR);
+  for (var k = 0; k < NF; k++){
+    var s = FREE[k]; if (s === GOAL) continue;
+    var o = s * NA, best = 0, bv = -1e18, second = -1e18, a;
+    for (a = 0; a < NA; a++){ if (snap.Q[o+a] > bv){ second = bv; bv = snap.Q[o+a]; best = a; } else if (snap.Q[o+a] > second) second = snap.Q[o+a]; }
+    var conf = Math.min(1, (bv - second) * 1.4);
+    if (conf < 0.06) continue;
+    var cx = (s % W) * cw + cw / 2, cy = ((s / W) | 0) * ch + ch / 2;
+    var dx = DC[best], dy = DR[best], L = cw * 0.26;
+    ctx.globalAlpha = 0.25 + 0.65 * conf;
+    ctx.beginPath();
+    ctx.moveTo(cx - dx * L * 0.6, cy - dy * L * 0.6);
+    ctx.lineTo(cx + dx * L, cy + dy * L);
+    ctx.stroke();
+    ctx.beginPath();
+    var hx = cx + dx * L, hy = cy + dy * L, px = -dy, py = dx;
+    ctx.moveTo(hx, hy);
+    ctx.lineTo(hx - dx * L * 0.38 + px * L * 0.2, hy - dy * L * 0.38 + py * L * 0.2);
+    ctx.lineTo(hx - dx * L * 0.38 - px * L * 0.2, hy - dy * L * 0.38 - py * L * 0.2);
+    ctx.closePath(); ctx.fill();
+  }
+  ctx.globalAlpha = 1;
+  $("snapStep").textContent = snap.step.toLocaleString();
+  $("snapRet").textContent = snap.retEMA === null ? "—" : snap.retEMA.toFixed(1);
+  var pill = $("livePill");
+  if (followLive){ pill.textContent = "● Live"; pill.classList.remove("off"); }
+  else { pill.textContent = "◐ Viewing history"; pill.classList.add("off"); }
+}
+function stepSnapDots(dt){
+  if (!SZ.snap || !snapshots.length) return;
+  var snap = snapshots[Math.min(scrubIdx, snapshots.length - 1)];
+  var ctx = cvSnap.getContext("2d"), w = SZ.snap.w, h = SZ.snap.h;
+  var cw = w / W, ch = h / H;
+  snapDots.forEach(function(d){
+    if (d.wait > 0){ d.wait -= dt; return; }
+    if (d.t >= 1){
+      d.from = d.to;
+      var o = d.to * NA, best = 0, bv = -1e18;
+      for (var a = 0; a < NA; a++) if (snap.Q[o+a] > bv){ bv = snap.Q[o+a]; best = a; }
+      if (Math.random() < 0.12) best = (Math.random() * NA) | 0; // a whisper of exploration
+      var res = envStep(d.to, best);
+      d.to = res.ns; d.t = 0;
+      if (res.done){ d.wait = 0.5 + Math.random() * 0.8; d.to = START; d.from = GOAL; }
+    }
+    d.t = Math.min(1, d.t + dt * d.speed);
+    var fx = (d.from % W) + 0.5, fy = ((d.from / W) | 0) + 0.5;
+    var tx = (d.to % W) + 0.5, ty = ((d.to / W) | 0) + 0.5;
+    var x = lerp(fx, tx, d.t) * cw, y = lerp(fy, ty, d.t) * ch;
+    ctx.fillStyle = "rgba(85,168,104,.85)";
+    ctx.beginPath(); ctx.arc(x, y, 2.4 * DPR, 0, 7); ctx.fill();
+  });
+}
+
+/* ---------------- UI wiring ---------------- */
+function updateScrubUI(){
+  var sc = $("scrubber");
+  sc.max = Math.max(0, snapshots.length - 1);
+  if (followLive) sc.value = snapshots.length - 1;
+}
+$("gammaSlider").addEventListener("input", function(e){
+  gammaUI = parseFloat(e.target.value);
+  $("gammaVal").textContent = gammaUI.toFixed(3);
+  computeDistributions(MAIN.Q, gammaUI);
+  drawHeats();
+});
+
+$("btnPlay").addEventListener("click", function(){
+  playing = !playing;
+  this.setAttribute("aria-pressed", playing ? "true" : "false");
+  this.classList.toggle("paused", !playing);
+  $("playLabel").textContent = playing ? "Training live" : "Paused";
+});
+document.querySelectorAll(".seg button").forEach(function(b){
+  b.addEventListener("click", function(){
+    document.querySelectorAll(".seg button").forEach(function(x){ x.setAttribute("aria-pressed", "false"); });
+    b.setAttribute("aria-pressed", "true");
+    speedMult = parseFloat(b.getAttribute("data-speed"));
+  });
+});
+$("btnReset").addEventListener("click", function(){ resetAll(); drawWorldBg(); drawTerrain(); drawHeats(); drawSnap(); });
+$("btnRetrainPG").addEventListener("click", function(){ pgResetAll(); pgUpdateReadouts(); drawPM(); drawLC(); });
+$("scrubber").addEventListener("input", function(e){
+  scrubIdx = parseInt(e.target.value, 10);
+  followLive = scrubIdx >= snapshots.length - 1;
+  snapDots.forEach(function(d){ d.from = START; d.to = START; d.t = 1; d.wait = Math.random() * 0.4; });
+  drawSnap();
+});
+$("btnLive").addEventListener("click", function(){
+  followLive = true; scrubIdx = snapshots.length - 1;
+  $("scrubber").value = scrubIdx;
+  drawSnap();
+});
+var resizeTimer = null;
+window.addEventListener("resize", function(){
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(layout, 120);
+});
+
+/* ---------------- main loop ---------------- */
+var lastT = performance.now(), slowTimer = 0, distTimer = 0, snapTimer = 0;
+function frame(now){
+  requestAnimationFrame(frame);
+  var dt = Math.min(0.05, (now - lastT) / 1000); lastT = now;
+  if (playing){
+    stepAcc += 30 * speedMult;
+    var steps = Math.floor(stepAcc); stepAcc -= steps;
+    var i;
+    for (i = 0; i < steps; i++) learnerStep(MAIN, null);
+    snapTimer += steps;
+    if (snapTimer >= SNAP_EVERY){ snapTimer = 0; takeSnapshot(); }
+    distTimer += dt;
+    if (distTimer > 0.45){ distTimer = 0; computeDistributions(MAIN.Q, gammaUI); drawHeats(); }
+    slowTimer += dt;
+    if (slowTimer > 0.4){
+      slowTimer = 0;
+      drawWorldBg(); drawTerrain();
+      $("statStep").textContent = MAIN.steps.toLocaleString();
+      $("statEps").textContent = epsAt(MAIN.steps).toFixed(2);
+      $("statRet").textContent = MAIN.retEMA === null ? "—" : MAIN.retEMA.toFixed(1);
+      var fs = $("flowState");
+      var e = epsAt(MAIN.steps);
+      fs.textContent = e > 0.2 ? "exploring…" : (e > 0.09 ? "organizing…" : "flow locked in ◆");
+    }
+  }
+  if (SZ.world) drawParticles(playing ? dt : dt * 0.25);
+  if (playing) pgTick(dt); else { drawPM(); drawLC(); }
+  drawSnap();
+  if (playing) stepSnapDots(dt);
+}
+
+/* ---------------- boot ---------------- */
+resetAll();
+layout();
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>
